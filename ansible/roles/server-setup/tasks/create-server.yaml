@@ -1,0 +1,22 @@
+---
+- name: create SSH key
+  hetzner.hcloud.hcloud_ssh_key:
+    api_token: "{{ hcloud_api_token }}"
+    public_key: "{{ ssh_key_admin_user }}"
+    name: "{{ ssh_key_admin_user_name }}"
+    state: present
+- name: create server via HCloud
+  hetzner.hcloud.hcloud_server:
+    api_token: "{{ hcloud_api_token }}"
+    firewalls:
+      - "{{ basic_firewall }}"
+    image: "{{ server_image }}"
+    location: "{{ server_location }}"
+    name: "{{ server_name }}"
+    placement_group: "{{ server_placement_group }}"
+    server_type: "{{ server_type }}"
+    ssh_keys:
+      - "{{ ssh_key_admin_user_name }}"
+    user_data: "{{ lookup('ansible.builtin.template', 'basic-ssh-hardening.yaml.j2', convert_data=false) }}"
+    state: present
+  register: server

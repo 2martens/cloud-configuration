@@ -1,0 +1,6 @@
+---
+hcloud_api_token: someAPIToken
+admin_user: nameForNewAdminUser
+ssh_key_admin_user: publicKeyForNewAdminUser
+ssh_key_admin_user_name: nameForSSHKeyForNewAdminUser
+server_name: nameOfTheNewServer

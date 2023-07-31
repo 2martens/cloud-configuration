@@ -1,11 +1,11 @@
 #cloud-config
 users:
-  - name: holu
+  - name: {{ admin_user }}
     groups: users, admin
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
-      - <public_ssh_key>
+      - {{ ssh_key_admin_user }}
 packages:
   - fail2ban
   - ufw
@@ -23,5 +23,5 @@ runcmd:
   - sed -i -e '/^\(#\|\)AllowTcpForwarding/s/^.*$/AllowTcpForwarding no/' /etc/ssh/sshd_config
   - sed -i -e '/^\(#\|\)AllowAgentForwarding/s/^.*$/AllowAgentForwarding no/' /etc/ssh/sshd_config
   - sed -i -e '/^\(#\|\)AuthorizedKeysFile/s/^.*$/AuthorizedKeysFile .ssh\/authorized_keys/' /etc/ssh/sshd_config
-  - sed -i '$a AllowUsers holu' /etc/ssh/sshd_config
+  - sed -i '$a AllowUsers {{ admin_user }}' /etc/ssh/sshd_config
   - reboot

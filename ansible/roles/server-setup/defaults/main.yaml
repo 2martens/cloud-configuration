@@ -1,0 +1,6 @@
+---
+basic_firewall: basic-firewall
+server_image: ubuntu-22.04
+server_location: fsn1
+server_placement_group: default
+server_type: cax11
