@@ -2,3 +2,5 @@
 *.retry
 hosts
 **/*_vars.yaml
+inventories/*
+!inventories/*.example
