@@ -1,0 +1,4 @@
+# ---> Ansible
+*.retry
+hosts
+**/*_vars.yaml
