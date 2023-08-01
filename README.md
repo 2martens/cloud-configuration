@@ -1,3 +1,3 @@
-# cloud-configuration
+# Ansible set up playbooks
 
-Contains config files and step-by-step instructions for cloud setup
+Contains ansible playbooks and step-by-step instructions for cloud setup.
