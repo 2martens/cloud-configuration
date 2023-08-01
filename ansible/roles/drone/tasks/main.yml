@@ -1,0 +1,5 @@
+---
+- name: Set up apache for drone
+  ansible.builtin.import_tasks: apache.yml
+- name: Set up drone
+  ansible.builtin.import_tasks: drone.yml

@@ -1,0 +1,42 @@
+---
+- name: Install apache 2
+  ansible.builtin.apt:
+    name: apache2
+    update_cache: true
+  tags:
+    - apache
+- name: Allow apache through firewall
+  community.general.ufw:
+    name: Apache Full
+    rule: allow
+- name: Enable mods
+  block:
+    - name: Enable headers
+      community.general.apache2_module:
+        name: headers
+        state: present
+    - name: Enable proxy
+      community.general.apache2_module:
+        name: proxy
+        state: present
+    - name: Enable proxy_wstunnel
+      community.general.apache2_module:
+        name: proxy_wstunnel
+        state: present
+    - name: Enable proxy_http
+      community.general.apache2_module:
+        name: proxy_http
+        state: present
+    - name: Enable proxy_balancer
+      community.general.apache2_module:
+        name: proxy_balancer
+        state: present
+    - name: Enable lbmethod_byrequests
+      community.general.apache2_module:
+        name: lbmethod_byrequests
+        state: present
+    - name: Enable ssl
+      community.general.apache2_module:
+        name: ssl
+        state: present
+      notify: Restart apache

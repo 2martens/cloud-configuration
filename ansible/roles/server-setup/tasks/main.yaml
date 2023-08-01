@@ -1,2 +1,3 @@
 ---
-- import_tasks: create-server.yaml
+- name: Create server
+  ansible.builtin.import_tasks: create-server.yaml

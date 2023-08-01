@@ -1,6 +1,0 @@
----
-- name: Create server
-  hosts: localhost
-  connection: local
-  roles:
-    - server-setup

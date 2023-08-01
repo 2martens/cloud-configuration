@@ -1,0 +1,5 @@
+---
+hcloud_api_token: someAPIToken
+ssh_user: remoteUser
+admin_mail: mail@example.com
+ci_domain: yourDomainForCi

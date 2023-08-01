@@ -1,0 +1,56 @@
+---
+- name: Add drone HTTP site
+  ansible.builtin.template:
+    src: etc/apache2/sites-available/ansible_domain.conf.j2
+    dest: /etc/apache2/sites-available/{{ ci_domain }}.conf
+    owner: root
+    group: root
+    mode: "644"
+    force: false
+  register: drone_http
+- name: Disable default site and enable drone site
+  block:
+    - name: Disable default site
+      ansible.builtin.command:
+        cmd: a2dissite 000-default.conf
+        removes: /etc/apache2/sites-enabled/000-default.conf
+    - name: Enable drone site
+      ansible.builtin.command:
+        cmd: a2ensite {{ ci_domain }}.conf
+        creates: /etc/apache2/sites-enabled/{{ ci_domain }}.conf
+- name: Check certificate existence
+  ansible.builtin.stat:
+    path: "/etc/letsencrypt/live/{{ ci_domain }}/cert.pem"
+  register: certificate
+- name: Generate certificates
+  ansible.builtin.command:
+    cmd: >
+      certbot --apache --non-interactive --keep-until-expiring
+      --no-eff-email
+      --email {{ admin_mail }}
+      --redirect
+      --renew-with-new-domains --agree-tos -d {{ ci_domain }}
+    creates: "/etc/letsencrypt/live/{{ ci_domain }}/cert.pem"
+  register: certbot_certificate_created
+  failed_when:
+    - "'Successfully received certificate.' not in certbot_certificate_created.stdout"
+  when:
+    - not certificate.stat.exists
+- name: Add drone HTTPS site
+  ansible.builtin.template:
+    src: etc/apache2/sites-available/ansible_domain-le-ssl.conf.j2
+    dest: /etc/apache2/sites-available/{{ ci_domain }}-le-ssl.conf
+    owner: root
+    group: root
+    mode: "644"
+- name: Check certificate existence after certbot run
+  ansible.builtin.stat:
+    path: "/etc/letsencrypt/live/{{ ci_domain }}/cert.pem"
+  register: certificate_after_certbot
+- name: Enable drone HTTPS site
+  ansible.builtin.command:
+    cmd: a2ensite {{ ci_domain }}-le-ssl.conf
+    creates: /etc/apache2/sites-enabled/{{ ci_domain }}-le-ssl.conf
+  notify: Restart apache
+  when:
+    - certificate_after_certbot.stat.exists

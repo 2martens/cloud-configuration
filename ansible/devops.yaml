@@ -1,0 +1,12 @@
+---
+- name: Create server
+  hosts: localhost
+  roles:
+    - server-setup
+- name: Set up drone
+  hosts: servers
+  become: true
+  become_method: ansible.builtin.sudo
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - drone

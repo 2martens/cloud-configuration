@@ -1,0 +1,23 @@
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+  ServerName {{ ci_domain }}
+  ServerAdmin {{ admin_mail }}
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+  SSLCertificateFile /etc/letsencrypt/live/{{ ci_domain }}/fullchain.pem
+  SSLCertificateKeyFile /etc/letsencrypt/live/{{ ci_domain }}/privkey.pem
+  Include /etc/letsencrypt/options-ssl-apache.conf
+
+  # Encoded slashes need to be allowed
+  AllowEncodedSlashes NoDecode
+
+  # keep the host
+  ProxyPreserveHost On
+  RequestHeader set X-Forwarded-Proto "https"
+  RequestHeader set X-Forwarded-Host "{{ ci_domain }}"
+  ProxyPass / http://127.0.0.1:8000/
+  ProxyPassReverse / http://127.0.0.1:8000/
+
+</VirtualHost>
+</IfModule>

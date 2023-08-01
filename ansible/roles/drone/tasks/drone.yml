@@ -1,0 +1,42 @@
+---
+- name: Create drone directory
+  ansible.builtin.file:
+    state: directory
+    path: /etc/drone
+    owner: root
+    group: root
+    mode: "644"
+- name: Create shared secret
+  ansible.builtin.command:
+    cmd: openssl rand -hex 16
+  register: drone_rpc_secret
+  changed_when: true
+- name: Copy docker compose file for drone
+  ansible.builtin.template:
+    src: etc/drone/docker-compose.yml.j2
+    dest: /etc/drone/docker-compose.yml
+    owner: root
+    group: root
+    mode: "644"
+- name: Start drone docker container
+  community.docker.docker_compose:
+    project_src: /etc/drone
+- name: Install drone cli
+  block:
+    - name: Download drone cli
+      ansible.builtin.get_url:
+        url: https://github.com/drone/drone-cli/releases/latest/download/drone_linux_amd64.tar.gz
+        dest: /home/{{ ssh_user }}/drone_linux_amd64.tar.gz
+        owner: "{{ ssh_user }}"
+        group: "{{ ssh_user }}"
+        mode: "644"
+    - name: Unpack the cli archive
+      ansible.builtin.unarchive:
+        dest: /home/{{ ssh_user }}
+        src: /home/{{ ssh_user }}/drone_linux_amd64.tar.gz
+        remote_src: true
+      register: drone_unpack
+    - name: Install drone cli
+      ansible.builtin.command:
+        cmd: install -t /usr/local/bin /home/{{ ssh_user }}/drone
+      changed_when: true

@@ -1,0 +1,9 @@
+---
+- name: Ensure all tool packages are installed
+  ansible.builtin.apt:
+    pkg: "{{ packages }}"
+    update_cache: true
+    cache_valid_time: 600
+  vars:
+    packages:
+      - python3-pip

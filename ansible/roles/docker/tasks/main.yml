@@ -1,0 +1,24 @@
+---
+- name: Install docker-compose
+  ansible.builtin.apt:
+    name: docker-compose
+    update_cache: true
+  tags:
+    - docker
+- name: Enable docker service
+  ansible.builtin.service:
+    name: docker
+    enabled: true
+- name: Install ansible python dependencies on remote
+  ansible.builtin.pip:
+    name:
+      - docker
+      - docker-compose
+- name: Enable docker log rotation
+  ansible.builtin.template:
+    src: etc/docker/daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: "644"
+  notify: Restart docker

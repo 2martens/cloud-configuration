@@ -1,11 +1,11 @@
 ---
-- name: create SSH key
+- name: Create SSH key
   hetzner.hcloud.hcloud_ssh_key:
     api_token: "{{ hcloud_api_token }}"
     public_key: "{{ ssh_key_admin_user }}"
     name: "{{ ssh_key_admin_user_name }}"
     state: present
-- name: create server via HCloud
+- name: Create server via HCloud
   hetzner.hcloud.hcloud_server:
     api_token: "{{ hcloud_api_token }}"
     firewalls:
