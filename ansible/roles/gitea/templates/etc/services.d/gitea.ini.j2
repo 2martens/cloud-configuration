@@ -1,0 +1,5 @@
+[program:gitea]
+directory=%(ENV_HOME)s/gitea
+command=%(ENV_HOME)s/gitea/gitea web
+startsecs=30
+autorestart=yes

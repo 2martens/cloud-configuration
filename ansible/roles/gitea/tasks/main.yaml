@@ -1,0 +1,7 @@
+---
+- name: Set up backend
+  ansible.builtin.import_tasks: backend.yaml
+- name: Set up domains
+  ansible.builtin.import_tasks: domains.yaml
+- name: Set up Gitea
+  ansible.builtin.import_tasks: gitea.yaml

@@ -1,0 +1,9 @@
+---
+- name: Get backend list
+  ansible.builtin.command: uberspace web backend list
+  register: backends
+  changed_when: false
+- name: Add backend
+  when: backends.stdout.find(gitea_backend) == -1
+  ansible.builtin.command: uberspace web backend set / --http --port {{ gitea_port }}
+  changed_when: true

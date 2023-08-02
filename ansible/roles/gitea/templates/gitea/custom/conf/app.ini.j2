@@ -1,0 +1,106 @@
+APP_NAME = {{ gitea_name }}
+RUN_USER = {{ ssh_user }}
+RUN_MODE = prod
+WORK_PATH = /home/{{ ssh_user }}/gitea
+
+[server]
+HTTP_PORT = {{ gitea_port }}
+DOMAIN = {{ gitea_domain }}
+ROOT_URL = https://%(DOMAIN)s/
+LOCAL_ROOT_URL = http://localhost:{{ gitea_port }}/
+SSH_DOMAIN = {{ gitea_domain }}
+DISABLE_SSH = false
+LFS_START_SERVER = true ; Enables Git LFS support
+{% if 'stdout' in lfs_jwt_secret %}
+LFS_JWT_SECRET = {{ lfs_jwt_secret.stdout }}
+{% elif 'stdout' in existing_lfs_jwt_secret %}
+LFS_JWT_SECRET = {{ existing_lfs_jwt_secret.stdout }}
+{% endif %}
+OFFLINE_MODE = false ; privacy option.
+
+[lfs]
+PATH = /home/{{ ssh_user }}/gitea/data/lfs
+
+[database]
+DB_TYPE = mysql
+HOST = 127.0.0.1:3306
+NAME = {{ ssh_user }}_gitea
+USER = {{ ssh_user }}
+PASSWD = {{ mysql_password }}
+SSL_MODE = disable
+PATH = data/gitea.db
+
+[security]
+INSTALL_LOCK = true
+{% if 'stdout' in secret_key %}
+SECRET_KEY = {{ secret_key.stdout }} ; the before generated security key
+{% elif 'stdout' in existing_secret_key %}
+SECRET_KEY = {{ existing_secret_key.stdout }} ; the before generated security key
+{% endif %}
+{% if 'stdout' in internal_token %}
+INTERNAL_TOKEN = {{ internal_token.stdout }}
+{% elif 'stdout' in existing_internal_token %}
+INTERNAL_TOKEN = {{ existing_internal_token.stdout }}
+{% endif %}
+
+[service]
+DISABLE_REGISTRATION = true
+REGISTER_EMAIL_CONFIRM = false
+SHOW_REGISTRATION_BUTTON = false
+ENABLE_NOTIFY_MAIL = false
+ENABLE_CAPTCHA = false
+DISABLE_REGISTRATION = true ; security option, only admins can create new users.
+REQUIRE_SIGNIN_VIEW = false
+DEFAULT_ORG_VISIBILITY = private ; [public, limited, private]
+DEFAULT_KEEP_EMAIL_PRIVATE = false
+DEFAULT_ALLOW_CREATE_ORGANIZATION = true
+DEFAULT_ENABLE_TIMETRACKING = true
+NO_REPLY_ADDRESS = noreply.{{ gitea_domain }}
+
+[service.explore]
+REQUIRE_SIGNIN_VIEW = true
+
+[mailer]
+ENABLED = true
+SMTP_ADDR = {{ gitea_mail_domain }}
+SMTP_PORT = 587
+FROM = gitea@{{ gitea_domain }}
+USER = {{ ssh_user }}@uber.space
+PASSWD = {{ gitea_mail_password }}
+
+[repository]
+ROOT = /home/{{ ssh_user }}/gitea-repositories
+
+[picture]
+DISABLE_GRAVATAR = false
+ENABLE_FEDERATED_AVATAR = true
+
+[openid]
+ENABLE_OPENID_SIGNIN = true
+ENABLE_OPENID_SIGNUP = false
+
+[session]
+PROVIDER = file
+PROVIDER_CONFIG = data/sessions
+
+[log]
+MODE = file
+LEVEL = Info
+ROOT_PATH = /home/{{ ssh_user }}/logs/gitea
+
+[cron.delete_repo_archives]
+ENABLED = true
+SCHEDULE = @every 24h
+
+[oauth2]
+{% if 'stdout' in jwt_secret %}
+JWT_SECRET = {{ jwt_secret.stdout }}
+{% elif 'stdout' in existing_jwt_secret %}
+JWT_SECRET = {{ existing_jwt_secret.stdout }}
+{% endif %}
+
+[git]
+VERBOSE_PUSH = false
+
+[other]
+SHOW_FOOTER_VERSION = false ; hide version number from strangers - you can still see it in the admin panel at /admin

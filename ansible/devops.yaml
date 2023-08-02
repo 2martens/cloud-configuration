@@ -4,9 +4,14 @@
   roles:
     - server-setup
 - name: Set up drone
-  hosts: servers
+  hosts: ci
   become: true
   become_method: ansible.builtin.sudo
   remote_user: "{{ ssh_user }}"
   roles:
     - drone
+- name: Set up Gitea
+  hosts: git
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - gitea

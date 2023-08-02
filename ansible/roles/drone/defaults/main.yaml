@@ -1,2 +1,5 @@
 ---
 drone_max_procs: 1
+drone_registration_closed: true
+drone_server_version: 2.18.0
+drone_runner_version: 1.8.3

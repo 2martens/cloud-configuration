@@ -2,7 +2,7 @@ version: '2'
 
 services:
   drone-server:
-    image: drone/drone:latest
+    image: "drone/drone:{{ drone_server_version }}"
 
     ports:
       - "8000:80"
@@ -21,10 +21,11 @@ services:
       - DRONE_GITEA_CLIENT_ID={{ gitea_client_id }}
       - DRONE_GITEA_CLIENT_SECRET={{ gitea_client_secret }}
       - DOCKER_MAX_PROCS={{ drone_max_procs }}
+      - DRONE_REGISTRATION_CLOSED={{ drone_registration_closed }}
       - LC_ALL=C.UTF-8
       - LANG=C.UTF-8
   drone-runner:
-    image: drone/drone-runner-docker:latest
+    image: "drone/drone-runner-docker:{{ drone_runner_version }}"
 
     ports:
       - "3000:3000"

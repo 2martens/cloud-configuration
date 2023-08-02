@@ -1,0 +1,16 @@
+---
+- name: List domains
+  ansible.builtin.command: uberspace web domain list
+  changed_when: false
+  register: domains
+- name: Set up domain
+  when: domains.stdout.find(gitea_domain) == -1
+  block:
+    - name: Add domain
+      ansible.builtin.command: uberspace web domain add {{ gitea_domain }}
+      register: new_domain
+      changed_when: true
+    - name: Print out important information
+      changed_when: false
+      ansible.builtin.debug:
+        msg: "{{ new_domain.stdout }}"

@@ -5,12 +5,12 @@
     path: /etc/drone
     owner: root
     group: root
-    mode: "644"
+    mode: "755"
 - name: Create shared secret
   ansible.builtin.command:
     cmd: openssl rand -hex 16
   register: drone_rpc_secret
-  changed_when: true
+  changed_when: false
 - name: Copy docker compose file for drone
   ansible.builtin.template:
     src: etc/drone/docker-compose.yml.j2

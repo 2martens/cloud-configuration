@@ -1,0 +1,130 @@
+---
+- name: Create directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/{{ ssh_user }}/gitea
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "755"
+- name: Check if service exists
+  ansible.builtin.stat:
+    path: /home/{{ ssh_user }}/etc/services.d/gitea.ini.j2
+  register: service
+- name: Shutdown Gitea
+  community.general.supervisorctl:
+    name: gitea
+    state: stopped
+  when: service.stat.exists
+- name: Download Gitea
+  ansible.builtin.get_url:
+    url: https://dl.gitea.com/gitea/{{ gitea_version }}/gitea-{{ gitea_version }}-linux-{{ host_architecture }}
+    dest: /home/{{ ssh_user }}/gitea/gitea
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "744"
+- name: Create config directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/{{ ssh_user }}/gitea/custom/conf
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "755"
+- name: Create data directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/{{ ssh_user }}/gitea/data
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "755"
+- name: Check if config file exists
+  ansible.builtin.stat:
+    path: /home/{{ ssh_user }}/gitea/custom/conf/app.ini
+  register: config_file
+- name: Read existing secret
+  register: existing_secret_key
+  when: config_file.stat.exists
+  changed_when: false
+  ansible.builtin.command:
+    chdir: /home/{{ ssh_user }}/gitea/custom/conf
+    argv:
+    - bash
+    - -c
+    - grep -e ^SECRET_KEY app.ini | cut -f 3 -d ' '
+- name: Read existing internal token
+  register: existing_internal_token
+  when: config_file.stat.exists
+  changed_when: false
+  ansible.builtin.command:
+    chdir: /home/{{ ssh_user }}/gitea/custom/conf
+    argv:
+      - bash
+      - -c
+      - grep -e ^INTERNAL_TOKEN app.ini | cut -f 3 -d ' '
+- name: Read existing JWT secret
+  register: existing_jwt_secret
+  when: config_file.stat.exists
+  changed_when: false
+  ansible.builtin.command:
+    chdir: /home/{{ ssh_user }}/gitea/custom/conf
+    argv:
+      - bash
+      - -c
+      - grep -e ^JWT_SECRET app.ini | cut -f 3 -d ' '
+- name: Read existing LFS JWT secret
+  register: existing_lfs_jwt_secret
+  when: config_file.stat.exists
+  changed_when: false
+  ansible.builtin.command:
+    chdir: /home/{{ ssh_user }}/gitea/custom/conf
+    argv:
+      - bash
+      - -c
+      - grep -e ^LFS_JWT_SECRET app.ini | cut -f 3 -d ' '
+- name: Create secret
+  ansible.builtin.command: /home/{{ ssh_user }}/gitea/gitea generate secret SECRET_KEY
+  register: secret_key
+  when: not config_file.stat.exists
+  changed_when: false
+- name: Create internal token
+  ansible.builtin.command: /home/{{ ssh_user }}/gitea/gitea generate secret INTERNAL_TOKEN
+  register: internal_token
+  when: not config_file.stat.exists
+  changed_when: false
+- name: Create LFS JWT secret
+  ansible.builtin.command: /home/{{ ssh_user }}/gitea/gitea generate secret LFS_JWT_SECRET
+  register: lfs_jwt_secret
+  when: not config_file.stat.exists
+  changed_when: false
+- name: Create JWT secret
+  ansible.builtin.command: /home/{{ ssh_user }}/gitea/gitea generate secret JWT_SECRET
+  register: jwt_secret
+  when: not config_file.stat.exists
+  changed_when: false
+- name: Create configuration
+  ansible.builtin.template:
+    src: gitea/custom/conf/app.ini.j2
+    dest: /home/{{ ssh_user }}/gitea/custom/conf/app.ini
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "600"
+- name: Migrate database
+  ansible.builtin.command: /home/{{ ssh_user }}/gitea/gitea migrate
+  changed_when: true
+- name: Create service directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/{{ ssh_user }}/etc/services.d
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "755"
+- name: Create Gitea service
+  ansible.builtin.template:
+    src: etc/services.d/gitea.ini.j2
+    dest: /home/{{ ssh_user }}/etc/services.d/gitea.ini
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "644"
+- name: Start Gitea
+  community.general.supervisorctl:
+    state: started
+    name: gitea
