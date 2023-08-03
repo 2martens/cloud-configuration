@@ -22,3 +22,10 @@
     group: root
     mode: "644"
   notify: Restart docker
+- name: Add user to docker group
+  ansible.builtin.user:
+    append: true
+    name: "{{ ssh_user }}"
+    create_home: false
+    groups:
+      - docker
