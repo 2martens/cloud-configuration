@@ -1,0 +1,2 @@
+[frontend]
+user.uber.space ansible_python_interpreter=/usr/bin/python

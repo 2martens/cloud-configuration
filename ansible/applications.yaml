@@ -1,0 +1,6 @@
+---
+- name: Set up domain
+  hosts: frontend
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - frontend
