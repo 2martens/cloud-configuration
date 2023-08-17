@@ -1,3 +1,4 @@
 ---
 ssh_user: 2martensAdmin
 admin_mail: admin@2martens.de
+drone_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGuTfzwAfRQCGa1zLsRSX5IGl4A/XHZ7p7LFRfLMA78J drone@devops

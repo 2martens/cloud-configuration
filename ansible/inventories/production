@@ -1,6 +1,6 @@
 [setup]
 devops ansible_host=localhost ansible_connection=local ansible_python_interpreter=python3
-applications ansible_host=localhost ansible_connection=local ansible_python_interpreter=python3
+application_server ansible_host=localhost ansible_connection=local ansible_python_interpreter=python3
 
 [ci]
 devops ansible_host=49.12.69.146 ansible_python_interpreter=python3

@@ -32,6 +32,7 @@
   become_method: ansible.builtin.sudo
   remote_user: "{{ ssh_user }}"
   roles:
+    - drone_accessible
     - docker
     - nginx
     - letsencrypt

@@ -1,0 +1,6 @@
+---
+- name: Add SSH key for Drone
+  ansible.posix.authorized_key:
+    key: "{{ drone_ssh_key }}"
+    user: "{{ ssh_user }}"
+    state: present
