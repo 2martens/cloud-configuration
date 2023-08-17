@@ -1,0 +1,9 @@
+---
+- name: Deploy Spring applications
+  hosts: applications
+  gather_facts: false
+  become: true
+  become_method: ansible.builtin.sudo
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - spring_boot

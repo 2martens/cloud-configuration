@@ -1,6 +1,0 @@
----
-dependencies:
-  - role: docker
-  - role: letsencrypt
-  - role: nginx
-  - role: kafka
