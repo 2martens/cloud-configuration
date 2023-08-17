@@ -1,0 +1,46 @@
+---
+- name: Create server
+  hosts: setup
+  gather_facts: false
+  serial: 1
+  roles:
+    - server_setup
+- name: Set up frontend domains
+  hosts: frontend
+  gather_facts: false
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - frontend
+- name: Set up Drone
+  hosts: ci
+  gather_facts: false
+  become: true
+  become_method: ansible.builtin.sudo
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - drone
+- name: Set up Gitea
+  hosts: git
+  gather_facts: false
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - gitea
+- name: Set up application server
+  hosts: applications
+  gather_facts: false
+  become: true
+  become_method: ansible.builtin.sudo
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - docker
+    - nginx
+    - letsencrypt
+    - kafka
+- name: Set up Spring Boot applications
+  hosts: applications
+  gather_facts: false
+  become: true
+  become_method: ansible.builtin.sudo
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - spring_boot

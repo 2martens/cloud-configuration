@@ -1,8 +1,15 @@
 [setup]
+devops ansible_host=localhost ansible_connection=local ansible_python_interpreter=python3
 applications ansible_host=localhost ansible_connection=local ansible_python_interpreter=python3
+
+[ci]
+devops ansible_host=49.12.69.146 ansible_python_interpreter=python3
+
+[git]
+gitea ansible_host=giteajim.uber.space ansible_python_interpreter=/usr/bin/python
 
 [frontend]
 wahlrecht-frontend ansible_host=wahlfron.uber.space ansible_python_interpreter=/usr/bin/python
 
-[springBoot]
+[applications]
 api-server ansible_host=49.13.77.70 ansible_python_interpreter=python3
