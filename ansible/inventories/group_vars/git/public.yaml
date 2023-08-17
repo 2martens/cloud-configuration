@@ -1,8 +1,6 @@
 ---
 ssh_user: giteajim
 host_architecture: amd64
-gitea_user: 2martens
-gitea_url: https://git.2martens.de
 gitea_domain: git.2martens.de
 gitea_port: 64745
 gitea_name: 2martens Gitea

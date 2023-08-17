@@ -1,0 +1,10 @@
+---
+- name: Set up apache for Drone
+  ansible.builtin.import_tasks: apache.yaml
+  tags: apache
+- name: Set up docker for Drone
+  ansible.builtin.import_tasks: docker.yaml
+  tags: docker
+- name: Set up Drone CLI
+  ansible.builtin.import_tasks: drone.yaml
+  tags: cli

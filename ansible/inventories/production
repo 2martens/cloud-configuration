@@ -1,9 +1,9 @@
 [setup]
-devops ansible_host=localhost ansible_connection=local ansible_python_interpreter=python3
-application_server ansible_host=localhost ansible_connection=local ansible_python_interpreter=python3
+devops_server ansible_host=localhost ansible_connection=local
+application_server ansible_host=localhost ansible_connection=local
 
 [ci]
-devops ansible_host=49.12.69.146 ansible_python_interpreter=python3
+devops ansible_host=49.12.69.146 ansible_python_interpreter=/usr/bin/python3
 
 [git]
 gitea ansible_host=giteajim.uber.space ansible_python_interpreter=/usr/bin/python
@@ -12,4 +12,4 @@ gitea ansible_host=giteajim.uber.space ansible_python_interpreter=/usr/bin/pytho
 wahlrecht-frontend ansible_host=wahlfron.uber.space ansible_python_interpreter=/usr/bin/python
 
 [applications]
-api-server ansible_host=49.13.77.70 ansible_python_interpreter=python3
+api-server ansible_host=49.13.77.70 ansible_python_interpreter=/usr/bin/python3

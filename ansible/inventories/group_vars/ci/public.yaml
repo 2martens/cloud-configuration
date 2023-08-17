@@ -2,3 +2,5 @@
 ssh_user: 2martensAdmin
 admin_mail: admin@2martens.de
 ci_domain: ci.2martens.de
+gitea_user: 2martens
+gitea_url: https://git.2martens.de

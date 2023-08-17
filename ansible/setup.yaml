@@ -11,12 +11,19 @@
   remote_user: "{{ ssh_user }}"
   roles:
     - frontend
+- name: Set up devops server
+  hosts: ci
+  remote_user: "{{ ssh_user }}"
+  roles:
+    - apache
+    - letsencrypt
+    - docker
 - name: Set up Drone
   hosts: ci
-  gather_facts: false
   become: true
   become_method: ansible.builtin.sudo
   remote_user: "{{ ssh_user }}"
+  tags: drone
   roles:
     - drone
 - name: Set up Gitea
@@ -27,7 +34,6 @@
     - gitea
 - name: Set up application server
   hosts: applications
-  gather_facts: false
   become: true
   become_method: ansible.builtin.sudo
   remote_user: "{{ ssh_user }}"
@@ -39,9 +45,9 @@
     - kafka
 - name: Set up Spring Boot applications
   hosts: applications
-  gather_facts: false
   become: true
   become_method: ansible.builtin.sudo
   remote_user: "{{ ssh_user }}"
+  tags: springBoot
   roles:
     - spring_boot

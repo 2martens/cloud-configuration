@@ -1,3 +1,2 @@
 ---
-server_name: production
-server_type: cax21
+architecture: arm64

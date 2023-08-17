@@ -1,0 +1,23 @@
+---
+- name: Create drone directory
+  ansible.builtin.file:
+    state: directory
+    path: /etc/drone
+    owner: root
+    group: root
+    mode: "755"
+- name: Create shared secret
+  ansible.builtin.command:
+    cmd: openssl rand -hex 16
+  register: drone_rpc_secret
+  changed_when: false
+- name: Copy docker compose file for drone
+  ansible.builtin.template:
+    src: etc/drone/docker-compose.yml.j2
+    dest: /etc/drone/docker-compose.yml
+    owner: root
+    group: root
+    mode: "644"
+- name: Start drone docker container
+  community.docker.docker_compose:
+    project_src: /etc/drone

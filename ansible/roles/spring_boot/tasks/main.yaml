@@ -2,5 +2,7 @@
 - name: Set up nginx for Spring Boot application
   ansible.builtin.import_tasks: nginx.yaml
   when: spring_use_nginx
+  tags: nginx
 - name: Set up docker-compose
   ansible.builtin.import_tasks: docker.yaml
+  tags: docker
