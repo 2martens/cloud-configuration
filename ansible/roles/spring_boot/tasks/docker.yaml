@@ -1,0 +1,19 @@
+---
+- name: Create Spring Boot application directory
+  ansible.builtin.file:
+    state: directory
+    path: /opt/{{ spring_docker_path }}
+    owner: root
+    group: root
+    mode: "755"
+- name: Copy docker compose file for application
+  ansible.builtin.template:
+    src: opt/application/docker-compose.yaml.j2
+    dest: /opt/{{ spring_docker_path }}/docker-compose.yaml
+    owner: root
+    group: root
+    mode: "644"
+    lstrip_blocks: true
+- name: Start application docker container
+  community.docker.docker_compose:
+    project_src: /opt/{{ spring_docker_path }}

@@ -1,6 +1,4 @@
 # ---> Ansible
 *.retry
-hosts
-**/*_vars.yaml
-inventories/*
-!inventories/*.example
+**/private.yaml
+vault_password

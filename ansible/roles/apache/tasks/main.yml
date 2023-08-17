@@ -1,4 +1,6 @@
 ---
+- name: Install Apache certbot
+  ansible.builtin.import_tasks: letsencrypt.yaml
 - name: Install apache 2
   ansible.builtin.apt:
     name: apache2

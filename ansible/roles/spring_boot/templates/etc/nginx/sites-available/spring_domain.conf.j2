@@ -1,0 +1,18 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name {{ spring_domain }};
+
+    location ^~ /.well-known/acme-challenge/ {
+        default_type "text/plain";
+    }
+
+    {% for app in spring_apps %}
+    {% if app.expose %}
+    location {{ app.path }} {
+        proxy_pass http://localhost:{{ app.port }};
+    }
+    {% endif %}
+    {% endfor %}
+}

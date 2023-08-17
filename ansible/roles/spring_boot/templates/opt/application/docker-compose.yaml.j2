@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  {% for app in spring_apps %}
+  {{ app.name }}:
+    image: {{ app.image }}:{{ lookup('ansible.builtin.vars', app.name + '_image_version') }}
+    {% if app.expose %}
+    ports:
+      - "{{ app.port }}:{{ app.port }}"
+    {% else %}
+    expose:
+      - "{{ app.port }}"
+    {% endif %}
+    {% if 'depends_on' in app %}
+    depends_on: {{ app.depends_on }}
+    {% endif %}
+    restart: always
+    networks:
+      - kafka
+    {% if app.has_environment %}
+    environment: {{ lookup('ansible.builtin.vars', app.name + '_environment') }}
+    {% endif %}
+  {% endfor %}
+
+networks:
+  kafka:
+    name: kafka
+    external: true

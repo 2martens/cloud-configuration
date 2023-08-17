@@ -3,7 +3,3 @@
   ansible.builtin.apt:
     name: certbot
     update_cache: true
-- name: Install python3-certbot-apache
-  ansible.builtin.apt:
-    name: python3-certbot-apache
-    update_cache: true

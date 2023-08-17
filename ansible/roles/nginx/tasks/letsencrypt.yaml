@@ -1,0 +1,12 @@
+---
+- name: Install python3-certbot-nginx
+  ansible.builtin.apt:
+    name: python3-certbot-nginx
+    update_cache: true
+- name: Create directory for acme challenge
+  ansible.builtin.file:
+    state: directory
+    path: /var/www/html/.well-known/acme-challenge
+    owner: root
+    group: root
+    mode: "700"

@@ -1,0 +1,4 @@
+---
+admin_user: 2martensAdmin
+ssh_key_admin_user: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBjYkz73HbsFtRAOfS5QB9xDbOajU9C4gpDp+OjQkLir 2martens@Jims-Air.fritz.box
+ssh_key_admin_user_name: 2martens@Jims-Air.fritz.box

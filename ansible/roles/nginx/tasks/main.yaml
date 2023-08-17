@@ -1,0 +1,11 @@
+---
+- name: Install nginx
+  ansible.builtin.apt:
+    name: nginx
+    update_cache: true
+- name: Allow nginx through firewall
+  community.general.ufw:
+    name: Nginx Full
+    rule: allow
+- name: Prepare for Let's Encrypt
+  ansible.builtin.import_tasks: letsencrypt.yaml

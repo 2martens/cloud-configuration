@@ -1,0 +1,24 @@
+---
+- name: Create Kafka directory
+  ansible.builtin.file:
+    state: directory
+    path: /opt/kafka
+    owner: root
+    group: root
+    mode: "755"
+- name: Copy docker compose file for kafka
+  ansible.builtin.template:
+    src: opt/kafka/docker-compose.yaml.j2
+    dest: /opt/kafka/docker-compose.yaml
+    owner: root
+    group: root
+    mode: "644"
+    lstrip_blocks: true
+- name: Create Kafka network
+  community.docker.docker_network:
+    name: kafka
+    state: present
+    appends: true
+- name: Start kafka docker container
+  community.docker.docker_compose:
+    project_src: /opt/kafka

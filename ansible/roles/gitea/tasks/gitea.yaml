@@ -47,9 +47,9 @@
   ansible.builtin.command:
     chdir: /home/{{ ssh_user }}/gitea/custom/conf
     argv:
-    - bash
-    - -c
-    - grep -e ^SECRET_KEY app.ini | cut -f 3 -d ' '
+      - bash
+      - -c
+      - grep -e ^SECRET_KEY app.ini | cut -f 3 -d ' '
 - name: Read existing internal token
   register: existing_internal_token
   when: config_file.stat.exists

@@ -1,0 +1,38 @@
+---
+- name: Add HTTP site
+  ansible.builtin.template:
+    src: etc/nginx/sites-available/spring_domain.conf.j2
+    dest: /etc/nginx/sites-available/{{ spring_domain }}.conf
+    owner: root
+    group: root
+    mode: "644"
+    force: false
+    lstrip_blocks: true
+- name: Disable default site
+  ansible.builtin.command:
+    cmd: rm /etc/nginx/sites-enabled/default
+    removes: /etc/nginx/sites-enabled/default
+- name: Enable HTTP site
+  ansible.builtin.command:
+    cmd: ln -sf /etc/nginx/sites-available/{{ spring_domain }}.conf /etc/nginx/sites-enabled/{{ spring_domain }}.conf
+    creates: /etc/nginx/sites-enabled/{{ spring_domain }}.conf
+  notify: Reload nginx
+- name: Check certificate existence
+  ansible.builtin.stat:
+    path: "/etc/letsencrypt/live/{{ spring_domain }}/cert.pem"
+  register: certificate
+- name: Generate certificates
+  ansible.builtin.command:
+    cmd: >
+      certbot --nginx --non-interactive --keep-until-expiring
+      --no-eff-email
+      --email {{ admin_mail }}
+      --redirect
+      --renew-with-new-domains --agree-tos -d {{ spring_domain }}
+    creates: "/etc/letsencrypt/live/{{ spring_domain }}/cert.pem"
+  register: certbot_certificate_created
+  notify: Reload nginx
+  failed_when:
+    - "'Successfully received certificate.' not in certbot_certificate_created.stdout"
+  when:
+    - not certificate.stat.exists

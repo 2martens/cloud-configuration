@@ -1,0 +1,23 @@
+---
+spring_domain: api.2martens.de
+spring_use_nginx: true
+spring_docker_path: api
+configserver_image_version: 0.1.8
+wahlrecht_image_version: 0.1.27
+configserver_environment:
+  - "SPRING_PROFILES_ACTIVE=prod"
+spring_apps:
+  - name: configserver
+    port: 8888
+    image: 2martens/configserver
+    path: "= /monitor"
+    expose: true
+    has_environment: true
+  - name: wahlrecht
+    port: 12000
+    image: 2martens/wahlrecht
+    path: /wahlrecht
+    expose: true
+    has_environment: true
+    depends_on:
+      - configserver

@@ -1,0 +1,8 @@
+[setup]
+applications ansible_host=localhost ansible_connection=local ansible_python_interpreter=python3
+
+[frontend]
+wahlrecht-frontend ansible_host=wahlfron.uber.space ansible_python_interpreter=/usr/bin/python
+
+[springBoot]
+api-server ansible_host=49.13.77.70 ansible_python_interpreter=python3
