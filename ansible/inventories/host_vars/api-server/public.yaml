@@ -3,7 +3,7 @@ spring_domain: api.2martens.de
 spring_use_nginx: true
 spring_docker_path: api
 configserver_image_version: 0.1.8
-wahlrecht_image_version: 0.2.2
+wahlrecht_image_version: 0.2.3
 configserver_environment:
   - "SPRING_PROFILES_ACTIVE=prod"
 spring_apps:
