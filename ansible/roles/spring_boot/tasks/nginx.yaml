@@ -1,5 +1,20 @@
 ---
-- name: Add HTTP site
+- name: Determine if Nginx config already exists
+  ansible.builtin.stat:
+    path: /etc/nginx/sites-available/{{ spring_domain }}.conf
+  register: nginx_site
+- name: Update Spring nginx site
+  when: nginx_site.stat.exists
+  ansible.builtin.template:
+    src: etc/nginx/sites-available/spring_domain_existing.conf.j2
+    dest: /etc/nginx/sites-available/{{ spring_domain }}.conf
+    owner: root
+    group: root
+    mode: "644"
+    force: true
+    lstrip_blocks: true
+- name: Add Spring nginx site
+  when: not nginx_site.stat.exists
   ansible.builtin.template:
     src: etc/nginx/sites-available/spring_domain.conf.j2
     dest: /etc/nginx/sites-available/{{ spring_domain }}.conf
@@ -12,7 +27,8 @@
   ansible.builtin.command:
     cmd: rm /etc/nginx/sites-enabled/default
     removes: /etc/nginx/sites-enabled/default
-- name: Enable HTTP site
+- name: Enable Spring nginx site
+  when: not nginx_site.stat.exists
   ansible.builtin.command:
     cmd: ln -sf /etc/nginx/sites-available/{{ spring_domain }}.conf /etc/nginx/sites-enabled/{{ spring_domain }}.conf
     creates: /etc/nginx/sites-enabled/{{ spring_domain }}.conf
