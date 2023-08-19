@@ -5,6 +5,7 @@
   register: nginx_site
 - name: Update Spring nginx site
   when: nginx_site.stat.exists
+  notify: Reload nginx
   ansible.builtin.template:
     src: etc/nginx/sites-available/spring_domain_existing.conf.j2
     dest: /etc/nginx/sites-available/{{ spring_domain }}.conf
