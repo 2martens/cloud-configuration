@@ -1,16 +1,6 @@
 ---
 - name: Install nginx
-  ansible.builtin.apt:
-    name: nginx
-    update_cache: true
-- name: Allow nginx through firewall
-  community.general.ufw:
-    name: Nginx Full
-    rule: allow
-- name: Disable server tokens
-  ansible.builtin.lineinfile:
-    search_string: "# server_tokens off;"
-    path: /etc/nginx/nginx.conf
-    line: "server_tokens off;"
+  ansible.builtin.import_tasks: nginx.yaml
+  tags: nginx
 - name: Prepare for Let's Encrypt
   ansible.builtin.import_tasks: letsencrypt.yaml

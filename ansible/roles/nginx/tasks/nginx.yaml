@@ -1,0 +1,16 @@
+---
+- name: Install nginx
+  ansible.builtin.apt:
+    name: nginx
+    update_cache: true
+- name: Allow nginx through firewall
+  community.general.ufw:
+    name: Nginx Full
+    rule: allow
+- name: Disable server tokens
+  notify: Restart nginx
+  ansible.builtin.lineinfile:
+    backrefs: true
+    regexp: "(\\s+)# (server_tokens off;)"
+    path: /etc/nginx/nginx.conf
+    line: "\\1\\2"
