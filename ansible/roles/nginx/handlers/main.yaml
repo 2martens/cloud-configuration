@@ -1,9 +1,11 @@
 ---
 - name: Restart nginx
+  tags: nginx
   ansible.builtin.service:
     name: nginx
     state: restarted
 - name: Reload nginx
+  tags: nginx
   ansible.builtin.service:
     name: nginx
     state: reloaded
