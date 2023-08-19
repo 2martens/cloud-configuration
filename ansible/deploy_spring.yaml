@@ -6,4 +6,5 @@
   become_method: ansible.builtin.sudo
   remote_user: "{{ ssh_user }}"
   roles:
+    - nginx
     - spring_boot
