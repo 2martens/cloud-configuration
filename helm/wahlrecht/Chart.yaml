@@ -1,0 +1,14 @@
+apiVersion: v2
+name: wahlrecht
+version: 0.1.4
+type: application
+description: Installs the Wahlrecht API into the Kubernetes cluster
+maintainers:
+  - name: Jim Martens
+    url: https://2martens.de
+sources:
+  - https://git.2martens.de/2martens/wahlrecht
+dependencies:
+  - name: template
+    version: 0.1.5
+    repository: file://../template

@@ -1,0 +1,46 @@
+image:
+  repository: 2martens/wahlrecht
+  tag: 0.2.8
+
+application:
+  port: 12000
+  actuatorPort: 12001
+  keycloak:
+    url: https://id.2martens.de
+    realm: 2martens
+  configserver:
+    scheme: http
+    host: configserver
+    port: 8888
+    prefix: /config
+  kafka:
+    host: kafka
+    port: 9092
+
+service:
+  port: 12000
+  actuatorPort: 12001
+
+secrets:
+  # Needs to be overwritten and in base64 encoding
+  MONGODB_CONNECTION_STRING: ""
+  # Needs to be overwritten and in base64 encoding
+  CLIENT_SECRET: ""
+
+environment:
+  - name: KEYCLOAK_URL
+    value: "{{ .Values.application.keycloak.url }}"
+  - name: KEYCLOAK_REALM
+    value: "{{ .Values.application.keycloak.realm }}"
+  - name: CONFIGSERVER_SCHEME
+    value: "{{ .Values.application.configserver.scheme }}"
+  - name: CONFIGSERVER_HOST
+    value: "{{ .Values.application.configserver.host }}"
+  - name: CONFIGSERVER_PORT
+    value: "{{ .Values.application.configserver.port }}"
+  - name: CONFIGSERVER_PREFIX
+    value: "{{ .Values.application.configserver.prefix }}"
+  - name: KAFKA_HOST
+    value: "{{ .Values.application.kafka.host }}"
+  - name: KAFKA_PORT
+    value: "{{ .Values.application.kafka.port }}"
