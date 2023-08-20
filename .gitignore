@@ -2,3 +2,6 @@
 *.retry
 **/private.yaml
 vault_password
+# Helm Charts
+values.yaml
+charts/

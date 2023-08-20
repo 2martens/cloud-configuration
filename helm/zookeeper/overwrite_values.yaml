@@ -1,0 +1,18 @@
+image:
+  repository: confluentinc/cp-zookeeper
+  tag: latest
+application:
+  port: 2181
+  isSpring: false
+  tickTime: 2000
+service:
+  port: 2181
+livenessProbe:
+  enabled: false
+readinessProbe:
+  enabled: false
+environment:
+  - name: ZOOKEEPER_CLIENT_PORT
+    value: "{{ .Values.application.port }}"
+  - name: ZOOKEEPER_TICK_TIME
+    value: "{{ .Values.application.tickTime }}"
