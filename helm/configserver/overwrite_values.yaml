@@ -1,0 +1,33 @@
+image:
+  repository: 2martens/configserver
+  tag: 0.1.13
+
+application:
+  port: &applicationPort 8888
+  actuatorPort: &actuatorPort 13000
+  prefix: &prefix /config
+  repositoryPath: &repositoryPath "https://git.2martens.de/2martens/{application}"
+  searchPath: &searchPath module-server/src/main/resources/config
+  kafka:
+    host: &kafkaHost kafka
+    port: &kafkaPort 9092
+
+service:
+  port: *applicationPort
+  actuatorPort: *actuatorPort
+
+environment:
+  - name: PORT
+    value: *applicationPort
+  - name: ACTUATOR_PORT
+    value: *actuatorPort
+  - name: PREFIX
+    value: *prefix
+  - name: REPOSITORY_PATH
+    value: *repositoryPath
+  - name: SEARCH_PATH
+    value: *searchPath
+  - name: KAFKA_HOST
+    value: *kafkaHost
+  - name: KAFKA_PORT
+    value: *kafkaPort

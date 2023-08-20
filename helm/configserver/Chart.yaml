@@ -1,0 +1,14 @@
+apiVersion: v2
+name: configserver
+version: 0.1.2
+type: application
+description: "Minimal Spring Boot config server"
+maintainers:
+  - name: Jim Martens
+    url: https://2martens.de
+sources:
+  - https://git.2martens.de/2martens/config-server
+dependencies:
+  - name: template
+    version: 0.1.3
+    repository: file://../template
