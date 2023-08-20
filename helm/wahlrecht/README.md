@@ -3,7 +3,39 @@
 This chart installs the Wahlrecht API
 into the Kubernetes cluster.
 
-## Requirements
+## Configuration
 
-* running config server (host and port can be configured)
-* running Kafka (host and port can be configured)
+* by default, it expects a Spring Boot config server running inside the cluster, available under
+  http://configserver:8888/config
+  ```yaml
+  application:
+    configserver:
+      host: configserver
+      port: 8888
+      prefix: /config
+      scheme: http
+  ```
+* by default, it expects a Kafka running inside the cluster, available under
+  kafka:9092
+  ```yaml
+  application:
+    kafka:
+      host: kafka
+      port: 9092
+  ```
+* configure Keycloak
+  ```yaml
+  application:
+    keycloak:
+      url: https://yourKeycloak
+      realm: yourRealm
+  ```
+* configure secrets (the application expects these values to be set)
+  ```yaml
+  secrets:
+    MONGODB_CONNECTION_STRING: mongoDBConnectionString
+    CLIENT_SECRET: keycloakClientSecret
+  ```
+  Should you want to use, for example, an external secret provider,
+  then you are currently out of luck. The chart does not support that,
+  yet.
