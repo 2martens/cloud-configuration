@@ -47,7 +47,7 @@ spec:
           {{- end}}
           {{- range .Values.environment }}
             - name: {{ .name }}
-              value: {{ .value | quote }}
+              value: {{ tpl (quote .value) $ }}
           {{- end }}
           ports:
             - name: http
