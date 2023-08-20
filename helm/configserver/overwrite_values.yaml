@@ -5,12 +5,12 @@ image:
 application:
   port: &applicationPort 8888
   actuatorPort: &actuatorPort 13000
-  prefix: &prefix /config
-  repositoryPath: &repositoryPath "https://git.2martens.de/2martens/{application}"
-  searchPath: &searchPath module-server/src/main/resources/config
+  prefix: /config
+  repositoryPath: "https://git.2martens.de/2martens/{application}"
+  searchPath: module-server/src/main/resources/config
   kafka:
-    host: &kafkaHost kafka
-    port: &kafkaPort 9092
+    host: kafka
+    port: 9092
 
 service:
   port: *applicationPort
@@ -18,16 +18,16 @@ service:
 
 environment:
   - name: PORT
-    value: *applicationPort
+    value: {{ .Values.application.port }}
   - name: ACTUATOR_PORT
-    value: *actuatorPort
+    value: {{ .Values.application.actuatorPort }}
   - name: PREFIX
-    value: *prefix
+    value: {{ .Values.application.prefix }}
   - name: REPOSITORY_PATH
-    value: *repositoryPath
+    value: {{ .Values.application.repositoryPath }}
   - name: SEARCH_PATH
-    value: *searchPath
+    value: {{ .Values.application.searchPath }}
   - name: KAFKA_HOST
-    value: *kafkaHost
+    value: {{ .Values.application.kafka.host }}
   - name: KAFKA_PORT
-    value: *kafkaPort
+    value: {{ .Values.application.kafka.port }}
