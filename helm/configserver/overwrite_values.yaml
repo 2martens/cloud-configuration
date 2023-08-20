@@ -18,16 +18,16 @@ service:
 
 environment:
   - name: PORT
-    value: {{ .Values.application.port }}
+    value: "{{ .Values.application.port }}"
   - name: ACTUATOR_PORT
-    value: {{ .Values.application.actuatorPort }}
+    value: "{{ .Values.application.actuatorPort }}"
   - name: PREFIX
-    value: {{ .Values.application.prefix }}
+    value: "{{ .Values.application.prefix }}"
   - name: REPOSITORY_PATH
-    value: {{ .Values.application.repositoryPath }}
+    value: "{{ .Values.application.repositoryPath }}"
   - name: SEARCH_PATH
-    value: {{ .Values.application.searchPath }}
+    value: "{{ .Values.application.searchPath }}"
   - name: KAFKA_HOST
-    value: {{ .Values.application.kafka.host }}
+    value: "{{ .Values.application.kafka.host }}"
   - name: KAFKA_PORT
-    value: {{ .Values.application.kafka.port }}
+    value: "{{ .Values.application.kafka.port }}"
