@@ -1,0 +1,10 @@
+apiVersion: v2
+name: template
+description: A Helm library chart containing common templates, keeping application templates short
+type: library
+version: 0.1.3
+maintainers:
+  - name: Jim Martens
+    url: https://2martens.de
+sources:
+  - https://git.2martens.de/2martens/cloud-configuration

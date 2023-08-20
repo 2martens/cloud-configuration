@@ -1,0 +1,23 @@
+{{- define "template.service" -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "template.fullname" . }}
+  labels:
+    {{- include "template.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: http
+    {{- if .Values.application.isSpring }}
+    - name: http-actuator
+      protocol: TCP
+      port: {{ .Values.service.actuatorPort }}
+      targetPort: http-actuator
+    {{- end }}
+  selector:
+    {{- include "template.selectorLabels" . | nindent 4 }}
+{{- end }}
