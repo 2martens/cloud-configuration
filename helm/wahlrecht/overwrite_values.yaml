@@ -1,6 +1,5 @@
 image:
   repository: 2martens/wahlrecht
-  tag: 0.2.8
 
 application:
   port: 12000

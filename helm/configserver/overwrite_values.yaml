@@ -1,6 +1,5 @@
 image:
   repository: 2martens/configserver
-  tag: 0.1.13
 
 application:
   port: &applicationPort 8888
