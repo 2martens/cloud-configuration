@@ -1,0 +1,11 @@
+apiVersion: v2
+name: kafka
+version: 0.1.3
+description: Simple Kafka chart to get started
+maintainers:
+  - name: Jim Martens
+    url: https://2martens.de
+dependencies:
+  - name: template
+    version: 0.1.4
+    repository: file://../template
