@@ -1,6 +1,6 @@
 apiVersion: v2
 name: configserver
-version: 0.1.5
+version: 0.1.6
 type: application
 description: "Minimal Spring Boot config server"
 maintainers:
@@ -20,12 +20,9 @@ annotations:
         - linux/amd64
         - linux/arm64
   artifacthub.io/changes: |
-    - kind: added
-      description: Completed README to contain all steps required to jumpstart an application chart
-    - kind: added
-      description: Added sign key entry to make verifying easier
-    - kind: added
-      description: Added the changelog
+    - kind: fixed
+      description: Added missing prerelease annotation
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
+  artifacthub.io/prerelease: true
