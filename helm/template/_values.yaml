@@ -1,6 +1,5 @@
-# Default values for template.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Copy these values to your application chart completely and then modify those bits where
+# the default for your application differs. The image.repository is a prime candidate for that.
 
 replicaCount: 1
 
@@ -10,8 +9,15 @@ image:
   # Overrides the image tag whose default is latest
   tag: ""
 
+# If image is not accessible for Kubernetes without authentication, configure required secrets here
+# will be added verbatim to imagePullSecrets in deployment pod template
 imagePullSecrets: []
+
+# Overrides the name being used in, for example, annotations
+# by default it is the chart name
 nameOverride: ""
+# Overrides the name being used for the name of Kubernetes resources
+# by default release name if it contains the chart name, otherwise releaseName-chartName
 fullnameOverride: ""
 
 serviceAccount:
@@ -23,11 +29,14 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+# Configure annotations for the pod, will be added verbatim to key annotations in pod metadata
 podAnnotations: {}
 
+# Configure the security context of the application pod
 podSecurityContext: {}
   # fsGroup: 2000
 
+# Configure security context of the application container
 securityContext: {}
 #   capabilities:
 #     drop:
@@ -42,17 +51,27 @@ application:
   profile: prod
   isSpring: true
 
+# Overwrite with application specific environment variables
+# Each item has key and value, where the value is parsed as a template
 environment: []
 
 enableServiceLinks: false
 
+# Contents of this object will be added to a Kubernetes secret data section and Base64 encoded
+# External secrets are not supported by this template
 secrets: {}
 
+# Configure the service
 service:
   type: ClusterIP
+  # port is targeting the containerPort http, described by application.port
   port: 8080
+  # actuatorPort is targeting the containerPort http-actuator, described by application.actuatorPort
+  # only used if application.isSpring=true
   actuatorPort: 8081
 
+# Configure the liveness probe
+# Defaults fitting for Spring Boot application that has livenessProbe enabled
 livenessProbe:
   enabled: true
   path: /actuator/health/liveness
@@ -60,19 +79,23 @@ livenessProbe:
   initialDelaySeconds: 30
   periodSeconds: 120
 
+# Configure the readiness probe
+# Defaults fitting for Spring Boot application that has readinessProbe enabled
 readinessProbe:
   enabled: true
   path: /actuator/health/readiness
   port: http-actuator
   initialDelaySeconds: 30
   periodSeconds: 10
-  timeoutSeconds: 2
+  # Allows you to specify the number of seconds the application can take to answer readinessProbe
+  # before failure is assumed by Kubernetes
+  timeoutSeconds: 1
 
+# Configure ingress if desired (exposing app beyond the boundaries of the cluster)
 ingress:
   enabled: false
   className: ""
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
@@ -85,10 +108,6 @@ ingress:
   #      - chart-example.local
 
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi
@@ -96,6 +115,7 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+# Configure autoscaling
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -103,10 +123,13 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+# Configure nodeSelector, contents will be added verbatim to key nodeSelector in deployment pod template
 nodeSelector: {}
 
+# Configure tolerations, contents will be added verbatim to key tolerations in deployment pod template
 tolerations: []
 
+# Configure affinity, contents will be added verbatim to key affinity in deployment pod template
 affinity: {}
 
 # podSpec: will be added at the bottom of the pod template in the deployment
