@@ -1,4 +1,4 @@
-# Configserver
+# Configserver Helm chart
 
 This chart installs a minimal Spring Boot configserver into 
 the Kubernetes cluster.
@@ -37,3 +37,6 @@ the Kubernetes cluster.
     port: 8888
     actuatorPort: 13000
   ```
+* as this application uses all the templates of the template library
+  chart, you have all the configuration options that come
+  with the library chart as well
