@@ -5,6 +5,8 @@ and helm charts.
 
 ## Helm charts
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/twomartens)](https://artifacthub.io/packages/search?repo=twomartens)
+
 The helm charts use symlinks to utilise a central collection of templates
 that is used for every chart. The values.yaml is symlinked into the 
 directory of each chart as default_values.yaml. Each chart has
