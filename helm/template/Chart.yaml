@@ -2,18 +2,20 @@ apiVersion: v2
 name: template
 description: A Helm library chart containing common templates, keeping application templates short
 type: library
-version: 0.1.8
+version: 0.1.9
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
 sources:
   - https://git.2martens.de/2martens/cloud-configuration
 annotations:
-  artifact.io/changes: |
+  artifacthub.io/changes: |
     - kind: added
       description: Completed README to contain all steps required to jumpstart an application chart
     - kind: added
       description: Added sign key entry to make verifying easier
+    - kind: fixed
+      description: Fixed annotation of the changes so they actually appear
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
