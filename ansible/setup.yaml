@@ -9,6 +9,7 @@
   hosts: frontend
   gather_facts: false
   remote_user: "{{ ssh_user }}"
+  serial: 1
   roles:
     - frontend
 - name: Set up devops server

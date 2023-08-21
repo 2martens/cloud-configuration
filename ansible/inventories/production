@@ -9,7 +9,8 @@ devops ansible_host=49.12.69.146 ansible_python_interpreter=/usr/bin/python3
 gitea ansible_host=giteajim.uber.space ansible_python_interpreter=/usr/bin/python
 
 [frontend]
-wahlrecht-frontend ansible_host=wahlfron.uber.space ansible_python_interpreter=/usr/bin/python
+wahlrecht-frontend ansible_host=gienah.uberspace.de ansible_python_interpreter=/usr/bin/python
+repo ansible_host=shaula.uberspace.de ansible_python_interpreter=/usr/bin/python
 
 [applications]
 api-server ansible_host=49.13.77.70 ansible_python_interpreter=/usr/bin/python3
