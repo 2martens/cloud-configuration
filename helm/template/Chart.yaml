@@ -2,7 +2,7 @@ apiVersion: v2
 name: template
 description: A Helm library chart containing common templates, keeping application templates short
 type: library
-version: 0.1.10
+version: 0.1.11
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
