@@ -1,6 +1,6 @@
 apiVersion: v2
 name: wahlrecht
-version: 0.1.5
+version: 0.1.6
 type: application
 description: Installs the Wahlrecht API into the Kubernetes cluster
 maintainers:

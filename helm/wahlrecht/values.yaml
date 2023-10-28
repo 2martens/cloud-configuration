@@ -113,17 +113,18 @@ readinessProbe:
 ingress:
   enabled: false
   className: ""
-  annotations: {}
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
   # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: chart-example-tls
+      hosts:
+        - chart-example.local
 resources: {}
 # limits:
 #   cpu: 100m
