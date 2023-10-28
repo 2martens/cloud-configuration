@@ -10,8 +10,8 @@ sources:
   - https://git.2martens.de/2martens/config-server
 dependencies:
   - name: template
-    version: 0.1.9
-    repository: https://repo.2martens.de/charts
+    version: 0.1.12
+    repository: file://../template
 annotations:
   artifacthub.io/images: |
     - name: 2martens/configserver:latest
