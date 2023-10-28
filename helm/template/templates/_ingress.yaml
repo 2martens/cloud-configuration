@@ -33,7 +33,7 @@ spec:
         paths:
           {{- range .paths }}
           - path: {{ .path }}
-            {{- if and .pathType }}
+            {{- if .pathType }}
             pathType: {{ .pathType }}
             {{- end }}
             backend:

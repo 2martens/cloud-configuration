@@ -2,7 +2,7 @@ apiVersion: v2
 name: template
 description: A Helm library chart containing common templates, keeping application templates short
 type: library
-version: 0.1.11
+version: 0.1.12
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
@@ -11,7 +11,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: fixed
-      description: Added annotation to mark this as a pre-release
+      description: Fixed secret and ingress files
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
