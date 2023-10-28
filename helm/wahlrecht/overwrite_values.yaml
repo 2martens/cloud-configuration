@@ -1,6 +1,14 @@
 image:
   repository: 2martens/wahlrecht
 
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+  tls:
+    - secretName: chart-example-tls
+      hosts:
+        - chart-example.local
+
 application:
   port: 12000
   actuatorPort: 12001
