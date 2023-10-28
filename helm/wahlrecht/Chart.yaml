@@ -10,5 +10,5 @@ sources:
   - https://git.2martens.de/2martens/wahlrecht
 dependencies:
   - name: template
-    version: 0.1.6
+    version: 0.1.10
     repository: file://../template

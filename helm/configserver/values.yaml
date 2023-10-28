@@ -1,0 +1,140 @@
+# Copy these values to your application chart completely and then modify those bits where
+# the default for your application differs. The image.repository is a prime candidate for that.
+
+replicaCount: 1
+image:
+  repository: 2martens/configserver
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is latest
+  tag: ""
+# If image is not accessible for Kubernetes without authentication, configure required secrets here
+# will be added verbatim to imagePullSecrets in deployment pod template
+imagePullSecrets: []
+# Overrides the name being used in, for example, annotations
+# by default it is the chart name
+nameOverride: ""
+# Overrides the name being used for the name of Kubernetes resources
+# by default release name if it contains the chart name, otherwise releaseName-chartName
+fullnameOverride: ""
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+# Configure annotations for the pod, will be added verbatim to key annotations in pod metadata
+podAnnotations: {}
+# Configure the security context of the application pod
+podSecurityContext: {}
+# fsGroup: 2000
+
+# Configure security context of the application container
+securityContext: {}
+#   capabilities:
+#     drop:
+#     - ALL
+#   readOnlyRootFilesystem: true
+#   runAsNonRoot: true
+#   runAsUser: 1000
+
+application:
+  port: &applicationPort 8888
+  actuatorPort: &actuatorPort 13000
+  profile: prod
+  isSpring: true
+  prefix: /config
+  repositoryPath: "https://git.2martens.de/2martens/{application}"
+  searchPath: module-server/src/main/resources/config
+  kafka:
+    host: kafka
+    port: 9092
+# Overwrite with application specific environment variables
+# Each item has key and value, where the value is parsed as a template
+environment:
+  - name: PORT
+    value: "{{ .Values.application.port }}"
+  - name: ACTUATOR_PORT
+    value: "{{ .Values.application.actuatorPort }}"
+  - name: PREFIX
+    value: "{{ .Values.application.prefix }}"
+  - name: REPOSITORY_PATH
+    value: "{{ .Values.application.repositoryPath }}"
+  - name: SEARCH_PATH
+    value: "{{ .Values.application.searchPath }}"
+  - name: KAFKA_HOST
+    value: "{{ .Values.application.kafka.host }}"
+  - name: KAFKA_PORT
+    value: "{{ .Values.application.kafka.port }}"
+enableServiceLinks: false
+# Contents of this object will be added to a Kubernetes secret data section and Base64 encoded
+# External secrets are not supported by this template
+secrets: {}
+# Configure the service
+service:
+  type: ClusterIP
+  # port is targeting the containerPort http, described by application.port
+  port: *applicationPort
+  # actuatorPort is targeting the containerPort http-actuator, described by application.actuatorPort
+  # only used if application.isSpring=true
+  actuatorPort: *actuatorPort
+# Configure the liveness probe
+# Defaults fitting for Spring Boot application that has livenessProbe enabled
+livenessProbe:
+  enabled: true
+  path: /actuator/health/liveness
+  port: http-actuator
+  initialDelaySeconds: 30
+  periodSeconds: 120
+# Configure the readiness probe
+# Defaults fitting for Spring Boot application that has readinessProbe enabled
+readinessProbe:
+  enabled: true
+  path: /actuator/health/readiness
+  port: http-actuator
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  # Allows you to specify the number of seconds the application can take to answer readinessProbe
+  # before failure is assumed by Kubernetes
+  timeoutSeconds: 1
+# Configure ingress if desired (exposing app beyond the boundaries of the cluster)
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+resources: {}
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
+
+# Configure autoscaling
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+# Configure nodeSelector, contents will be added verbatim to key nodeSelector in deployment pod template
+nodeSelector: {}
+# Configure tolerations, contents will be added verbatim to key tolerations in deployment pod template
+tolerations: []
+# Configure affinity, contents will be added verbatim to key affinity in deployment pod template
+affinity: {}
+# podSpec: will be added at the bottom of the pod template in the deployment
+podSpec: {}
+# containerSpec: will be added at the bottom of the container specification in the pod template
+containerSpec: {}
