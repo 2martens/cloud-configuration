@@ -158,6 +158,11 @@ containerSpec: {}
 argocd:
   enabled: false
   project: default
-  repoURL: https://github.com/exampleUser/exampleRepo
-  targetRevision: HEAD
-  pathInRepo: /
+  repoURL: https://repo.2martens.de/charts/
+  targetRevision: x
+  # pathInRepo: is required if it is a git repo
+  pathInRepo: ""
+  # chartName: required if repo is a Helm chart repo
+  chartName: "wahlrecht"
+  # targetCluster: specifies the cluster to deploy to
+  targetCluster: https://kubernetes.default.svc
