@@ -1,9 +1,0 @@
-apiVersion: v2
-name: wahlrecht
-description: Configuration chart for ArgoCD to monitor
-type: application
-version: 0.1.8
-dependencies:
-  - name: wahlrecht
-    version: 0.1.8
-    repository: https://repo.2martens.de/charts

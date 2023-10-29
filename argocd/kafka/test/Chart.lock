@@ -1,6 +1,0 @@
-dependencies:
-- name: kafka
-  repository: https://repo.2martens.de/charts
-  version: 0.1.4
-digest: sha256:d1ae6b3e5b1a556aacbc79af9e91d6b453da22c8b59ea74d2503dd98c965609d
-generated: "2023-10-29T21:02:09.531613+01:00"

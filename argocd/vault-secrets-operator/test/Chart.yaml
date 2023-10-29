@@ -1,9 +1,0 @@
-apiVersion: v2
-name: vault-secrets-operator
-description: Configuration chart for ArgoCD to monitor
-type: application
-version: 0.1.0
-dependencies:
-  - name: vault-secrets-operator
-    version: 0.3.4
-    repository: https://helm.releases.hashicorp.com

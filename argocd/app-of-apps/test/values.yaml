@@ -1,27 +1,27 @@
 applications:
   - name: configserver
     project: default
-    targetRevision: main
+    targetRevision: x
     namespace: spring-support
     createNamespace: true
   - name: kafka
     project: default
-    targetRevision: main
+    targetRevision: x
     namespace: kafka
     createNamespace: true
   - name: zookeeper
     project: default
-    targetRevision: main
+    targetRevision: x
     namespace: kafka
     createNamespace: false
   - name: wahlrecht
     project: default
-    targetRevision: main
+    targetRevision: x
     namespace: wahlrecht
     createNamespace: true
   - name: vault-secrets-operator
     project: default
-    targetRevision: main
+    targetRevision: x
     namespace: vault-secrets-operator-system
     createNamespace: true
 

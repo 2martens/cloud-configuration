@@ -16,10 +16,11 @@ spec:
     server: {{ $.Values.overall.destinationServer }}
   project: {{ .project }}
   source:
-    path: argocd/{{ .name }}/{{ $.Values.overall.environment }}
-    repoURL: https://git.2martens.de/2martens/cloud-configuration/
+    repoURL: https://repo.2martens.de/charts
     targetRevision: {{ .targetRevision }}
+    chart: {{ .name }}
     helm:
+      ignoreMissingValueFiles: true
       valueFiles:
-        - override_values.yaml
+        - {{ .name }}.yaml
 {{- end }}

@@ -1,9 +1,0 @@
-apiVersion: v2
-name: kafka
-description: Configuration chart for ArgoCD to monitor
-type: application
-version: 0.1.4
-dependencies:
-  - name: kafka
-    version: 0.1.4
-    repository: https://repo.2martens.de/charts
