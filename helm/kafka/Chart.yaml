@@ -2,7 +2,7 @@ apiVersion: v2
 name: kafka
 description: Simple Kafka chart to get started
 type: application
-version: 0.1.3
+version: 0.1.4
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
@@ -12,8 +12,8 @@ dependencies:
     repository: file://../template
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Added Artifact metadata
+    - kind: fixed
+      description: Fixed version and values
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
