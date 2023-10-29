@@ -7,7 +7,7 @@ applications:
     repoURL: https://repo.2martens.de/charts
     values:
       image:
-        tag: 0.1.14
+        tag: 0.1.15
       application:
         kafka:
           host: kafka.kafka
