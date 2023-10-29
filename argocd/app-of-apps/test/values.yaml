@@ -5,24 +5,65 @@ applications:
     namespace: spring-support
     createNamespace: true
     repoURL: https://repo.2martens.de/charts
+    values:
+      image:
+        tag: 0.1.10
+      application:
+        kafka:
+          host: kafka.kafka
+          port: 9092
   - name: kafka
     project: default
     targetRevision: x
     namespace: kafka
     createNamespace: true
     repoURL: https://repo.2martens.de/charts
+    values:
+      image:
+        tag: 7.5.1
   - name: zookeeper
     project: default
     targetRevision: x
     namespace: kafka
     createNamespace: false
     repoURL: https://repo.2martens.de/charts
+    values:
+      image:
+        tag: 7.5.1
   - name: wahlrecht
     project: default
     targetRevision: x
     namespace: wahlrecht
     createNamespace: true
     repoURL: https://repo.2martens.de/charts
+    values:
+      image:
+        tag: 0.2.10
+      ingress:
+        enabled: true
+        className: public
+        hosts:
+          - host: api.2martens.de
+            paths:
+              - path: /wahlrecht/
+                pathType: Prefix
+        tls:
+          - secretName: wahlrecht-tls
+            hosts:
+              - api.2martens.de
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      application:
+        configserver:
+          scheme: http
+          host: configserver.spring-support
+          port: 8888
+          prefix: /config
+        kafka:
+          host: kafka.kafka
+          port: 9092
   - name: vault-secrets-operator
     project: default
     targetRevision: x

@@ -21,6 +21,6 @@ spec:
     chart: {{ .name }}
     helm:
       ignoreMissingValueFiles: true
-      valueFiles:
-        - {{ .name }}.yaml
+      values: >
+        {{ toYaml .values }}
 {{- end }}
