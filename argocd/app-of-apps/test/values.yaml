@@ -3,22 +3,27 @@ applications:
     project: default
     targetRevision: main
     namespace: spring-support
+    createNamespace: true
   - name: kafka
     project: default
     targetRevision: main
     namespace: kafka
+    createNamespace: true
   - name: zookeeper
     project: default
     targetRevision: main
     namespace: kafka
+    createNamespace: false
   - name: wahlrecht
     project: default
     targetRevision: main
     namespace: wahlrecht
+    createNamespace: true
   - name: vault-secrets-operator
     project: default
     targetRevision: main
     namespace: vault-secrets-operator-system
+    createNamespace: true
 
 overall:
   destinationServer: https://kubernetes.default.svc
