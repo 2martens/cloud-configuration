@@ -5,7 +5,7 @@ applications:
     namespace: spring-support
     createNamespace: true
     repoURL: https://repo.2martens.de/charts
-    values: >
+    values:
       image:
         tag: 0.1.10
       application:
@@ -18,7 +18,7 @@ applications:
     namespace: kafka
     createNamespace: true
     repoURL: https://repo.2martens.de/charts
-    values: >
+    values:
       image:
         tag: 7.5.1
   - name: zookeeper
@@ -27,7 +27,7 @@ applications:
     namespace: kafka
     createNamespace: false
     repoURL: https://repo.2martens.de/charts
-    values: >
+    values:
       image:
         tag: 7.5.1
   - name: wahlrecht
@@ -36,7 +36,7 @@ applications:
     namespace: wahlrecht
     createNamespace: true
     repoURL: https://repo.2martens.de/charts
-    values: >
+    values:
       image:
         tag: 0.2.10
       ingress:
