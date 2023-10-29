@@ -83,9 +83,9 @@ enableServiceLinks: false
 # Contents of this object will be added to a Kubernetes secret data section and Base64 encoded
 # External secrets are not supported by this template
 secrets:
-  # Needs to be overwritten and in base64 encoding
+  # Needs to be overwritten
   MONGODB_CONNECTION_STRING: ""
-  # Needs to be overwritten and in base64 encoding
+  # Needs to be overwritten
   CLIENT_SECRET: ""
 # Configure the service
 service:

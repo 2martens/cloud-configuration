@@ -29,9 +29,9 @@ service:
   actuatorPort: 12001
 
 secrets:
-  # Needs to be overwritten and in base64 encoding
+  # Needs to be overwritten
   MONGODB_CONNECTION_STRING: ""
-  # Needs to be overwritten and in base64 encoding
+  # Needs to be overwritten
   CLIENT_SECRET: ""
 
 environment:
