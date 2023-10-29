@@ -1,0 +1,19 @@
+{{- range .Values.applications }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .name }}
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    server: {{ $.Values.overall.destinationServer }}
+  project: {{ .project }}
+  source:
+    path: argocd/{{ .name }}/{{ $.Values.overall.environment }}
+    repoURL: https://git.2martens.de/2martens/cloud-configuration/
+    targetRevision: {{ .targetRevision }}
+{{- end }}

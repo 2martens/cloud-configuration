@@ -1,0 +1,20 @@
+applications:
+  - name: configserver
+    project: default
+    targetRevision: main
+  - name: kafka
+    project: default
+    targetRevision: main
+  - name: zookeeper
+    project: default
+    targetRevision: main
+  - name: wahlrecht
+    project: default
+    targetRevision: main
+  - name: vault-secrets-operator
+    project: default
+    targetRevision: main
+
+overall:
+  destinationServer: https://kubernetes.default.svc
+  environment: test
