@@ -12,9 +12,14 @@ spec:
   source:
     repoURL: {{ .Values.argocd.repoURL }}
     targetRevision: {{ .Values.argocd.targetRevision }}
+    {{- if .Values.argocd.pathInRepo }}
     path: {{ .Values.argocd.pathInRepo }}
+    {{- end }}
+    {{- if .Values.argocd.chartName }}
+    chart: {{ .Values.argocd.chartName }}
+    {{- end }}
   destination:
-    server: https://kubernetes.default.svc
+    server: {{ .Values.argocd.targetCluster }}
     namespace: {{ .Values.application.namespace }}
 {{- end }}
 {{- end }}
