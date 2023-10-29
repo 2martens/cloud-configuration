@@ -1,0 +1,6 @@
+dependencies:
+- name: zookeeper
+  repository: https://repo.2martens.de/charts
+  version: 0.1.3
+digest: sha256:deb188ee907d0b65139c7ae0125ae661693b9d27132026a64f3a7dfac33ffdab
+generated: "2023-10-29T21:06:20.654449+01:00"

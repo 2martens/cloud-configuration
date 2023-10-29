@@ -1,0 +1,6 @@
+dependencies:
+- name: configserver
+  repository: https://repo.2martens.de/charts
+  version: 0.1.7
+digest: sha256:3dba1d0466b9d4fe5b46e0d8fabe16f6cde178c6768b1980e31fabedd8d66bdb
+generated: "2023-10-29T20:54:06.964275+01:00"

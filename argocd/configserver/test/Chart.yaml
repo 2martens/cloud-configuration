@@ -1,0 +1,9 @@
+apiVersion: v2
+name: configserver
+description: Configuration chart for ArgoCD to monitor
+type: application
+version: 0.1.7
+dependencies:
+  - name: configserver
+    version: 0.1.7
+    repository: https://repo.2martens.de/charts

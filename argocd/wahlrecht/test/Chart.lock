@@ -1,0 +1,6 @@
+dependencies:
+- name: wahlrecht
+  repository: https://repo.2martens.de/charts
+  version: 0.1.8
+digest: sha256:b39f9c646c50aca0624889fcf6e1c419fc0bed5c62243a3ecb88bea2930a77e6
+generated: "2023-10-29T20:37:10.080382+01:00"
