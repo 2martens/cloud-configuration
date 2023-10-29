@@ -19,4 +19,7 @@ spec:
     path: argocd/{{ .name }}/{{ $.Values.overall.environment }}
     repoURL: https://git.2martens.de/2martens/cloud-configuration/
     targetRevision: {{ .targetRevision }}
+    helm:
+      valueFiles:
+        - values.yaml
 {{- end }}
