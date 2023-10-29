@@ -7,7 +7,7 @@ applications:
     repoURL: https://repo.2martens.de/charts
     values:
       image:
-        tag: 0.1.10
+        tag: 0.1.14
       application:
         kafka:
           host: kafka.kafka
@@ -38,7 +38,7 @@ applications:
     repoURL: https://repo.2martens.de/charts
     values:
       image:
-        tag: 0.2.10
+        tag: 0.2.11
       ingress:
         enabled: true
         className: public
@@ -54,6 +54,9 @@ applications:
       resources:
         requests:
           cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 200m
           memory: 128Mi
       application:
         configserver:

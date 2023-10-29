@@ -1,7 +1,0 @@
-image:
-  tag: 0.1.10
-
-application:
-  kafka:
-    host: kafka.kafka
-    port: 9092
