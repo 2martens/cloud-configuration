@@ -21,6 +21,5 @@ spec:
     chart: {{ .name }}
     helm:
       ignoreMissingValueFiles: true
-      values: >
-        {{ .values }}
+      values: {{ .values }}
 {{- end }}
