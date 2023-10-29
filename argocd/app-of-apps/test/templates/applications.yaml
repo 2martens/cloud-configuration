@@ -21,5 +21,5 @@ spec:
     targetRevision: {{ .targetRevision }}
     helm:
       valueFiles:
-        - values.yaml
+        - override_values.yaml
 {{- end }}
