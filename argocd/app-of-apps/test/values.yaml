@@ -4,26 +4,31 @@ applications:
     targetRevision: x
     namespace: spring-support
     createNamespace: true
+    repoURL: https://repo.2martens.de/charts
   - name: kafka
     project: default
     targetRevision: x
     namespace: kafka
     createNamespace: true
+    repoURL: https://repo.2martens.de/charts
   - name: zookeeper
     project: default
     targetRevision: x
     namespace: kafka
     createNamespace: false
+    repoURL: https://repo.2martens.de/charts
   - name: wahlrecht
     project: default
     targetRevision: x
     namespace: wahlrecht
     createNamespace: true
+    repoURL: https://repo.2martens.de/charts
   - name: vault-secrets-operator
     project: default
     targetRevision: x
     namespace: vault-secrets-operator-system
     createNamespace: true
+    repoURL: https://helm.releases.hashicorp.com
 
 overall:
   destinationServer: https://kubernetes.default.svc

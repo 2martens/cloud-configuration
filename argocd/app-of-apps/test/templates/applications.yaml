@@ -16,7 +16,7 @@ spec:
     server: {{ $.Values.overall.destinationServer }}
   project: {{ .project }}
   source:
-    repoURL: https://repo.2martens.de/charts
+    repoURL: {{ .repoURL }}
     targetRevision: {{ .targetRevision }}
     chart: {{ .name }}
     helm:
