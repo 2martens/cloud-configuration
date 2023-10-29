@@ -35,6 +35,10 @@ secrets:
   CLIENT_SECRET: ""
 
 environment:
+  - name: PORT
+    value: "{{ .Values.application.port }}"
+  - name: ACTUATOR_PORT
+    value: "{{ .Values.application.actuatorPort }}"
   - name: KEYCLOAK_URL
     value: "{{ .Values.application.keycloak.url }}"
   - name: KEYCLOAK_REALM

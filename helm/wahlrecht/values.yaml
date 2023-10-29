@@ -42,6 +42,7 @@ securityContext: {}
 application:
   port: 12000
   actuatorPort: 12001
+  namespace: template # update to match the desired namespace
   profile: prod
   isSpring: true
   keycloak:
@@ -58,6 +59,10 @@ application:
 # Overwrite with application specific environment variables
 # Each item has key and value, where the value is parsed as a template
 environment:
+  - name: PORT
+    value: "{{ .Values.application.port }}"
+  - name: ACTUATOR_PORT
+    value: "{{ .Values.application.actuatorPort }}"
   - name: KEYCLOAK_URL
     value: "{{ .Values.application.keycloak.url }}"
   - name: KEYCLOAK_REALM
@@ -125,9 +130,6 @@ ingress:
     - secretName: chart-example-tls
       hosts:
         - chart-example.local
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 resources: {}
 # limits:
 #   cpu: 100m
@@ -153,3 +155,9 @@ affinity: {}
 podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template
 containerSpec: {}
+argocd:
+  enabled: false
+  project: default
+  repoURL: https://github.com/exampleUser/exampleRepo
+  targetRevision: HEAD
+  pathInRepo: /

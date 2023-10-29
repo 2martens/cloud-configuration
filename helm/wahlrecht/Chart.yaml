@@ -1,8 +1,8 @@
 apiVersion: v2
 name: wahlrecht
-version: 0.1.6
-type: application
 description: Installs the Wahlrecht API into the Kubernetes cluster
+type: application
+version: 0.1.7
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
@@ -10,5 +10,15 @@ sources:
   - https://git.2martens.de/2martens/wahlrecht
 dependencies:
   - name: template
-    version: 0.1.12
+    version: 0.1.13
     repository: file://../template
+annotations:
+  artifacthub.io/changes: |
+    - kind: fixed
+      description: Configured port and actuator port now match spring configured values
+    - kind: added
+      description: Added support for ArgoCD application configuration
+  artifacthub.io/signKey: |
+    fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
+    url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
+  artifacthub.io/prerelease: true
