@@ -22,5 +22,5 @@ spec:
     helm:
       ignoreMissingValueFiles: true
       values: >
-        {{ toYaml .values }}
+        {{ .values }}
 {{- end }}
