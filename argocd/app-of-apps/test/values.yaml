@@ -2,18 +2,23 @@ applications:
   - name: configserver
     project: default
     targetRevision: main
+    namespace: spring-support
   - name: kafka
     project: default
     targetRevision: main
+    namespace: kafka
   - name: zookeeper
     project: default
     targetRevision: main
+    namespace: kafka
   - name: wahlrecht
     project: default
     targetRevision: main
+    namespace: wahlrecht
   - name: vault-secrets-operator
     project: default
     targetRevision: main
+    namespace: vault-secrets-operator-system
 
 overall:
   destinationServer: https://kubernetes.default.svc
