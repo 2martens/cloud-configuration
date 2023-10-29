@@ -1,0 +1,20 @@
+{{- define "template.application" -}}
+{{- if .Values.argocd.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ include "template.fullname" . }}
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Values.argocd.project }}
+  source:
+    repoURL: {{ .Values.argocd.repoURL }}
+    targetRevision: {{ .Values.argocd.targetRevision }}
+    path: {{ .Values.argocd.pathInRepo }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Values.application.namespace }}
+{{- end }}
+{{- end }}
