@@ -1,7 +1,7 @@
 applications:
   - name: configserver
     project: default
-    targetRevision: 0.1.17
+    targetRevision: 0.1.18
     namespace: spring-support
     createNamespace: true
     repoURL: https://repo.2martens.de/charts
