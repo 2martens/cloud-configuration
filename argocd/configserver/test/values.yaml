@@ -6,7 +6,7 @@ image:
   repository: 2martens/configserver
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is latest
-  tag: "0.1.18"
+  tag: "0.1.17"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here
 # will be added verbatim to imagePullSecrets in deployment pod template
 imagePullSecrets: []
@@ -64,10 +64,8 @@ environment:
     value: "{{ .Values.application.repositoryPath }}"
   - name: SEARCH_PATH
     value: "{{ .Values.application.searchPath }}"
-  - name: KAFKA_HOST
-    value: "{{ .Values.application.kafka.host }}"
-  - name: KAFKA_PORT
-    value: "{{ .Values.application.kafka.port }}"
+  - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
+    value: "{{ .Values.application.kafka.host }}:{{ .Values.application.kafka.port }}"
 enableServiceLinks: false
 # Contents of this object will be added to a Kubernetes secret data section and Base64 encoded
 # External secrets are not supported by this template
@@ -139,14 +137,3 @@ affinity: {}
 podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template
 containerSpec: {}
-argocd:
-  enabled: false
-  project: default
-  repoURL: https://github.com/exampleUser/exampleRepo
-  targetRevision: HEAD
-  # pathInRepo: is required if it is a git repo
-  pathInRepo: /
-  # chartName: required if repo is a Helm chart repo
-  chartName: ""
-  # targetCluster: specifies the cluster to deploy to
-  targetCluster: https://kubernetes.default.svc

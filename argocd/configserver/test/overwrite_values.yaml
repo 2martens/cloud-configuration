@@ -1,6 +1,19 @@
 image:
-  tag: 0.1.18
+  tag: 0.1.17
 application:
   kafka:
     host: kafka.kafka
     port: 9092
+environment:
+  - name: PORT
+    value: "{{ .Values.application.port }}"
+  - name: ACTUATOR_PORT
+    value: "{{ .Values.application.actuatorPort }}"
+  - name: PREFIX
+    value: "{{ .Values.application.prefix }}"
+  - name: REPOSITORY_PATH
+    value: "{{ .Values.application.repositoryPath }}"
+  - name: SEARCH_PATH
+    value: "{{ .Values.application.searchPath }}"
+  - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
+    value: "{{ .Values.application.kafka.host }}:{{ .Values.application.kafka.port }}"
