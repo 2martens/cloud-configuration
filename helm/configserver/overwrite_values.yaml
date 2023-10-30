@@ -1,6 +1,5 @@
 image:
   repository: 2martens/configserver
-  tag: 0.1.17
 
 application:
   port: &applicationPort 8888
@@ -27,7 +26,3 @@ environment:
     value: "{{ .Values.application.repositoryPath }}"
   - name: SEARCH_PATH
     value: "{{ .Values.application.searchPath }}"
-  - name: KAFKA_HOST
-    value: "{{ .Values.application.kafka.host }}"
-  - name: KAFKA_PORT
-    value: "{{ .Values.application.kafka.port }}"
