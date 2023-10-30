@@ -39,7 +39,7 @@ resource "inwx_domain_contact" "inwx" {
   street_address = "Prinzessinnenstr. 30"
   city = "Berlin"
   postal_code = "10969"
-  country_code = 'DE'
+  country_code = "DE"
   phone_number = "+49.309832120"
   email = "hostmaster@inwx.de"
 }
