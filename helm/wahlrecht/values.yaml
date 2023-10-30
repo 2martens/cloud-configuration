@@ -2,6 +2,8 @@
 # the default for your application differs. The image.repository is a prime candidate for that.
 
 replicaCount: 1
+# revisionHistoryLimit: can be configured to reduce/increase amount of stored replica sets for rollback
+revisionHistoryLimit: 10
 image:
   repository: 2martens/wahlrecht
   pullPolicy: IfNotPresent
