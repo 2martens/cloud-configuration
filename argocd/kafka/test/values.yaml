@@ -3,10 +3,10 @@
 
 replicaCount: 1
 image:
-  repository: 2martens/wahlrecht
+  repository: confluentinc/cp-kafka
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is latest
-  tag: ""
+  tag: "7.5.1"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here
 # will be added verbatim to imagePullSecrets in deployment pod template
 imagePullSecrets: []
@@ -40,65 +40,47 @@ securityContext: {}
 #   runAsUser: 1000
 
 application:
-  port: 12000
-  actuatorPort: 12001
+  port: &applicationPort 9092
+  actuatorPort: 8081
   namespace: template # update to match the desired namespace
   profile: prod
-  isSpring: true
-  keycloak:
-    url: https://id.2martens.de
-    realm: 2martens
-  configserver:
-    scheme: http
-    host: configserver
-    port: 8888
-    prefix: /config
-  kafka:
-    host: kafka
-    port: 9092
+  isSpring: false
+  zookeeper:
+    host: zookeeper
+    port: 2181
 # Overwrite with application specific environment variables
 # Each item has key and value, where the value is parsed as a template
 environment:
-  - name: PORT
-    value: "{{ .Values.application.port }}"
-  - name: ACTUATOR_PORT
-    value: "{{ .Values.application.actuatorPort }}"
-  - name: KEYCLOAK_URL
-    value: "{{ .Values.application.keycloak.url }}"
-  - name: KEYCLOAK_REALM
-    value: "{{ .Values.application.keycloak.realm }}"
-  - name: CONFIGSERVER_SCHEME
-    value: "{{ .Values.application.configserver.scheme }}"
-  - name: CONFIGSERVER_HOST
-    value: "{{ .Values.application.configserver.host }}"
-  - name: CONFIGSERVER_PORT
-    value: "{{ .Values.application.configserver.port }}"
-  - name: CONFIGSERVER_PREFIX
-    value: "{{ .Values.application.configserver.prefix }}"
-  - name: KAFKA_HOST
-    value: "{{ .Values.application.kafka.host }}"
-  - name: KAFKA_PORT
-    value: "{{ .Values.application.kafka.port }}"
+  - name: KAFKA_BROKER_ID
+    value: "1"
+  - name: KAFKA_ZOOKEEPER_CONNECT
+    value: "{{ .Values.application.zookeeper.host }}:{{ .Values.application.zookeeper.port }}"
+  - name: KAFKA_LISTENERS
+    value: "PLAINTEXT://0.0.0.0:{{ .Values.application.port }}"
+  - name: KAFKA_ADVERTISED_LISTENERS
+    value: "PLAINTEXT://kafka:{{ .Values.application.port }}"
+  - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
+    value: PLAINTEXT:PLAINTEXT
+  - name: KAFKA_INTER_BROKER_LISTENER_NAME
+    value: PLAINTEXT
+  - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+    value: "1"
 enableServiceLinks: false
 # Contents of this object will be added to a Kubernetes secret data section and Base64 encoded
 # External secrets are not supported by this template
-secrets:
-  # Needs to be overwritten
-  MONGODB_CONNECTION_STRING: ""
-  # Needs to be overwritten
-  CLIENT_SECRET: ""
+secrets: {}
 # Configure the service
 service:
   type: ClusterIP
   # port is targeting the containerPort http, described by application.port
-  port: 12000
+  port: *applicationPort
   # actuatorPort is targeting the containerPort http-actuator, described by application.actuatorPort
   # only used if application.isSpring=true
-  actuatorPort: 12001
+  actuatorPort: 8081
 # Configure the liveness probe
 # Defaults fitting for Spring Boot application that has livenessProbe enabled
 livenessProbe:
-  enabled: true
+  enabled: false
   path: /actuator/health/liveness
   port: http-actuator
   initialDelaySeconds: 30
@@ -106,7 +88,7 @@ livenessProbe:
 # Configure the readiness probe
 # Defaults fitting for Spring Boot application that has readinessProbe enabled
 readinessProbe:
-  enabled: true
+  enabled: false
   path: /actuator/health/readiness
   port: http-actuator
   initialDelaySeconds: 30
@@ -118,8 +100,7 @@ readinessProbe:
 ingress:
   enabled: false
   className: ""
-  annotations:
-    cert-manager.io/cluster-issuer: lets-encrypt
+  annotations: {}
   # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
@@ -155,3 +136,14 @@ affinity: {}
 podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template
 containerSpec: {}
+argocd:
+  enabled: false
+  project: default
+  repoURL: https://github.com/exampleUser/exampleRepo
+  targetRevision: HEAD
+  # pathInRepo: is required if it is a git repo
+  pathInRepo: /
+  # chartName: required if repo is a Helm chart repo
+  chartName: ""
+  # targetCluster: specifies the cluster to deploy to
+  targetCluster: https://kubernetes.default.svc

@@ -6,7 +6,7 @@ image:
   repository: 2martens/wahlrecht
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is latest
-  tag: ""
+  tag: "0.2.11"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here
 # will be added verbatim to imagePullSecrets in deployment pod template
 imagePullSecrets: []
@@ -50,11 +50,11 @@ application:
     realm: 2martens
   configserver:
     scheme: http
-    host: configserver
+    host: configserver.spring-support
     port: 8888
     prefix: /config
   kafka:
-    host: kafka
+    host: kafka.kafka
     port: 9092
 # Overwrite with application specific environment variables
 # Each item has key and value, where the value is parsed as a template
@@ -116,21 +116,27 @@ readinessProbe:
   timeoutSeconds: 1
 # Configure ingress if desired (exposing app beyond the boundaries of the cluster)
 ingress:
-  enabled: false
-  className: ""
+  enabled: true
+  className: "public"
   annotations:
     cert-manager.io/cluster-issuer: lets-encrypt
   # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: chart-example.local
+    - host: api.2martens.de
       paths:
-        - path: /
-          pathType: ImplementationSpecific
+        - path: /wahlrecht/
+          pathType: Prefix
   tls:
-    - secretName: chart-example-tls
+    - secretName: wahlrecht-tls
       hosts:
-        - chart-example.local
-resources: {}
+        - api.2martens.de
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
 # limits:
 #   cpu: 100m
 #   memory: 128Mi

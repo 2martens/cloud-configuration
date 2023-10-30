@@ -1,76 +1,34 @@
 applications:
   - name: configserver
     project: default
-    targetRevision: 0.1.18
+    targetRevision: main
     namespace: spring-support
     createNamespace: true
-    repoURL: https://repo.2martens.de/charts
-    values:
-      application:
-        kafka:
-          host: kafka.kafka
-          port: 9092
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
   - name: kafka
     project: default
-    targetRevision: x
+    targetRevision: main
     namespace: kafka
     createNamespace: true
-    repoURL: https://repo.2martens.de/charts
-    values:
-      image:
-        tag: 7.5.1
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
   - name: zookeeper
     project: default
-    targetRevision: x
+    targetRevision: main
     namespace: kafka
     createNamespace: false
-    repoURL: https://repo.2martens.de/charts
-    values:
-      image:
-        tag: 7.5.1
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
   - name: wahlrecht
     project: default
-    targetRevision: x
+    targetRevision: main
     namespace: wahlrecht
     createNamespace: true
-    repoURL: https://repo.2martens.de/charts
-    values:
-      image:
-        tag: 0.2.11
-      ingress:
-        enabled: true
-        className: public
-        hosts:
-          - host: api.2martens.de
-            paths:
-              - path: /wahlrecht/
-                pathType: Prefix
-        tls:
-          - secretName: wahlrecht-tls
-            hosts:
-              - api.2martens.de
-      resources:
-        requests:
-          cpu: 100m
-          memory: 128Mi
-        limits:
-          cpu: 200m
-          memory: 128Mi
-      application:
-        configserver:
-          scheme: http
-          host: configserver.spring-support
-          port: 8888
-          prefix: /config
-        kafka:
-          host: kafka.kafka
-          port: 9092
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
   - name: vault-secrets-operator
     project: default
-    targetRevision: x
+    targetRevision: main
     namespace: vault-secrets-operator-system
     createNamespace: true
-    repoURL: https://helm.releases.hashicorp.com
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
 
 overall:
   destinationServer: https://kubernetes.default.svc

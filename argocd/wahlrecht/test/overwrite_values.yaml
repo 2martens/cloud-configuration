@@ -1,0 +1,30 @@
+image:
+  tag: 0.2.11
+ingress:
+  enabled: true
+  className: public
+  hosts:
+    - host: api.2martens.de
+      paths:
+        - path: /wahlrecht/
+          pathType: Prefix
+  tls:
+    - secretName: wahlrecht-tls
+      hosts:
+        - api.2martens.de
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+application:
+  configserver:
+    scheme: http
+    host: configserver.spring-support
+    port: 8888
+    prefix: /config
+  kafka:
+    host: kafka.kafka
+    port: 9092

@@ -18,10 +18,13 @@ spec:
   source:
     repoURL: {{ .repoURL }}
     targetRevision: {{ .targetRevision }}
+    {{- if .repoURL | contains "git" }}
+    path: argocd/{{ .name }}/{{ $.Values.overall.environment }}
+    {{- else }}
     chart: {{ .name }}
-    {{- if .values }}
-    helm:
-      values: |
-        {{- toYaml .values | nindent 8 }}
     {{- end }}
+    helm:
+      ignoreMissingValueFiles: true
+      valueFiles:
+        - argocd_values.yaml
 {{- end }}
