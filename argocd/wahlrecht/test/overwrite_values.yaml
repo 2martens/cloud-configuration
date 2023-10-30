@@ -28,3 +28,9 @@ application:
   kafka:
     host: kafka.kafka
     port: 9092
+
+readinessProbe:
+  initialDelaySeconds: 60
+
+livenessProbe:
+  initialDelaySeconds: 60

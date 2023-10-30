@@ -6,7 +6,7 @@ image:
   repository: 2martens/wahlrecht
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is latest
-  tag: "0.2.11"
+  tag: "0.2.12"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here
 # will be added verbatim to imagePullSecrets in deployment pod template
 imagePullSecrets: []
@@ -101,7 +101,7 @@ livenessProbe:
   enabled: true
   path: /actuator/health/liveness
   port: http-actuator
-  initialDelaySeconds: 30
+  initialDelaySeconds: 60
   periodSeconds: 120
 # Configure the readiness probe
 # Defaults fitting for Spring Boot application that has readinessProbe enabled
@@ -109,7 +109,7 @@ readinessProbe:
   enabled: true
   path: /actuator/health/readiness
   port: http-actuator
-  initialDelaySeconds: 30
+  initialDelaySeconds: 60
   periodSeconds: 10
   # Allows you to specify the number of seconds the application can take to answer readinessProbe
   # before failure is assumed by Kubernetes
