@@ -2,4 +2,4 @@ apiVersion: v2
 name: app-of-apps
 description: Configuration chart for ArgoCD to monitor
 type: application
-version: 0.1.0
+version: 0.1.1
