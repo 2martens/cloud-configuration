@@ -58,7 +58,7 @@ environment:
   - name: KAFKA_LISTENERS
     value: "PLAINTEXT://0.0.0.0:{{ .Values.application.port }}"
   - name: KAFKA_ADVERTISED_LISTENERS
-    value: "PLAINTEXT://kafka:{{ .Values.application.port }}"
+    value: "PLAINTEXT://kafka.kafka:{{ .Values.application.port }}"
   - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
     value: PLAINTEXT:PLAINTEXT
   - name: KAFKA_INTER_BROKER_LISTENER_NAME
@@ -136,14 +136,3 @@ affinity: {}
 podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template
 containerSpec: {}
-argocd:
-  enabled: false
-  project: default
-  repoURL: https://github.com/exampleUser/exampleRepo
-  targetRevision: HEAD
-  # pathInRepo: is required if it is a git repo
-  pathInRepo: /
-  # chartName: required if repo is a Helm chart repo
-  chartName: ""
-  # targetCluster: specifies the cluster to deploy to
-  targetCluster: https://kubernetes.default.svc
