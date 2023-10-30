@@ -6,8 +6,6 @@ applications:
     createNamespace: true
     repoURL: https://repo.2martens.de/charts
     values:
-      image:
-        tag: 0.1.17
       application:
         kafka:
           host: kafka.kafka
