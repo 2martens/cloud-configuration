@@ -4,6 +4,9 @@ application:
   kafka:
     host: kafka.kafka
     port: 9092
+  zookeeper:
+    host: zookeeper.kafka
+    port: 2181
 environment:
   - name: PORT
     value: "{{ .Values.application.port }}"
@@ -15,7 +18,7 @@ environment:
     value: "{{ .Values.application.repositoryPath }}"
   - name: SEARCH_PATH
     value: "{{ .Values.application.searchPath }}"
-  - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
+  - name: SPRING_CLOUD_STREAM_KAFKA_STREAMS_BINDER_BROKERS
     value: "{{ .Values.application.kafka.host }}:{{ .Values.application.kafka.port }}"
-  - name: SPRING_KAFKA_ADMIN_BOOTSTRAP-SERVERS
-    value: "{{ .Values.application.kafka.host }}:{{ .Values.application.kafka.port }}"
+  - name: SPRING_CLOUD_STREAM_KAFKA_STREAMS_BINDER_ZKNODES
+    value: "{{ .Values.application.zookeeper.host }}:{{ .Values.application.zookeeper.port }}"
