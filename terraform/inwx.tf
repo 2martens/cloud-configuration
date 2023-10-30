@@ -80,7 +80,7 @@ resource "inwx_domain" "twomartens_eu" {
     tech  = inwx_domain_contact.inwx.id
     billing  = inwx_domain_contact.inwx.id
   }
-  additional_data = {
+  extra_data = {
     "EU-COUNTRY-OF-CITIZENSHIP": "DE"
   }
 }
