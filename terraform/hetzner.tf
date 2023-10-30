@@ -1,5 +1,5 @@
 module "drone_domain" {
-  source    = "modules/domain"
+  source    = "./modules/domain"
   domain    = "2martens.de"
   subdomain = "ci"
   ipv4      = "49.12.69.146"
