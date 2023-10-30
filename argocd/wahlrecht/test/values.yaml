@@ -98,7 +98,7 @@ service:
 # Configure the liveness probe
 # Defaults fitting for Spring Boot application that has livenessProbe enabled
 livenessProbe:
-  enabled: false
+  enabled: true
   path: /actuator/health/liveness
   port: http-actuator
   initialDelaySeconds: 30
@@ -106,7 +106,7 @@ livenessProbe:
 # Configure the readiness probe
 # Defaults fitting for Spring Boot application that has readinessProbe enabled
 readinessProbe:
-  enabled: false
+  enabled: true
   path: /actuator/health/readiness
   port: http-actuator
   initialDelaySeconds: 30
