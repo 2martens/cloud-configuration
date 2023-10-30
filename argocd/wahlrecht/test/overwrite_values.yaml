@@ -1,5 +1,6 @@
 image:
   tag: "0.2.12"
+revisionHistoryLimit: 3
 ingress:
   enabled: true
   className: public
