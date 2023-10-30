@@ -10,7 +10,7 @@ sources:
   - https://git.2martens.de/2martens/wahlrecht
 dependencies:
   - name: template
-    version: 0.1.15
+    version: 0.1.16
     repository: file://../template
 annotations:
   artifacthub.io/images: |
