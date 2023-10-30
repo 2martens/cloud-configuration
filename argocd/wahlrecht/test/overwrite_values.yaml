@@ -30,7 +30,7 @@ application:
     port: 9092
 
 readinessProbe:
-  initialDelaySeconds: 60
+  initialDelaySeconds: 70
 
 livenessProbe:
-  initialDelaySeconds: 60
+  initialDelaySeconds: 70
