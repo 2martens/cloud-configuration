@@ -18,6 +18,8 @@ environment:
     value: "{{ .Values.application.repositoryPath }}"
   - name: SEARCH_PATH
     value: "{{ .Values.application.searchPath }}"
+  - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
+    value: "{{ .Values.application.kafka.host }}:{{ .Values.application.kafka.port }}"
   - name: SPRING_CLOUD_STREAM_KAFKA_STREAMS_BINDER_BROKERS
     value: "{{ .Values.application.kafka.host }}:{{ .Values.application.kafka.port }}"
   - name: SPRING_CLOUD_STREAM_KAFKA_STREAMS_BINDER_ZKNODES
