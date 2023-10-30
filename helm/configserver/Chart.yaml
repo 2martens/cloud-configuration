@@ -1,6 +1,6 @@
 apiVersion: v2
 name: configserver
-version: 0.1.7
+version: 0.1.17
 type: application
 description: "Minimal Spring Boot config server"
 maintainers:
@@ -10,18 +10,18 @@ sources:
   - https://git.2martens.de/2martens/config-server
 dependencies:
   - name: template
-    version: 0.1.12
+    version: 0.1.14
     repository: file://../template
 annotations:
   artifacthub.io/images: |
-    - name: 2martens/configserver:latest
-      image: 2martens/configserver:latest
+    - name: 2martens/configserver:0.1.17
+      image: 2martens/configserver:0.1.17
       platforms:
         - linux/amd64
         - linux/arm64
   artifacthub.io/changes: |
     - kind: changed
-      description: Changed imaged name in annotations to show repository
+      description: Updated image tag
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
