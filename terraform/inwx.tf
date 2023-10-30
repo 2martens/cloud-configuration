@@ -33,7 +33,7 @@ resource "inwx_domain_contact" "admin" {
 
 resource "inwx_domain_contact" "inwx" {
   // contact configuration
-  type = "ORG"
+  type = "ROLE"
   name = "Hostmaster Of The Day"
   organization = "INWX GmbH"
   street_address = "Prinzessinnenstr. 30"
@@ -54,7 +54,7 @@ resource "inwx_domain" "twomartens_de" {
   period = local.domain_period
   renewal_mode = local.domain_renewal
   transfer_lock = true
-  contacts {
+  contacts = {
     // references to terraform managed contact "example_person"
     registrant = inwx_domain_contact.admin.id
     admin  = inwx_domain_contact.admin.id
@@ -73,11 +73,14 @@ resource "inwx_domain" "twomartens_eu" {
   period = local.domain_period
   renewal_mode = local.domain_renewal
   transfer_lock = true
-  contacts {
+  contacts = {
     // references to terraform managed contact "example_person"
     registrant = inwx_domain_contact.admin.id
     admin  = inwx_domain_contact.admin.id
     tech  = inwx_domain_contact.inwx.id
     billing  = inwx_domain_contact.inwx.id
+  }
+  additional_data = {
+    "EU-COUNTRY-OF-CITIZENSHIP": "DE"
   }
 }
