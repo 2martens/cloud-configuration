@@ -6,7 +6,7 @@ image:
   repository: 2martens/configserver
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is latest
-  tag: "0.1.18"
+  tag: "0.1.21"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here
 # will be added verbatim to imagePullSecrets in deployment pod template
 imagePullSecrets: []
