@@ -126,18 +126,18 @@ resource "inwx_nameserver_record" "twomartens_eu_soa" {
 
 // redirect 2martens.eu to 2martens.de
 resource "inwx_nameserver_record" "twomartens_eu_root_redirect" {
-  domain  = "2martens.eu"
-  name    = ""
-  content = "https://2martens.de"
-  type    = "URL"
-  prio    = 301
-  ttl     = 3600
+  domain            = "2martens.eu"
+  name              = ""
+  content           = "https://2martens.de"
+  type              = "URL"
+  url_redirect_type = "HEADER301"
+  ttl               = 3600
 }
 resource "inwx_nameserver_record" "twomartens_eu_www_redirect" {
-  domain  = "2martens.eu"
-  name    = "www"
-  content = "https://2martens.de"
-  type    = "URL"
-  prio    = 301
-  ttl     = 3600
+  domain            = "2martens.eu"
+  name              = "www"
+  content           = "https://2martens.de"
+  type              = "URL"
+  url_redirect_type = "HEADER301"
+  ttl               = 3600
 }
