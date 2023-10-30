@@ -31,19 +31,6 @@ resource "inwx_domain_contact" "admin" {
   email = var.admin_email
 }
 
-resource "inwx_domain_contact" "inwx" {
-  // contact configuration
-  type = "ROLE"
-  name = "Hostmaster Of The Day"
-  organization = "INWX GmbH"
-  street_address = "Prinzessinnenstr. 30"
-  city = "Berlin"
-  postal_code = "10969"
-  country_code = "DE"
-  phone_number = "+49.309832120"
-  email = "hostmaster@inwx.de"
-}
-
 resource "inwx_domain" "twomartens_de" {
   name = "2martens.de"
   nameservers = [
@@ -58,8 +45,8 @@ resource "inwx_domain" "twomartens_de" {
     // references to terraform managed contact "example_person"
     registrant = inwx_domain_contact.admin.id
     admin  = inwx_domain_contact.admin.id
-    tech  = inwx_domain_contact.inwx.id
-    billing  = inwx_domain_contact.inwx.id
+    tech  = 1
+    billing  = 1
   }
 }
 
@@ -77,8 +64,8 @@ resource "inwx_domain" "twomartens_eu" {
     // references to terraform managed contact "example_person"
     registrant = inwx_domain_contact.admin.id
     admin  = inwx_domain_contact.admin.id
-    tech  = inwx_domain_contact.inwx.id
-    billing  = inwx_domain_contact.inwx.id
+    tech  = 1
+    billing  = 1
   }
   extra_data = {
     "EU-COUNTRY-OF-CITIZENSHIP": "DE"
