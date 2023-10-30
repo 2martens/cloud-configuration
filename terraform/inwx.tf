@@ -61,15 +61,6 @@ resource "inwx_domain" "twomartens_de" {
     tech  = inwx_domain_contact.inwx.id
     billing  = inwx_domain_contact.inwx.id
   }
-  extra_data = {
-    // Enable e.g. whois protection
-    "WHOIS-PROTECTION": "1" // 1 == bool true
-  }
-  lifecycle {
-    ignore_changes = [
-      extra_data["WHOIS-CURRENCY"], // ignore WHOIS-CURRENCY
-    ]
-  }
 }
 
 resource "inwx_domain" "twomartens_eu" {
@@ -88,14 +79,5 @@ resource "inwx_domain" "twomartens_eu" {
     admin  = inwx_domain_contact.admin.id
     tech  = inwx_domain_contact.inwx.id
     billing  = inwx_domain_contact.inwx.id
-  }
-  extra_data = {
-    // Enable e.g. whois protection
-    "WHOIS-PROTECTION": "1" // 1 == bool true
-  }
-  lifecycle {
-    ignore_changes = [
-      extra_data["WHOIS-CURRENCY"], // ignore WHOIS-CURRENCY
-    ]
   }
 }
