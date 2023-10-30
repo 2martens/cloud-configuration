@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    inwx = {
+      source  = "inwx/inwx"
+      version = "1.3.2"
+    }
+  }
+}
+
 resource "inwx_nameserver_record" "a" {
   domain  = var.domain
   name    = var.subdomain
