@@ -6,7 +6,7 @@ image:
   repository: 2martens/configserver
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is latest
-  tag: ""
+  tag: "0.1.17"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here
 # will be added verbatim to imagePullSecrets in deployment pod template
 imagePullSecrets: []
@@ -42,6 +42,7 @@ securityContext: {}
 application:
   port: &applicationPort 8888
   actuatorPort: &actuatorPort 13000
+  namespace: template # update to match the desired namespace
   profile: prod
   isSpring: true
   prefix: /config
@@ -109,10 +110,10 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: chart-example-tls
+      hosts:
+        - chart-example.local
 resources: {}
 # limits:
 #   cpu: 100m
@@ -138,3 +139,14 @@ affinity: {}
 podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template
 containerSpec: {}
+argocd:
+  enabled: false
+  project: default
+  repoURL: https://github.com/exampleUser/exampleRepo
+  targetRevision: HEAD
+  # pathInRepo: is required if it is a git repo
+  pathInRepo: /
+  # chartName: required if repo is a Helm chart repo
+  chartName: ""
+  # targetCluster: specifies the cluster to deploy to
+  targetCluster: https://kubernetes.default.svc
