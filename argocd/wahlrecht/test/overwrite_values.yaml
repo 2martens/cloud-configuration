@@ -28,3 +28,9 @@ application:
   kafka:
     host: kafka.kafka
     port: 9092
+
+livenessProbe:
+  enabled: false
+
+readinessProbe:
+  enabled: false
