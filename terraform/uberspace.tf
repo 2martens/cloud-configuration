@@ -60,7 +60,7 @@ module "personal_website_domain" {
 }
 resource "inwx_nameserver_record" "twomartens_de_google-verification_txt" {
   domain  = "2martens.de"
-  name    = ""
+  name    = "2martens.de"
   content = "google-site-verification=nUFiHQFxBpBMdX96ELH3TcfyIfXf2ZlwMFYtXjVq5lo"
   type    = "TXT"
   ttl     = 3600
@@ -82,7 +82,7 @@ module "nextcloud_domain" {
 // domain key
 resource "inwx_nameserver_record" "twomartens_de_uberspace-domainkey_txt" {
   domain  = "2martens.de"
-  name    = "uberspace._domainkey.id"
+  name    = "uberspace._domainkey.id.2martens.de"
   content = "v=DKIM1;t=s;n=core;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqs3bFL8W77z7VJHCFbsJ3o68Y1uBbVsbIS1y35CMfRv6wp7si7aIG2ZeKqzdh2dTMsvtvSMaYVq1gT/EtRmTbU/BYC21ff8sqcVqn/ll5nNsk5jKWXTYAlTQp4LBQN7icw94ZNGr5/SDYcnv2nsBYFf2GUviObWXGHX4RaBFNj9NVUNWNin/HicvW+LsbfYq37QtlhjmUn9K96VCwKcTV1mx+Ek0osErYefcOVNawqWIlVRQDLkHZhk1StLsOpRqV+qEjhzTk4n4ZiNtLJG1D9CpHl24d5DKsQDyVFdEfqHimFTSNgiitlkuXg+i+NMiRA9G3gNJtvw8uvfN8f+stQIDAQAB"
   type    = "TXT"
   ttl     = 3600

@@ -60,7 +60,7 @@ resource "inwx_domain" "twomartens_eu" {
 // NS records
 resource "inwx_nameserver_record" "twomartens_de_ns1" {
   domain  = "2martens.de"
-  name    = ""
+  name    = "2martens.de"
   content = "ns.inwx.de"
   type    = "NS"
   ttl     = 86400
@@ -68,7 +68,7 @@ resource "inwx_nameserver_record" "twomartens_de_ns1" {
 
 resource "inwx_nameserver_record" "twomartens_de_ns2" {
   domain  = "2martens.de"
-  name    = ""
+  name    = "2martens.de"
   content = "ns2.inwx.de"
   type    = "NS"
   ttl     = 86400
@@ -76,7 +76,7 @@ resource "inwx_nameserver_record" "twomartens_de_ns2" {
 
 resource "inwx_nameserver_record" "twomartens_de_ns3" {
   domain  = "2martens.de"
-  name    = ""
+  name    = "2martens.de"
   content = "ns3.inwx.eu"
   type    = "NS"
   ttl     = 86400
@@ -84,7 +84,7 @@ resource "inwx_nameserver_record" "twomartens_de_ns3" {
 
 resource "inwx_nameserver_record" "twomartens_eu_ns1" {
   domain  = "2martens.eu"
-  name    = ""
+  name    = "2martens.eu"
   content = "ns.inwx.de"
   type    = "NS"
   ttl     = 86400
@@ -92,7 +92,7 @@ resource "inwx_nameserver_record" "twomartens_eu_ns1" {
 
 resource "inwx_nameserver_record" "twomartens_eu_ns2" {
   domain  = "2martens.eu"
-  name    = ""
+  name    = "2martens.eu"
   content = "ns2.inwx.de"
   type    = "NS"
   ttl     = 86400
@@ -100,7 +100,7 @@ resource "inwx_nameserver_record" "twomartens_eu_ns2" {
 
 resource "inwx_nameserver_record" "twomartens_eu_ns3" {
   domain  = "2martens.eu"
-  name    = ""
+  name    = "2martens.eu"
   content = "ns3.inwx.eu"
   type    = "NS"
   ttl     = 86400
@@ -110,16 +110,16 @@ resource "inwx_nameserver_record" "twomartens_eu_ns3" {
 
 resource "inwx_nameserver_record" "twomartens_de_soa" {
   domain  = "2martens.de"
-  name    = ""
-  content = "ns.inwx.de hostmaster.inwx.de 2023103000 10800 3600 604800 3600"
+  name    = "2martens.de"
+  content = "ns.inwx.de hostmaster.inwx.de 2023103008 10800 3600 604800 3600"
   type    = "SOA"
   ttl     = 86400
 }
 
 resource "inwx_nameserver_record" "twomartens_eu_soa" {
   domain  = "2martens.eu"
-  name    = ""
-  content = "ns.inwx.de hostmaster.inwx.de 2020080805 10800 3600 604800 3600"
+  name    = "2martens.eu"
+  content = "ns.inwx.de hostmaster.inwx.de 2023103001 10800 3600 604800 3600"
   type    = "SOA"
   ttl     = 86400
 }
@@ -127,17 +127,19 @@ resource "inwx_nameserver_record" "twomartens_eu_soa" {
 // redirect 2martens.eu to 2martens.de
 resource "inwx_nameserver_record" "twomartens_eu_root_redirect" {
   domain            = "2martens.eu"
-  name              = ""
+  name              = "2martens.eu"
   content           = "https://2martens.de"
   type              = "URL"
   url_redirect_type = "HEADER301"
+  prio              = 301
   ttl               = 3600
 }
 resource "inwx_nameserver_record" "twomartens_eu_www_redirect" {
   domain            = "2martens.eu"
-  name              = "www"
+  name              = "www.2martens.eu"
   content           = "https://2martens.de"
   type              = "URL"
   url_redirect_type = "HEADER301"
+  prio              = 301
   ttl               = 3600
 }

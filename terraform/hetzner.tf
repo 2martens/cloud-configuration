@@ -7,7 +7,7 @@ module "drone_domain" {
 }
 resource "inwx_nameserver_record" "twomartens_de_ci-ownercheck_txt" {
   domain  = "2martens.de"
-  name    = "ownercheck.ci"
+  name    = "ownercheck.ci.2martens.de"
   content = "e1eb600b"
   type    = "TXT"
   ttl     = 3600
