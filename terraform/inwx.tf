@@ -29,6 +29,7 @@ resource "inwx_domain_contact" "admin" {
   country_code = var.admin_country_code
   phone_number = var.admin_phone_number
   email = var.admin_email
+  whois_protection = true
 }
 
 resource "inwx_domain" "twomartens_de" {
