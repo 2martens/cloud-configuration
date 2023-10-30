@@ -54,7 +54,7 @@ resource "inwx_domain" "twomartens_de" {
   period = local.domain_period
   renewal_mode = local.domain_renewal
   transfer_lock = true
-  contacts = {
+  contacts {
     // references to terraform managed contact "example_person"
     registrant = inwx_domain_contact.admin.id
     admin  = inwx_domain_contact.admin.id
@@ -73,7 +73,7 @@ resource "inwx_domain" "twomartens_eu" {
   period = local.domain_period
   renewal_mode = local.domain_renewal
   transfer_lock = true
-  contacts = {
+  contacts {
     // references to terraform managed contact "example_person"
     registrant = inwx_domain_contact.admin.id
     admin  = inwx_domain_contact.admin.id
