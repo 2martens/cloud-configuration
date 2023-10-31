@@ -41,7 +41,7 @@ resource "hcloud_network_subnet" "k8s-network-subnet" {
 resource "hcloud_network_route" "k8s-route" {
   network_id  = hcloud_network.kubernetes-network.id
   destination = "10.1.0.0/16"
-  gateway     = "10.0.0.2"
+  gateway     = hcloud_network_subnet.k8s-network-subnet.gateway
 }
 
 resource "hcloud_firewall" "basic-firewall" {
@@ -185,9 +185,9 @@ resource "hcloud_server" "server_k8s_test" {
   location                = data.hcloud_location.falkenstein.name
   public_net {
     ipv4_enabled = true
-    ipv4         = hcloud_primary_ip.primary_ipv4_devops.id
+    ipv4         = hcloud_primary_ip.primary_ipv4_k8s_test.id
     ipv6_enabled = true
-    ipv6         = hcloud_primary_ip.primary_ipv6_devops.id
+    ipv6         = hcloud_primary_ip.primary_ipv6_k8s_test.id
   }
   ignore_remote_firewall_ids = false
   keep_disk                  = false
