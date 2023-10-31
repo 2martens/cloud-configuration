@@ -11,5 +11,9 @@ terraform {
       source  = "inwx/inwx"
       version = "1.3.2"
     }
+    hcloud = {
+      source  = "hetznercloud/hcloud"
+      version = "1.44.1"
+    }
   }
 }
