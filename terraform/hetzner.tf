@@ -41,7 +41,8 @@ resource "hcloud_network_subnet" "k8s-network-subnet" {
 resource "hcloud_network_route" "k8s-route" {
   network_id  = hcloud_network.kubernetes-network.id
   destination = "10.1.0.0/16"
-  gateway     = hcloud_network_subnet.k8s-network-subnet.gateway
+  gateway     = "10.0.0.2"
+  depends_on  = [hcloud_network_subnet.k8s-network-subnet]
 }
 
 resource "hcloud_firewall" "basic-firewall" {
@@ -203,6 +204,7 @@ resource "hcloud_server" "server_k8s_test" {
   network {
     network_id = hcloud_network.kubernetes-network.id
     ip         = "10.0.0.2"
+    alias_ips  = []
   }
 
   lifecycle {
