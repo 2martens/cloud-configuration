@@ -1,7 +1,7 @@
 [kubernetes]
-%{ for server in k8s_servers ~}
-${server.name} ansible_host=${server.ipv4_address} ansible_python_interpreter=/usr/bin/python3
+%{ for ip in k8s_servers ~}
+${ip} ansible_python_interpreter=/usr/bin/python3
 %{ endfor ~}
 
 [ci]
-${devops.name} ansible_host=${devops.ipv4_address} ansible_python_interpreter=/usr/bin/python3
+${devops} ansible_python_interpreter=/usr/bin/python3
