@@ -5,3 +5,10 @@ vault_password
 # Helm Charts
 charts/
 .env
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
