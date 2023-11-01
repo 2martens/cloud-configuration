@@ -22,10 +22,10 @@ prometheus-adapter:
         nodeQuery: sum(container_memory_working_set_bytes{<<.LabelMatchers>>,id='/'}) by (<<.GroupBy>>)
         resources:
           overrides:
-          node:
-            resource: node
-          namespace:
-            resource: namespace
-          pod:
-            resource: pod
+            node:
+              resource: node
+            namespace:
+              resource: namespace
+            pod:
+              resource: pod
       window: 5m
