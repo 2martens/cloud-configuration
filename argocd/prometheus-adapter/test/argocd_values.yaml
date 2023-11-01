@@ -7,11 +7,15 @@ prometheus-adapter:
       cpu:
         containerQuery: |
           sum by (<<.GroupBy>>) (
-            rate(container_cpu_usage_seconds_total{container!="",<<.LabelMatchers>>}[3m])
+            irate (
+                container_cpu_usage_seconds_total{<<.LabelMatchers>>,container!="",pod!=""}[4m]
+            )
           )
         nodeQuery: |
-          sum  by (<<.GroupBy>>) (
-            rate(node_cpu_seconds_total{mode!="idle",mode!="iowait",mode!="steal",<<.LabelMatchers>>}[3m])
+          sum by (<<.GroupBy>>) (
+            irate(
+                node_cpu_usage_seconds_total{<<.LabelMatchers>>}[4m]
+            )
           )
         resources:
           overrides:
@@ -25,13 +29,11 @@ prometheus-adapter:
       memory:
         containerQuery: |
           sum by (<<.GroupBy>>) (
-            avg_over_time(container_memory_working_set_bytes{container!="",<<.LabelMatchers>>}[3m])
+            container_memory_working_set_bytes{<<.LabelMatchers>>,container!="",pod!=""}
           )
         nodeQuery: |
           sum by (<<.GroupBy>>) (
-            avg_over_time(node_memory_MemTotal_bytes{<<.LabelMatchers>>}[3m])
-            -
-            avg_over_time(node_memory_MemAvailable_bytes{<<.LabelMatchers>>}[3m])
+            node_memory_working_set_bytes{<<.LabelMatchers>>}
           )
         resources:
           overrides:
@@ -42,4 +44,4 @@ prometheus-adapter:
             pod:
               resource: pod
         containerLabel: container
-      window: 3m
+      window: 5m
