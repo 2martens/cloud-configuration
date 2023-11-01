@@ -1,3 +1,7 @@
+prometheus-node-exporter:
+  hostRootFsMount:
+    mountPropagation: None
+
 ingress:
   enabled: true
   ingressClassName: public
