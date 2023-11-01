@@ -19,7 +19,7 @@ spec:
     repoURL: {{ .repoURL }}
     targetRevision: {{ .targetRevision }}
     {{- if .repoURL | contains "chart" }}
-    chart: {{ .name }}
+    chart: {{ .chart | default .name }}
     {{- else }}
     path: argocd/{{ .name }}/{{ $.Values.overall.environment }}
     {{- end }}

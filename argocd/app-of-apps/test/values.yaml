@@ -28,7 +28,14 @@ applications:
     targetRevision: main
     namespace: vault-secrets-operator-system
     createNamespace: true
-    repoURL: https://git.2martens.de/2martens/
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+  - name: prometheus
+    project: default
+    targetRevision: 25.4.x
+    namespace: observability
+    createNamespace: true
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus-community/prometheus
 
 
 overall:
