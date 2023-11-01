@@ -30,6 +30,8 @@ prometheus:
       scrape_configs:
         - job_name: 'kubernetes-nodes'
           scheme: http
+        - job_name: 'kubernetes-nodes-cadvisor'
+          scheme: http
   resources: { }
   # requests:
   #   cpu: 100m
