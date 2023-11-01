@@ -15,10 +15,15 @@ prometheus:
         - secretName: prometheus-server-tls
           hosts:
             - prometheus.k8s.test.2martens.de
-
+    baseURL: https://prometheus.k8s.test.2martens.de
   alertmanager:
     enabled: false
 
+  serverFiles:
+    prometheus.yml:
+      scrape_configs:
+        - job_name: 'kubernetes-nodes'
+          scheme: http
   resources: { }
   # requests:
   #   cpu: 100m
