@@ -35,6 +35,12 @@ applications:
     namespace: observability
     createNamespace: true
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+  - name: prometheus-adapter
+    project: default
+    targetRevision: main
+    namespace: observability
+    createNamespace: true
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
 
 
 overall:
