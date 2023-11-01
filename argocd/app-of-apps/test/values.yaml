@@ -29,6 +29,13 @@ applications:
     namespace: vault-secrets-operator-system
     createNamespace: true
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+  - name: prometheus
+    project: default
+    targetRevision: 4.7.1
+    namespace: observability
+    createNamespace: true
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+
 
 overall:
   destinationServer: https://kubernetes.default.svc
