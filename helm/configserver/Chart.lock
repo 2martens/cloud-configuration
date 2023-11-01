@@ -1,6 +1,6 @@
 dependencies:
 - name: template
   repository: file://../template
-  version: 0.1.15
-digest: sha256:86d355abc3c032602d0b696e9838ed87fa29e0ab8d012289832509adc2a58fe0
-generated: "2023-10-30T01:32:54.536194+01:00"
+  version: 0.1.17
+digest: sha256:6b0edcf5d2477cd788059d296cbb307091b1382ebb7f2fb0634d2a12b43523dc
+generated: "2023-11-02T00:10:11.690888+01:00"

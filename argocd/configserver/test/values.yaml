@@ -2,6 +2,8 @@
 # the default for your application differs. The image.repository is a prime candidate for that.
 
 replicaCount: 1
+# revisionHistoryLimit: can be configured to reduce/increase amount of stored replica sets for rollback
+revisionHistoryLimit: 10
 image:
   repository: 2martens/configserver
   pullPolicy: IfNotPresent
@@ -54,6 +56,8 @@ application:
   zookeeper:
     host: zookeeper.kafka
     port: 2181
+prometheus:
+  enabled: true
 # Overwrite with application specific environment variables
 # Each item has key and value, where the value is parsed as a template
 environment:
