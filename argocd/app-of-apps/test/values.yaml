@@ -31,7 +31,7 @@ applications:
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
   - name: prometheus
     project: default
-    targetRevision: 4.7.1
+    targetRevision: main
     namespace: observability
     createNamespace: true
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
