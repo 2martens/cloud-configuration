@@ -1,4 +1,10 @@
 prometheus:
+  kube-state-metrics:
+    prometheus:
+      monitor:
+        enabled: true
+    selfMonitor:
+      enabled: true
   prometheus-node-exporter:
     hostRootFsMount:
       mountPropagation: None
