@@ -3,6 +3,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "template.fullname" . }}
+  annotations:
+    {{- if .Values.prometheus.enabled }}
+    prometheus.io/scrape: "true"
+    {{- if .Values.application.isSpring }}
+    prometheus.io/path: /actuator/prometheus
+    {{- else }}
+    prometheus.io/path: /metrics
+    {{- end }}
+    prometheus.io/port: "{{ .Values.application.actuatorPort }}"
+    {{- end }}
   labels:
     {{- include "template.labels" . | nindent 4 }}
 spec:

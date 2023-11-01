@@ -54,6 +54,9 @@ application:
   profile: prod
   isSpring: true
 
+prometheus:
+  enabled: true
+
 # Overwrite with application specific environment variables
 # Each item has key and value, where the value is parsed as a template
 environment: []
