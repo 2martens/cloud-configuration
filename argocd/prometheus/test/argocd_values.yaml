@@ -1,26 +1,28 @@
-prometheus-node-exporter:
-  hostRootFsMount:
-    mountPropagation: None
+prometheus:
+  prometheus-node-exporter:
+    hostRootFsMount:
+      mountPropagation: None
 
-ingress:
-  enabled: true
-  ingressClassName: public
-  hosts:
-    - prometheus.k8s.test.2martens.de
-  annotations:
-    cert-manager.io/cluster-issuer: lets-encrypt
-  tls:
-    - secretName: prometheus-server-tls
+  server:
+    ingress:
+      enabled: true
+      ingressClassName: public
       hosts:
         - prometheus.k8s.test.2martens.de
+      annotations:
+        cert-manager.io/cluster-issuer: lets-encrypt
+      tls:
+        - secretName: prometheus-server-tls
+          hosts:
+            - prometheus.k8s.test.2martens.de
 
-alertmanager:
-  enabled: false
+  alertmanager:
+    enabled: false
 
-resources: { }
-# requests:
-#   cpu: 100m
-#   memory: 128Mi
-# limits:
-#   cpu: 100m
-#   memory: 128Mi
+  resources: { }
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi

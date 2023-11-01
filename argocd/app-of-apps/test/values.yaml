@@ -31,10 +31,10 @@ applications:
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
   - name: prometheus
     project: default
-    targetRevision: 25.4.x
+    targetRevision: main
     namespace: observability
     createNamespace: true
-    repoURL: https://prometheus-community.github.io/helm-charts
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
 
 
 overall:
