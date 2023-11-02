@@ -35,3 +35,6 @@ readinessProbe:
 
 livenessProbe:
   initialDelaySeconds: 70
+
+prometheus:
+  useCRDs: true

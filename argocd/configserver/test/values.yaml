@@ -58,6 +58,11 @@ application:
     port: 2181
 prometheus:
   enabled: true
+  # only enable if you have the Prometheus operator installed, otherwise it will fail due to missing CRDs
+  useCRDs: true
+  # namespace: the namespace of the Prometheus installation
+  # the value is templated
+  namespace:
 # Overwrite with application specific environment variables
 # Each item has key and value, where the value is parsed as a template
 environment:
