@@ -2,6 +2,8 @@
 # the default for your application differs. The image.repository is a prime candidate for that.
 
 replicaCount: 1
+# revisionHistoryLimit: can be configured to reduce/increase amount of stored replica sets for rollback
+revisionHistoryLimit: 10
 image:
   repository: confluentinc/cp-kafka
   pullPolicy: IfNotPresent
@@ -48,6 +50,13 @@ application:
   zookeeper:
     host: zookeeper
     port: 2181
+prometheus:
+  enabled: false
+  # only enable if you have the Prometheus operator installed, otherwise it will fail due to missing CRDs
+  useCRDs: false
+  # namespace: the namespace of the Prometheus installation
+  # the value is templated
+  namespace:
 # Overwrite with application specific environment variables
 # Each item has key and value, where the value is parsed as a template
 environment:
@@ -136,3 +145,6 @@ affinity: {}
 podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template
 containerSpec: {}
+prometheus-kafka-exporter:
+  kafkaServer:
+    - kafka.kafka:9092

@@ -16,3 +16,7 @@ environment:
     value: PLAINTEXT
   - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
     value: "1"
+
+prometheus-kafka-exporter:
+  kafkaServer:
+    - kafka.kafka:9092
