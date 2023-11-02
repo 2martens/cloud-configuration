@@ -7,6 +7,7 @@ metadata:
   namespace: {{ tpl (quote .Values.prometheus.namespace) . | default "observability" }}
   labels:
     {{- include "template.labels" . | nindent 4 }}
+    release: {{ .Values.prometheus.releaseName | quote | default "prometheus" }}
 spec:
   podMetricsEndpoints:
     - port: "{{ .Values.application.actuatorPort }}"

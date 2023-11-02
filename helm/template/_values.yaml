@@ -61,6 +61,8 @@ prometheus:
   # namespace: the namespace of the Prometheus installation
   # the value is templated
   namespace:
+  # name of helm release or argo cd application
+  releaseName:
 
 # Overwrite with application specific environment variables
 # Each item has key and value, where the value is parsed as a template
