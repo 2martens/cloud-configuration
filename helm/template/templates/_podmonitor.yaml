@@ -1,0 +1,17 @@
+{{- define "template.podmonitor" -}}
+{{- if and .Values.prometheus.enabled .Values.prometheus.useCRDs .Values.application.isSpring }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "template.fullname" . }}
+  namespace: {{ tpl .Values.prometheus.namespace . | default "observability" }}
+  labels:
+    {{- include "template.labels" . | nindent 4 }}
+spec:
+  podMetricsEndpoints:
+    - port: {{ .Values.application.actuatorPort }}
+      path: /actuator/prometheus
+  selector:
+    {{- include "template.selectorLabels" . | nindent 4 }}
+{{- end }}
+{{- end }}

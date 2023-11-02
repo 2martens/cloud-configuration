@@ -16,13 +16,9 @@ spec:
   template:
     metadata:
       annotations:
-        {{- if $.Values.prometheus.enabled }}
+        {{- if and $.Values.prometheus.enabled (not $.Values.prometheus.useCRDs) $.Values.application.isSpring }}
         prometheus.io/scrape: "true"
-        {{- if $.Values.application.isSpring }}
         prometheus.io/path: /actuator/prometheus
-        {{- else }}
-        prometheus.io/path: /metrics
-        {{- end }}
         prometheus.io/port: "{{ $.Values.application.actuatorPort }}"
         {{- end }}
         {{- with .Values.podAnnotations }}
