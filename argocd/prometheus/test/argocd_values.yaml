@@ -31,7 +31,7 @@ prometheus:
         - job_name: 'kubernetes-nodes'
           scheme: http
         - job_name: 'kubernetes-nodes-cadvisor'
-          scheme: http
+          scheme: https
   resources: { }
   # requests:
   #   cpu: 100m
