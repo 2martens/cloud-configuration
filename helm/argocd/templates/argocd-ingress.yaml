@@ -14,7 +14,7 @@ metadata:
 spec:
   ingressClassName: public
   rules:
-    - host: {{ tpl .Values.ingress.host . }}
+    - host: {{ tpl (quote .Values.ingress.host) . }}
       http:
         paths:
           - path: /
@@ -26,5 +26,5 @@ spec:
                   name: https
   tls:
     - hosts:
-        - {{ tpl .Values.ingress.host . }}
+        - {{ tpl (quote .Values.ingress.host) . }}
       secretName: argocd-server-tls # as expected by argocd-server

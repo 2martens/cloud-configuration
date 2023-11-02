@@ -7,13 +7,16 @@ maintainers:
   - name: Jim Martens
     url: https://2martens.de
 dependencies:
+  - name: prometheus-kafka-exporter
+    version: 2.7.0
+    repository: https://prometheus-community.github.io/helm-charts
   - name: template
-    version: 0.1.14
+    version: 0.1.20
     repository: file://../template
 annotations:
   artifacthub.io/changes: |
-    - kind: fixed
-      description: Fixed version and values
+    - kind: added
+      description: Added Prometheus support
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc

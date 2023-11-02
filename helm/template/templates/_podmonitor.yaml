@@ -4,7 +4,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: {{ include "template.fullname" . }}
-  namespace: {{ tpl .Values.prometheus.namespace . | default "observability" }}
+  namespace: {{ tpl (quote .Values.prometheus.namespace) . | default "observability" }}
   labels:
     {{- include "template.labels" . | nindent 4 }}
 spec:

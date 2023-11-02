@@ -14,6 +14,6 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: {{ tpl .Values.appOfApps.path . }}
+    path: {{ tpl (quote .Values.appOfApps.path) . }}
     repoURL: {{ .Values.appOfApps.repoURL }}
     targetRevision: main

@@ -28,3 +28,5 @@ environment:
     value: PLAINTEXT
   - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
     value: "1"
+prometheus:
+  enabled: false
