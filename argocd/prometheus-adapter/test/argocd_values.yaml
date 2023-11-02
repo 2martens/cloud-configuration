@@ -1,7 +1,7 @@
 prometheus-adapter:
   prometheus:
-    url: http://prometheus-server.observability.svc
-    port: 80
+    url: http://prometheus-kube-prometheus-prometheus.observability.svc
+    port: 9090
 
   rules:
     resource:
