@@ -146,5 +146,10 @@ podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template
 containerSpec: {}
 prometheus-kafka-exporter:
+  prometheus:
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus
   kafkaServer:
     - kafka.kafka:9092

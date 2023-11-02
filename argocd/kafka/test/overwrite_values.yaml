@@ -18,5 +18,10 @@ environment:
     value: "1"
 
 prometheus-kafka-exporter:
+  prometheus: 
+    serviceMonitor: 
+      enabled: true
+      additionalLabels: 
+        release: prometheus
   kafkaServer:
     - kafka.kafka:9092
