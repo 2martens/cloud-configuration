@@ -4,7 +4,7 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
   annotations:
-    cert-manager.io/cluster-issuer: lets-encrypt
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.certIssuer }}
     ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     # If you encounter a redirect loop or are getting a 307 response code
@@ -14,7 +14,7 @@ metadata:
 spec:
   ingressClassName: public
   rules:
-    - host: argocd.2martens.de
+    - host: {{ tpl .Values.ingress.host . }}
       http:
         paths:
           - path: /
@@ -26,5 +26,5 @@ spec:
                   name: https
   tls:
     - hosts:
-        - argocd.k8s.{{ .Values.environment }}.2martens.de
+        - {{ tpl .Values.ingress.host . }}
       secretName: argocd-server-tls # as expected by argocd-server

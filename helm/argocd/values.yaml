@@ -1,1 +1,12 @@
-environment: test
+appOfApps:
+  repoURL: https://git.2martens.de/2martens/cloud-configuration/
+  # variable is templated
+  path: argocd/app-of-apps/{{ .Values.environment }}
+
+ingress:
+  # variable is templated
+  host: argocd.k8s.{{ .Values.environment }}.2martens.de
+  certIssuer: lets-encrypt
+
+# should be overriden for the specific installation
+environment:

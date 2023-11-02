@@ -14,6 +14,6 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argocd/app-of-apps/test
-    repoURL: https://git.2martens.de/2martens/cloud-configuration/
+    path: {{ tpl .Values.appOfApps.path . }}
+    repoURL: {{ .Values.appOfApps.repoURL }}
     targetRevision: main
