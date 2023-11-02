@@ -1,6 +1,6 @@
 dependencies:
 - name: template
   repository: https://repo.2martens.de/charts
-  version: 0.1.22
-digest: sha256:0d5dce9d30d729ff79f416fc519f73b09f3d9d33bd6f6b9a7bbbb7c10f05735e
-generated: "2023-11-02T12:17:30.000215+01:00"
+  version: 0.1.23
+digest: sha256:362151ab1c4036316bf4a4761a9988a726d4fcc5f70aae59395d10fa623134c7
+generated: "2023-11-02T12:34:30.342539+01:00"
