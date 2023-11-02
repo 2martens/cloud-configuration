@@ -11,6 +11,8 @@ livenessProbe:
   enabled: false
 readinessProbe:
   enabled: false
+prometheus:
+  enabled: false
 environment:
   - name: ZOOKEEPER_CLIENT_PORT
     value: "{{ .Values.application.port }}"
