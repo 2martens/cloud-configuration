@@ -4,7 +4,7 @@ metadata:
   name: prometheus-metrics-reading
 subjects:
   - kind: ServiceAccount
-    apiGroup: rbac.authorization.k8s.io
+    apiGroup: ""
     name: prometheus-server
     namespace: {{ .Release.Namespace }}
 roleRef:
