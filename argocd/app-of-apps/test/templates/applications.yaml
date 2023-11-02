@@ -9,6 +9,10 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   syncPolicy:
+    {{- if .serverSideApply }}
+    syncOptions:
+      - ServerSideApply=true
+    {{- end }}
     automated:
       prune: true
   destination:
