@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus-metrics-reading
+rules:
+  - nonResourceURLs:
+      - "/metrics"
+      - "/metrics/cadvisor"
+      - "/metrics/resource"
+      - "/metrics/probes"
+    verbs:
+      - get
