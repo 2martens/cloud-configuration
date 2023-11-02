@@ -9,7 +9,7 @@ metadata:
     {{- include "template.labels" . | nindent 4 }}
 spec:
   podMetricsEndpoints:
-    - port: {{ .Values.application.actuatorPort }}
+    - port: "{{ .Values.application.actuatorPort }}"
       path: /actuator/prometheus
   selector:
     {{- include "template.selectorLabels" . | nindent 4 }}
