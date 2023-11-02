@@ -1,6 +1,6 @@
 prometheus-adapter:
   prometheus:
-    url: http://prometheus.observability.svc
+    url: http://prometheus-server.observability.svc
 
   rules:
     resource:
