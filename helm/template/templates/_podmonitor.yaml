@@ -13,6 +13,7 @@ spec:
     - port: "{{ .Values.application.actuatorPort }}"
       path: /actuator/prometheus
   selector:
-    {{- include "template.selectorLabels" . | nindent 4 }}
+    matchLabels:
+      {{- include "template.selectorLabels" . | nindent 6 }}
 {{- end }}
 {{- end }}
