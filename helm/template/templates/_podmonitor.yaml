@@ -12,6 +12,9 @@ spec:
   podMetricsEndpoints:
     - port: "{{ .Values.application.actuatorPort }}"
       path: /actuator/prometheus
+  namespaceSelector:
+    matchNames:
+      - "{{ .Release.Namespace }}"
   selector:
     matchLabels:
       {{- include "template.selectorLabels" . | nindent 6 }}
