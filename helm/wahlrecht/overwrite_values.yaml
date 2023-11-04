@@ -29,9 +29,9 @@ service:
   actuatorPort: 12001
 
 secrets:
-  # Needs to be overwritten
+  # Needs to be overwritten. Will be ignored if vault is enabled.
   MONGODB_CONNECTION_STRING: ""
-  # Needs to be overwritten
+  # Needs to be overwritten. Will be ignored if vault is enabled.
   CLIENT_SECRET: ""
 
 environment:

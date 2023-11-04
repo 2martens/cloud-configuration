@@ -2,7 +2,7 @@ apiVersion: v2
 name: wahlrecht
 description: Installs the Wahlrecht API into the Kubernetes cluster
 type: application
-version: 0.1.10
+version: 0.2.0
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
@@ -10,7 +10,7 @@ sources:
   - https://git.2martens.de/2martens/wahlrecht
 dependencies:
   - name: template
-    version: 0.1.20
+    version: 0.2.1
     repository: file://../template
 annotations:
   artifacthub.io/images: |
@@ -21,7 +21,7 @@ annotations:
         - linux/arm64
   artifacthub.io/changes: |
     - kind: added
-      description: Added support for Prometheus (operator)
+      description: Added support for vault secrets
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
