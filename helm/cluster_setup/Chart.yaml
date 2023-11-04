@@ -12,6 +12,8 @@ annotations:
       description: Added cluster roles and bindings to access logs and shell from kubectl
     - kind: added
       description: Added cluster issuer for lets encrypt
+    - kind: added
+      description: Added vault service principal
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc

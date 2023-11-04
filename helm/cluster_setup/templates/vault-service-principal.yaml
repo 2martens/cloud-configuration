@@ -1,0 +1,15 @@
+{{- if .Values.vault.enabled -}}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.vault.namespace }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vault-service-principal
+  namespace: {{ .Values.vault.namespace }}
+data:
+  clientId: {{ .Values.vault.clientId | b64enc }}
+  clientSecret: {{ .Values.vault.clientSecret | b64enc }}
+{{- end }}
