@@ -136,6 +136,17 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+vault:
+  enabled: false
+  # name of the Vault secrets applications
+  applicationName: ""
+  # id of the organization in Vault secrets
+  organizationId: ""
+  # id of the project in Vault secrets
+  projectId: ""
+  # if not provided, vault-secrets-operator-system will be used
+  operatorNamespace: ""
+
 # Configure nodeSelector, contents will be added verbatim to key nodeSelector in deployment pod template
 nodeSelector: {}
 

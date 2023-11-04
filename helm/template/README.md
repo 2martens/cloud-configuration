@@ -54,9 +54,13 @@ NOTES.txt
 {{- end }}
 ```
 
+podmonitor.yaml:
+
+```yaml
+{ { - include "template.podmonitor" . - } }
+```
+
 secret.yaml:
-If you want to use external secrets, you MUST NOT include the secret
-template but implement it yourself. 
 ```yaml
 {{- include "template.secret" . -}}
 ```
@@ -69,6 +73,12 @@ service.yaml
 serviceaccount.yaml
 ```yaml
 {{- include "template.serviceAccount" . -}}
+```
+
+vault-secrets-app.yaml
+
+```yaml
+{ { - include "template.vaultSecretsApp" . - } }
 ```
 
 tests/test-connection.yaml
