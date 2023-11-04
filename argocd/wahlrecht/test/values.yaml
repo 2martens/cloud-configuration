@@ -65,6 +65,8 @@ prometheus:
   # namespace: the namespace of the Prometheus installation
   # the value is templated
   namespace:
+  # name of helm release or argo cd application
+  releaseName:
 # Overwrite with application specific environment variables
 # Each item has key and value, where the value is parsed as a template
 environment:
@@ -92,9 +94,9 @@ enableServiceLinks: false
 # Contents of this object will be added to a Kubernetes secret data section and Base64 encoded
 # External secrets are not supported by this template
 secrets:
-  # Needs to be overwritten
+  # Needs to be overwritten. Will be ignored if vault is enabled.
   MONGODB_CONNECTION_STRING: ""
-  # Needs to be overwritten
+  # Needs to be overwritten. Will be ignored if vault is enabled.
   CLIENT_SECRET: ""
 # Configure the service
 service:
@@ -160,6 +162,17 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
+vault:
+  # If enabled, no ordinary secret resource will be created, even if secrets value is populated.
+  enabled: false
+  # name of the Vault secrets applications
+  applicationName: ""
+  # id of the organization in Vault secrets
+  organizationId: ""
+  # id of the project in Vault secrets
+  projectId: ""
+  # if not provided, vault-secrets-operator-system will be used
+  operatorNamespace: ""
 # Configure nodeSelector, contents will be added verbatim to key nodeSelector in deployment pod template
 nodeSelector: {}
 # Configure tolerations, contents will be added verbatim to key tolerations in deployment pod template
