@@ -137,6 +137,7 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 vault:
+  # If enabled, no ordinary secret resource will be created, even if secrets value is populated.
   enabled: false
   # name of the Vault secrets applications
   applicationName: ""
