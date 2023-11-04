@@ -1,8 +1,20 @@
 apiVersion: v2
 name: argocd
-version: 0.1.0
+version: 0.1.1
 type: application
+description: "ArgoCD bundle with ingress and app of apps configuration"
+maintainers:
+  - name: Jim Martens
+    url: https://2martens.de
 dependencies:
   - name: argo-cd
     version: 5.50.1
     repository: https://argoproj.github.io/argo-helm
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: Updated Argo CD version to 5.50.1
+  artifacthub.io/signKey: |
+    fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
+    url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
+  artifacthub.io/prerelease: true
