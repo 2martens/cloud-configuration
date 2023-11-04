@@ -9,4 +9,4 @@ ingress:
   certIssuer: lets-encrypt
 
 # should be overriden for the specific installation
-environment:
+environment: ""
