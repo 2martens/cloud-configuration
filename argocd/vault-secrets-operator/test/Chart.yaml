@@ -6,3 +6,6 @@ dependencies:
   - name: vault-secrets-operator
     version: 0.3.4
     repository: https://helm.releases.hashicorp.com
+  - name: template
+    version: 0.2.0
+    repository: https://repo.2martens.de/charts
