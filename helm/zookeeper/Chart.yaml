@@ -2,18 +2,18 @@ apiVersion: v2
 name: zookeeper
 description: Simple Zookeeper chart to get started
 type: application
-version: 0.1.4
+version: 0.1.5
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
 dependencies:
   - name: template
-    version: 0.1.22
+    version: 0.2.1
     repository: file://../template
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Added revision history limit
+    - kind: changed
+      description: Updated template chart
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
