@@ -41,15 +41,10 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if and .Values.secrets (not .Values.vault.enabled) }}
+          {{- if or .Values.secrets .Values.vault.enabled }}
           envFrom:
             - secretRef:
                 name: {{ include "template.fullname" . }}
-          {{- end }}
-          {{- if .Values.vault.enabled }}
-          envFrom:
-            - secretRef:
-                name: {{ .Values.vault.operatorNamespace | default "vault-secrets-operator-system" }}/{{ include "template.fullname" . }}
           {{- end }}
           env:
           {{- if .Values.application.isSpring }}

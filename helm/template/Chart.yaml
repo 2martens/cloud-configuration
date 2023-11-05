@@ -2,7 +2,7 @@ apiVersion: v2
 name: template
 description: A Helm library chart containing common templates, keeping application templates short
 type: library
-version: 0.2.2
+version: 0.2.3
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
@@ -11,7 +11,9 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: fixed
-      description: Fixed path to secret when using vault
+      description: Reverted path to secret for vault
+    - kind: fixed
+      description: Changed namespace for vault secrets app to release namespace
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
