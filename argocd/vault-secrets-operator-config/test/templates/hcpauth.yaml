@@ -10,8 +10,8 @@ spec:
   projectID: {{ .Values.projectId }}
   allowedNamespaces:
     - {{ .Release.Namespace }}
-    {{- range .Values.allowedNamespaces -}}
+    {{- range .Values.allowedNamespaces }}
     - {{ .name }}
-    {{- end -}}
+    {{- end }}
   servicePrincipal:
     secretRef: vault-service-principal
