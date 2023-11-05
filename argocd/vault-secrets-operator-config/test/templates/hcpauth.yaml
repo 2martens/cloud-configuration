@@ -1,4 +1,3 @@
-{{- define "template.hcpauth" -}}
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: HCPAuth
 metadata:
@@ -11,4 +10,3 @@ spec:
   projectID: {{ .Values.projectId }}
   servicePrincipal:
     secretRef: vault-service-principal
-{{- end }}
