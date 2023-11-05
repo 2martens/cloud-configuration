@@ -23,7 +23,7 @@ applications:
     namespace: wahlrecht
     createNamespace: true
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
-  - name: vault-secrets-operator
+  - name: vault-secrets-operator-config
     project: default
     targetRevision: main
     namespace: vault-secrets-operator-system
