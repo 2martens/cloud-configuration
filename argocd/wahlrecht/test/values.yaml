@@ -168,9 +168,9 @@ vault:
   # name of the Vault secrets applications
   applicationName: "wahlrecht"
   # id of the organization in Vault secrets
-  organizationId: "2015ed6d-3c84-48d5-9aca-99b0034b8b5a"
+  organizationId: ""
   # id of the project in Vault secrets
-  projectId: "21153839-1630-4f55-9803-0220e3af458d"
+  projectId: ""
   # if not provided, vault-secrets-operator-system will be used
   operatorNamespace: ""
 # Configure nodeSelector, contents will be added verbatim to key nodeSelector in deployment pod template
