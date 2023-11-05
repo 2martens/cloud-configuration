@@ -4,3 +4,4 @@ vault:
   namespace: "vault-secrets-operator-system"
   clientId: ""
   clientSecret: ""
+  applicationNamespaces: []

@@ -2,14 +2,16 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: {{ .Values.vault.namespace }}
+  name: {{ $.Values.vault.namespace }}
+{{- range .Values.vault.applicationNamespaces }}
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: vault-service-principal
-  namespace: {{ .Values.vault.namespace }}
+  namespace: {{ .name }}
 data:
-  clientID: {{ .Values.vault.clientId | b64enc }}
-  clientSecret: {{ .Values.vault.clientSecret | b64enc }}
+  clientID: {{ $.Values.vault.clientId | b64enc }}
+  clientSecret: {{ $.Values.vault.clientSecret | b64enc }}
+{{- end }}
 {{- end }}
