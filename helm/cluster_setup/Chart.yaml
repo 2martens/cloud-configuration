@@ -1,6 +1,6 @@
 apiVersion: v2
 name: cluster_setup
-version: 0.1.0
+version: 0.1.1
 type: application
 description: "Initial cluster setup"
 maintainers:
@@ -8,12 +8,8 @@ maintainers:
     url: https://2martens.de
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Added cluster roles and bindings to access logs and shell from kubectl
-    - kind: added
-      description: Added cluster issuer for lets encrypt
-    - kind: added
-      description: Added vault service principal
+    - kind: fixed
+      description: Fixed spelling of clientID
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc

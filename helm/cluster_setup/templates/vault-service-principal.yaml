@@ -10,6 +10,6 @@ metadata:
   name: vault-service-principal
   namespace: {{ .Values.vault.namespace }}
 data:
-  clientId: {{ .Values.vault.clientId | b64enc }}
+  clientID: {{ .Values.vault.clientId | b64enc }}
   clientSecret: {{ .Values.vault.clientSecret | b64enc }}
 {{- end }}
