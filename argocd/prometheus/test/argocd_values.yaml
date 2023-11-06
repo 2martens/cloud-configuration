@@ -9,6 +9,36 @@ kube-prometheus-stack:
     enabled: false
 
   prometheus:
+    prometheusSpec:
+      retention: 6h
+      disableCompaction: true
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: hcloud-volumes
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: 10Gi
+          selector: {}
+      thanos:
+        objectStorageConfig:
+          existingSecret:
+            key: thanos.yaml
+            name: thanos-object-storage-config
+    thanosIngress:
+      enabled: true
+      ingressClassName: public
+      hosts:
+        - thanos.prometheus.k8s.test.2martens.de
+      tls:
+       - secretName: thanos-gateway-tls
+         hosts:
+         - thanos.prometheus.k8s.test.2martens.de
+    thanosServiceMonitor:
+      enabled: true
+    thanosService:
+      enabled: true
     ingress:
       enabled: true
       ingressClassName: public
@@ -22,7 +52,7 @@ kube-prometheus-stack:
             - prometheus.k8s.test.2martens.de
   kubeControllerManager:
     endpoints:
-      - 10.0.0.2
+      - 10.0.0.4
   kubeScheduler:
     endpoints:
-      - 10.0.0.2
+      - 10.0.0.4
