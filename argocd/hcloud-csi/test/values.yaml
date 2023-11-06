@@ -1,0 +1,5 @@
+hcloud-csi:
+  storageClasses:
+  - name: hcloud-volumes
+    defaultStorageClass: true
+    reclaimPolicy: Retain

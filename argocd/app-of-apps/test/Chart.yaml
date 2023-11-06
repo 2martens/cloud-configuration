@@ -7,3 +7,6 @@ dependencies:
   - name: vso-crds
     version: 0.1.0
     repository: file://../../vso-crds/test
+  - name: hcloud-csi
+    version: 0.1.0
+    repository: file://../../hcloud-csi/test

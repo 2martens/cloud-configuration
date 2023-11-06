@@ -2,5 +2,8 @@ dependencies:
 - name: vso-crds
   repository: file://../../vso-crds/test
   version: 0.1.0
-digest: sha256:12c8671f8eae4ae564788a7d51247c70ba63a4fa80967aab41b83d4571ad5076
-generated: "2023-11-06T08:21:13.730117+01:00"
+- name: hcloud-csi
+  repository: file://../../hcloud-csi/test
+  version: 0.1.0
+digest: sha256:f48e9e23b6d16e00cac07b23ce945d98d64cf3a9a15ebfd829b46a4c579aaa9b
+generated: "2023-11-06T17:05:04.34442+01:00"
