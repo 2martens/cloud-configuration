@@ -1,7 +1,6 @@
 email: ""
 vault:
   enabled: false
-  namespace: "vault-secrets-operator-system"
   clientId: ""
   clientSecret: ""
   applicationNamespaces: []
