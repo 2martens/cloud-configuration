@@ -1,0 +1,10 @@
+{{- if .Values.thanos.enabled }}
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: {{ .Values.thanos.namespace | default "observability" }}
+  name: thanos-object-storage-config
+data:
+  thanos.yaml: |-
+    {{ tpl (.Files.Get "thanos.yaml") . | b64enc }}
+{{- end }}

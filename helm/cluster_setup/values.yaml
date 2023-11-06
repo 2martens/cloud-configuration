@@ -10,3 +10,10 @@ hcloud:
   token: ""
   # if empty, hcloud will be used
   namespace: ""
+thanos:
+  enabled: true
+  namespace: ""
+  bucketName: ""
+  awsRegion: "eu-central-1"
+  accessKey: ""
+  secretKey: ""

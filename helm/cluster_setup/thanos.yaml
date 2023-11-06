@@ -1,0 +1,6 @@
+type: s3
+config:
+  bucket: {{ .Values.thanos.bucketName }}
+  endpoint: s3.{{ .Values.thanos.awsRegion }}.amazonaws.com
+  access_key: {{ .Values.thanos.accessKey }}
+  secret_key: {{ .Values.thanos.secretKey }}
