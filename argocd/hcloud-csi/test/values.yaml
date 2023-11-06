@@ -3,3 +3,8 @@ hcloud-csi:
   - name: hcloud-volumes
     defaultStorageClass: true
     reclaimPolicy: Retain
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: observability

@@ -1,4 +1,10 @@
 applications:
+  - name: hcloud-csi
+    project: default
+    targetRevision: main
+    namespace: hcloud
+    createNamespace: true
+    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
   - name: configserver
     project: default
     targetRevision: main
