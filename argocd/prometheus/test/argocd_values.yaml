@@ -20,7 +20,6 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: 10Gi
-            selector: {}
       thanos:
         objectStorageConfig:
           existingSecret:
