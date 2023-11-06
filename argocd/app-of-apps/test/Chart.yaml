@@ -3,7 +3,3 @@ name: app-of-apps
 description: Configuration chart for ArgoCD to monitor
 type: application
 version: 0.1.1
-dependencies:
-  - name: vso-crds
-    version: 0.1.0
-    repository: file://../../vso-crds/test
