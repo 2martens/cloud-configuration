@@ -3,4 +3,10 @@ vault:
   enabled: false
   clientId: ""
   clientSecret: ""
+  # creates each of the namespaces
   applicationNamespaces: []
+hcloud:
+  enabled: false
+  token: ""
+  # if empty, hcloud will be used
+  namespace: ""

@@ -8,6 +8,7 @@ metadata:
 ---
 apiVersion: v1
 kind: Secret
+type: Opaque
 metadata:
   name: vault-service-principal
   namespace: {{ .name }}

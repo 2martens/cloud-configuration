@@ -1,0 +1,14 @@
+{{- if .Values.hcloud.enabled }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.hcloud.namespace | default "hcloud" }}
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: hcloud
+data:
+  token: {{ .Values.hcloud.token | b64enc }}
+{{- end }}
