@@ -29,6 +29,7 @@ kube-prometheus-stack:
     thanosIngress:
       enabled: true
       ingressClassName: public
+      pathType: Prefix
       hosts:
         - thanos.prometheus.k8s.test.2martens.de
       tls:
