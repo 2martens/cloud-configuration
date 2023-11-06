@@ -2,6 +2,11 @@
 {{- range .Values.vault.applicationNamespaces }}
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .name }}
+---
+apiVersion: v1
 kind: Secret
 metadata:
   name: vault-service-principal
