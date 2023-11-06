@@ -1,0 +1,6 @@
+dependencies:
+- name: vso-crds
+  repository: file://../../vso-crds/test
+  version: 0.1.0
+digest: sha256:12c8671f8eae4ae564788a7d51247c70ba63a4fa80967aab41b83d4571ad5076
+generated: "2023-11-06T08:21:13.730117+01:00"
