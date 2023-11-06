@@ -11,7 +11,7 @@ hcloud:
   # if empty, hcloud will be used
   namespace: ""
 thanos:
-  enabled: true
+  enabled: false
   namespace: ""
   bucketName: ""
   awsRegion: "eu-central-1"
