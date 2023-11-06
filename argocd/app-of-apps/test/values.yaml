@@ -40,7 +40,7 @@ applications:
     project: default
     targetRevision: main
     namespace: observability
-    createNamespace: true
+    createNamespace: false
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
 
 
