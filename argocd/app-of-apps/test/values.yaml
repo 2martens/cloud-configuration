@@ -38,7 +38,7 @@ applications:
     project: default
     targetRevision: main
     namespace: wahlrecht
-    createNamespace: true
+    createNamespace: false
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
     syncWave: 5
   - name: vault-secrets-operator
