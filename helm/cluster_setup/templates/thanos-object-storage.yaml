@@ -1,5 +1,10 @@
 {{- if .Values.thanos.enabled }}
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.thanos.namespace | default "observability" }}
+---
+apiVersion: v1
 kind: Secret
 metadata:
   namespace: {{ .Values.thanos.namespace | default "observability" }}
