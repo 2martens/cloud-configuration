@@ -5,7 +5,7 @@ applications:
     namespace: hcloud
     createNamespace: false
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
-    syncWave: -1
+    syncWave: 1
   - name: vso-crds
     project: default
     targetRevision: main
@@ -19,28 +19,28 @@ applications:
     namespace: spring-support
     createNamespace: true
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
-    syncWave: 2
+    syncWave: 4
   - name: kafka
     project: default
     targetRevision: main
     namespace: kafka
     createNamespace: true
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
-    syncWave: 0
+    syncWave: 3
   - name: zookeeper
     project: default
     targetRevision: main
     namespace: kafka
     createNamespace: false
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
-    syncWave: 0
+    syncWave: 3
   - name: wahlrecht
     project: default
     targetRevision: main
     namespace: wahlrecht
     createNamespace: true
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
-    syncWave: 3
+    syncWave: 5
   - name: vault-secrets-operator
     project: default
     targetRevision: main
@@ -55,14 +55,14 @@ applications:
     createNamespace: false
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
     serverSideApply: true
-    syncWave: 0
+    syncWave: 2
   - name: prometheus-adapter
     project: default
     targetRevision: main
     namespace: observability
     createNamespace: false
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
-    syncWave: 1
+    syncWave: 2
 
 
 overall:
