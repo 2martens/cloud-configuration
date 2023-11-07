@@ -3,9 +3,9 @@ kube-prometheus-stack:
     admissionWebhooks:
       certManager:
         enabled: true
-        issuerRef:
-          name: "lets-encrypt"
-          kind: "ClusterIssuer"
+#        issuerRef:
+#          name: "lets-encrypt"
+#          kind: "ClusterIssuer"
   prometheus-node-exporter:
     hostRootFsMount:
       mountPropagation: None
