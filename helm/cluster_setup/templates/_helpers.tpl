@@ -34,8 +34,8 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "template.labels" -}}
-helm.sh/chart: {{ include "template.chart" . }}
-{{ include "template.selectorLabels" . }}
+helm.sh/chart: {{ include "template.chart" $ }}
+{{ include "template.selectorLabels" $ }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 {{- define "template.annotations" -}}
@@ -47,7 +47,7 @@ meta.helm.sh/release-namespace: {{ .Release.Namespace }}
 Selector labels
 */}}
 {{- define "template.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "template.name" . }}
+app.kubernetes.io/name: {{ include "template.name" $ }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
