@@ -3,12 +3,20 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: {{ .Values.thanos.namespace | default "observability" }}
+  labels:
+    {{- include "template.labels" . | nindent 4 }}
+  annotations:
+    {{- include "template.annotations" . | nindent 4 }}
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   namespace: {{ .Values.thanos.namespace | default "observability" }}
   name: thanos-object-storage-config
+  labels:
+    {{- include "template.labels" . | nindent 4 }}
+  annotations:
+    {{- include "template.annotations" . | nindent 4 }}
 data:
   thanos.yaml: |-
     {{ tpl (.Files.Get "thanos.yaml") . | b64enc }}
