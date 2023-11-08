@@ -1,0 +1,37 @@
+kube-prometheus-stack:
+  prometheusOperator:
+    admissionWebhooks:
+      certManager:
+        enabled: true
+#        issuerRef:
+#          name: "lets-encrypt"
+#          kind: "ClusterIssuer"
+  prometheus-node-exporter:
+    hostRootFsMount:
+      mountPropagation: None
+
+  alertmanager:
+    enabled: true
+  grafana:
+    enabled: true
+
+  prometheus:
+    prometheusSpec:
+      retention: 6h
+      disableCompaction: true
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: hcloud-volumes
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: 10Gi
+    ingress:
+      enabled: false
+  kubeControllerManager:
+    endpoints:
+      - 10.0.0.4
+  kubeScheduler:
+    endpoints:
+      - 10.0.0.4
