@@ -16,6 +16,6 @@ spec:
     name: {{ $.Release.Name }}-prometheus-kube-prometheus-prometheus-db-prometheus-prometheus-kube-prometheus-prometheus-{{ $index }}
   csi:
     driver: csi.hetzner.cloud
-    volumeHandle: {{ index $.Values.storage.handles $index }}
+    volumeHandle: {{ index $.Values.storage.handles $index | quote }}
     fsType: ext4
 {{- end }}
