@@ -1,0 +1,5 @@
+apiVersion: v2
+name: thanos
+version: 0.1.0
+type: application
+description: Helm chart to install Thanos manifests
