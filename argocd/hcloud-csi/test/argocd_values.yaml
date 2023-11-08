@@ -8,6 +8,8 @@ hcloud-csi:
     serviceMonitor:
       enabled: true
       namespace: observability
+  node:
+    kubeletDir: /var/snap/microk8s/common/var/lib/kubelet
 vault:
   enabled: true
   applicationName: hcloud
