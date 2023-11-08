@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/version: v0.31.0
     controller.receive.thanos.io/hashring: default
   name: thanos-receive-ingestor-default
-  namespace: thanos
+  namespace: {{ .Release.Namespace }}
 spec:
   clusterIP: None
   ports:

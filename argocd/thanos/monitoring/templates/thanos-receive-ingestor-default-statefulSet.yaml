@@ -9,7 +9,7 @@ metadata:
     controller.receive.thanos.io: thanos-receive-controller
     controller.receive.thanos.io/hashring: default
   name: thanos-receive-ingestor-default
-  namespace: thanos
+  namespace: {{ .Release.Namespace }}
 spec:
   minReadySeconds: 0
   replicas: 1
@@ -44,7 +44,7 @@ spec:
                   values:
                   - thanos-receive-ingestor-default
               namespaces:
-              - thanos
+              - {{ .Release.Namespace }}
               topologyKey: kubernetes.io/hostname
             weight: 100
           - podAffinityTerm:
@@ -59,7 +59,7 @@ spec:
                   values:
                   - thanos-receive-ingestor-default
               namespaces:
-              - thanos
+              - {{ .Release.Namespace }}
               topologyKey: topology.kubernetes.io/zone
             weight: 100
       containers:
