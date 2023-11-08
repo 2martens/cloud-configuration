@@ -12,8 +12,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   claimRef:
-    namespace: {{ $.Release.Namespace }}
+    apiVersion: v1
+    kind: PersistentVolumeClaim
     name: {{ $.Release.Name }}-prometheus-kube-prometheus-prometheus-db-prometheus-prometheus-kube-prometheus-prometheus-{{ $index }}
+    namespace: {{ $.Release.Namespace }}
   csi:
     driver: csi.hetzner.cloud
     volumeHandle: {{ (index $.Values.storage.handles $index) | quote }}
