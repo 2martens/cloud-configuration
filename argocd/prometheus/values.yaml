@@ -2,3 +2,10 @@ vault:
   enabled: false
   applicationName: ""
   operatorNamespace: ""
+prometheus:
+  # must match the value provided to prometheusSpec of kube-prometheus-stack
+  replicas: 1
+storage:
+  capacity: 10Gi
+  className: hcloud-volumes
+  handles: []

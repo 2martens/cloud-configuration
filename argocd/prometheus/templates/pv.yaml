@@ -1,0 +1,21 @@
+{{- range $index, $e := until .Values.prometheus.replicas }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-prometheus-pv-{{ $index }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  storageClassName: {{ .Values.storage.className }}
+  capacity:
+    storage: {{ .Values.storage.capacity }}
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: {{ .Release.Namespace }}
+    name: {{ .Release.Name }}-prometheus-kube-prometheus-prometheus-db-prometheus-prometheus-kube-prometheus-prometheus-{{ $index }}
+  csi:
+    driver: csi.hetzner.cloud
+    volumeHandle: {{ index .Values.storage.handles $index }}
+    fsType: ext4
+{{- end }}

@@ -17,6 +17,7 @@ kube-prometheus-stack:
 
   prometheus:
     prometheusSpec:
+      replicas: &replicas 1
       retention: 6h
       disableCompaction: true
       storageSpec:
@@ -63,3 +64,8 @@ kube-prometheus-stack:
   kubeScheduler:
     endpoints:
       - 10.0.0.4
+prometheus:
+  replicas: *replicas
+storage:
+  handles:
+    - 100068485
