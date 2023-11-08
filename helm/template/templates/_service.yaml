@@ -5,6 +5,8 @@ metadata:
   name: {{ include "template.fullname" . }}
   labels:
     {{- include "template.labels" . | nindent 4 }}
+  annotations:
+    {{- include "template.annotations" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:

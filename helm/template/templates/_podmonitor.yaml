@@ -8,6 +8,8 @@ metadata:
   labels:
     {{- include "template.labels" . | nindent 4 }}
     release: {{ .Values.prometheus.releaseName | quote | default "prometheus" }}
+  annotations:
+    {{- include "template.annotations" . | nindent 4 }}
 spec:
   podMetricsEndpoints:
     - port: "{{ .Values.application.actuatorPort }}"

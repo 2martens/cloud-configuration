@@ -41,6 +41,10 @@ app.kubernetes.io/version: {{ .Values.image.tag | default .Chart.AppVersion | qu
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
+{{- define "template.annotations" -}}
+meta.helm.sh/release-name: {{ .Release.Name }}
+meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+{{- end }}
 
 {{/*
 Selector labels

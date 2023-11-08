@@ -5,6 +5,8 @@ metadata:
   name: {{ include "template.fullname" . }}
   labels:
     {{- include "template.labels" . | nindent 4 }}
+  annotations:
+    {{- include "template.annotations" . | nindent 4 }}
 spec:
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   {{- if not .Values.autoscaling.enabled }}
@@ -24,6 +26,7 @@ spec:
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        {{- include "template.annotations" . | nindent 8 }}
       labels:
         {{- include "template.selectorLabels" . | nindent 8 }}
     spec:
