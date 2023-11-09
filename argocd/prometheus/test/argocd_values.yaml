@@ -20,6 +20,7 @@ kube-prometheus-stack:
       replicas: &replicas 1
       retention: 6h
       disableCompaction: true
+      replicaExternalLabelName: prometheus_replica
       storageSpec:
         volumeClaimTemplate:
           spec:
@@ -33,31 +34,11 @@ kube-prometheus-stack:
           existingSecret:
             key: thanos.yaml
             name: thanos-object-storage-config
-    thanosIngress:
-      enabled: true
-      ingressClassName: public
-      pathType: Prefix
-      hosts:
-        - thanos.prometheus.k8s.test.2martens.de
-      tls:
-       - secretName: thanos-gateway-tls
-         hosts:
-         - thanos.prometheus.k8s.test.2martens.de
     thanosServiceMonitor:
       enabled: true
-    thanosService:
+    thanosServiceExternal:
       enabled: true
-    ingress:
-      enabled: true
-      ingressClassName: public
-      hosts:
-        - prometheus.k8s.test.2martens.de
-      annotations:
-        cert-manager.io/cluster-issuer: lets-encrypt
-      tls:
-        - secretName: prometheus-server-tls
-          hosts:
-            - prometheus.k8s.test.2martens.de
+      type: NodePort
   kubeControllerManager:
     endpoints:
       - 10.0.0.4
