@@ -1,11 +1,23 @@
 kube-prometheus-stack:
   prometheusOperator:
+    prometheusConfigReloader:
+      resources:
+        requests:
+          cpu: 200m
+          memory: 50Mi
+        limits:
+          cpu: 200m
+          memory: 50Mi
+    resources:
+      limits:
+        cpu: 200m
+        memory: 200Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
     admissionWebhooks:
       certManager:
         enabled: true
-#        issuerRef:
-#          name: "lets-encrypt"
-#          kind: "ClusterIssuer"
   prometheus-node-exporter:
     extraArgs:
       - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/snap/microk8s/common/var/lib/kubelet/.+)($|/)
@@ -19,6 +31,8 @@ kube-prometheus-stack:
     enabled: false
 
   prometheus:
+    networkPolicy:
+      enabled: true
     prometheusSpec:
       replicas: &replicas 1
       retention: 6h
@@ -37,6 +51,9 @@ kube-prometheus-stack:
           existingSecret:
             key: thanos.yaml
             name: thanos-object-storage-config
+      resources:
+        requests:
+          memory: 400Mi
     thanosServiceMonitor:
       enabled: true
     thanosServiceExternal:
