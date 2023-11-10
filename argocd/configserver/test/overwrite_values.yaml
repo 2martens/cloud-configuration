@@ -22,3 +22,10 @@ environment:
     value: "{{ .Values.application.searchPath }}"
   - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
     value: "{{ .Values.application.kafka.host }}:{{ .Values.application.kafka.port }}"
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 100m
+    memory: 512Mi
