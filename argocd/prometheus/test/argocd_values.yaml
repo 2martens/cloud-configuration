@@ -33,6 +33,10 @@ kube-prometheus-stack:
   prometheus:
     networkPolicy:
       enabled: true
+      egress:
+        - {}
+      ingress:
+        - {}
     prometheusSpec:
       replicas: &replicas 1
       retention: 6h
@@ -53,7 +57,11 @@ kube-prometheus-stack:
             name: thanos-object-storage-config
       resources:
         requests:
-          memory: 400Mi
+          memory: 1Gi
+          cpu: 400m
+        limits:
+          memory: 1Gi
+          cpu: 800m
     thanosServiceMonitor:
       enabled: true
     thanosServiceExternal:
