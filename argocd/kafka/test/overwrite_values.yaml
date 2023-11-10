@@ -17,7 +17,22 @@ environment:
   - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
     value: "1"
 
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
 prometheus-kafka-exporter:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
   prometheus: 
     serviceMonitor: 
       enabled: true

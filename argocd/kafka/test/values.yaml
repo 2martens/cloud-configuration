@@ -122,7 +122,13 @@ ingress:
     - secretName: chart-example-tls
       hosts:
         - chart-example.local
-resources: {}
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
 # limits:
 #   cpu: 100m
 #   memory: 128Mi
@@ -159,6 +165,13 @@ podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template
 containerSpec: {}
 prometheus-kafka-exporter:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
   prometheus:
     serviceMonitor:
       enabled: true
