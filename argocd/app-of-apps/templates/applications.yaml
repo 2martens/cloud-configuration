@@ -13,8 +13,10 @@ spec:
   {{- if .ignoreDifferences }}
   ignoreDifferences:
     {{- range .ignoreDifferences }}
-    - group: {{ .group }}
-      kind: {{ .kind }}
+    - kind: {{ .kind }}
+      {{- if .group }}
+      group: {{ .group }}
+      {{- end }}
       name: {{ .name }}
       namespace: {{ .namespace }}
       jsonPointers:
