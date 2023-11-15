@@ -9,7 +9,7 @@ metadata:
 spec:
   gatewayClassName: cilium
   listeners:
-    - name: {{ tpl (quote .Values.gateway.host) . }}
+    - name: argocd-server
       protocol: HTTPS
       port: 443
       hostname: {{ tpl (quote .Values.gateway.host) . }}
