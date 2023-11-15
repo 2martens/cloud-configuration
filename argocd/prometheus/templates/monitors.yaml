@@ -7,7 +7,7 @@ metadata:
     {{- include "template.labels" . | nindent 4 }}
 spec:
   podMetricsEndpoints:
-    - port: 9963
+    - port: "9963"
   selector:
     matchLabels:
       app.kubernetes.io/name: cilium-operator
@@ -21,7 +21,7 @@ metadata:
     {{- include "template.labels" . | nindent 4 }}
 spec:
   endpoints:
-    - port: 9964
+    - port: "9964"
   selector:
     matchLabels:
       app.kubernetes.io/name: cilium-agent
@@ -35,7 +35,7 @@ metadata:
     {{- include "template.labels" . | nindent 4 }}
 spec:
   endpoints:
-    - port: 9965
+    - port: "9965"
   selector:
     matchLabels:
       app.kubernetes.io/name: hubble
