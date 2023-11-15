@@ -12,7 +12,7 @@ metadata:
     #
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
-  ingressClassName: public
+  ingressClassName: {{ .Values.ingress.className }}
   rules:
     - host: {{ tpl (quote .Values.ingress.host) . }}
       http:

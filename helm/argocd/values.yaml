@@ -7,6 +7,7 @@ ingress:
   # variable is templated
   host: argocd.k8s.{{ .Values.environment }}.2martens.de
   certIssuer: lets-encrypt
+  className: default
 
 # should be overriden for the specific installation
 environment: ""
