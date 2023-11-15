@@ -1,4 +1,6 @@
 kube-prometheus-stack:
+  crds:
+    enabled: false
   prometheusOperator:
     prometheusConfigReloader:
       resources:
@@ -42,6 +44,8 @@ kube-prometheus-stack:
       retention: 6h
       disableCompaction: true
       replicaExternalLabelName: prometheus_replica
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
       storageSpec:
         volumeClaimTemplate:
           spec:
