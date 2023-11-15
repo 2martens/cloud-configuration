@@ -1,0 +1,9 @@
+apiVersion: v2
+name: hcloud-ccm
+description: Installs the HCloud cloud controller
+type: application
+version: 0.1.0
+dependencies:
+  - name: hcloud-cloud-controller-manager
+    version: v1.18.0
+    repository: https://charts.hetzner.cloud
