@@ -4,10 +4,17 @@ appOfApps:
   path: argocd/app-of-apps/{{ .Values.environment }}
 
 ingress:
+  enabled: false
   # variable is templated
   host: argocd.k8s.{{ .Values.environment }}.2martens.de
   certIssuer: lets-encrypt
   className: default
+
+gateway:
+  enabled: false
+  # variable is templated
+  host: argocd.k8s.{{ .Values.environment }}.2martens.de
+  certIssuer: lets-encrypt
 
 # should be overriden for the specific installation
 environment: ""
