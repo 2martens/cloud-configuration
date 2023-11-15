@@ -1,5 +1,5 @@
 apiVersion: v2
-name: hcloud-csi
+name: hcloud-csi-ccm
 description: Installs the HCloud CSI driver
 type: application
 version: 0.1.0
