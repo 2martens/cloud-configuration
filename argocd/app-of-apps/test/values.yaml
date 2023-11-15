@@ -56,6 +56,14 @@ applications:
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
     serverSideApply: true
     syncWave: 2
+    ignoreDifferences:
+      - group: ""
+        kind: PersistentVolume
+        name: prometheus-prometheus-pv-0
+        namespace: observability
+        jsonPointers:
+          - /spec/claimRef/resourceVersion
+          - /spec/claimRef/uid
   - name: prometheus-adapter
     project: default
     targetRevision: main

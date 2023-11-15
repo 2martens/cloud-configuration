@@ -10,6 +10,17 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  {{- if .ignoreDifferences }}
+  ignoreDifferences:
+    {{- range .ignoreDifferences }}
+    - group: {{ .group }}
+      kind: {{ .kind }}
+      name: {{ .name }}
+      namespace: {{ .namespace }}
+      jsonPointers:
+        {{- toYaml .jsonPointers . | nindent 10 }}
+    {{- end }}
+  {{- end }}
   syncPolicy:
     {{- if .serverSideApply }}
     syncOptions:
