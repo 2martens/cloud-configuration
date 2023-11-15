@@ -27,6 +27,7 @@ spec:
     {{- if .serverSideApply }}
     syncOptions:
       - ServerSideApply=true
+      - RespectIgnoreDifferences=true
     {{- end }}
     automated:
       prune: true
