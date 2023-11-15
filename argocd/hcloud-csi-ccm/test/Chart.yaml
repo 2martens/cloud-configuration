@@ -7,3 +7,6 @@ dependencies:
   - name: hcloud-csi
     version: 2.6.0
     repository: https://charts.hetzner.cloud
+  - name: hcloud-cloud-controller-manager
+    version: v1.18.0
+    repository: https://charts.hetzner.cloud

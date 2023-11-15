@@ -1,7 +1,0 @@
-hcloud-cloud-controller-manager:
-  monitoring:
-    podMonitor:
-      enabled: true
-  networking:
-    enabled: true
-    clusterCIDR: 10.1.0.0/16

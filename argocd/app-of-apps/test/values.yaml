@@ -1,12 +1,5 @@
 applications:
-  - name: hcloud-csi
-    project: default
-    targetRevision: main
-    namespace: hcloud
-    createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
-    syncWave: 1
-  - name: hcloud-ccm
+  - name: hcloud-csi-ccm
     project: default
     targetRevision: main
     namespace: hcloud
