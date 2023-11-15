@@ -8,6 +8,7 @@ metadata:
 spec:
   podMetricsEndpoints:
     - port: "9963"
+      path: /metrics
   namespaceSelector:
     matchNames:
       - kube-system
@@ -16,7 +17,7 @@ spec:
       app.kubernetes.io/name: cilium-operator
 ---
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
   name: cilium-agent
   namespace: {{ .Release.Namespace }}
@@ -24,7 +25,8 @@ metadata:
     {{- include "template.labels" . | nindent 4 }}
 spec:
   endpoints:
-    - port: "9964"
+    - port: "9962"
+      path: /metrics
   namespaceSelector:
     matchNames:
       - kube-system
@@ -42,6 +44,7 @@ metadata:
 spec:
   endpoints:
     - port: "9965"
+      path: /metrics
   namespaceSelector:
     matchNames:
       - kube-system
