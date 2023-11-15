@@ -24,8 +24,8 @@ environment:
     value: "{{ .Values.application.kafka.host }}:{{ .Values.application.kafka.port }}"
 resources:
   requests:
-    cpu: 100m
+    cpu: 200m
     memory: 256Mi
   limits:
-    cpu: 100m
+    cpu: 300m
     memory: 512Mi
