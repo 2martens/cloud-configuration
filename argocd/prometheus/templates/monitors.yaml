@@ -8,6 +8,9 @@ metadata:
 spec:
   podMetricsEndpoints:
     - port: "9963"
+  namespaceSelector:
+    matchNames:
+      - kube-system
   selector:
     matchLabels:
       app.kubernetes.io/name: cilium-operator
@@ -22,6 +25,9 @@ metadata:
 spec:
   endpoints:
     - port: "9964"
+  namespaceSelector:
+    matchNames:
+      - kube-system
   selector:
     matchLabels:
       app.kubernetes.io/name: cilium-agent
@@ -36,6 +42,9 @@ metadata:
 spec:
   endpoints:
     - port: "9965"
+  namespaceSelector:
+    matchNames:
+      - kube-system
   selector:
     matchLabels:
       app.kubernetes.io/name: hubble
