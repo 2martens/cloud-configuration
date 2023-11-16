@@ -3,7 +3,7 @@ hcloud-cloud-controller-manager:
     podMonitor:
       enabled: true
   networking:
-    enabled: true
+    enabled: false
     clusterCIDR: 10.1.0.0/16
 
 hcloud-csi:
