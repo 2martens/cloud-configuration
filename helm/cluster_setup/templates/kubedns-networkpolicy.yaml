@@ -1,0 +1,65 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: kube-dns
+  namespace: kube-system
+specs:
+  - nodeSelector:
+      # apply to master nodes
+      matchLabels:
+        node.kubernetes.io/microk8s-controlplane: microk8s-controlplane
+    ingress:
+      # core dns -> api server
+      - fromEndpoints:
+          - matchLabels:
+              k8s:io.cilium.k8s.policy.serviceaccount: coredns
+        toPorts:
+          - ports:
+              - port: '16443'
+                protocol: TCP
+  - nodeSelector:
+      # apply to all nodes
+      matchLabels: {}
+    egress:
+      # kubelet -> core dns probes
+      - toEndpoints:
+          - matchLabels:
+              k8s:io.cilium.k8s.policy.serviceaccount: coredns
+        toPorts:
+          - ports:
+              - port: '8080'
+                protocol: TCP
+              - port: '8181'
+                protocol: TCP
+  - endpointSelector:
+      # apply to core dns pods
+      matchLabels:
+        k8s:io.cilium.k8s.policy.serviceaccount: coredns
+    ingress:
+      # kubelet -> core dns probes
+      - fromEntities:
+          - host
+        toPorts:
+          - ports:
+              - port: '8080'
+                protocol: TCP
+              - port: '8181'
+                protocol: TCP
+      # prometheus -> dns metrics
+      - fromEndpoints:
+        - matchLabels:
+            k8s:io.cilium.k8s.policy.serviceaccount: prometheus-kube-prometheus-prometheus
+            k8s:io.kubernetes.pod.namespace: observability
+        toPorts:
+          - ports:
+              - port: '9153'
+                protocol: TCP
+      # cluster -> dns
+      - fromEntities:
+          - cluster
+        toPorts:
+          - ports:
+              - port: '53'
+                protocol: TCP
+              - port: '53'
+                protocol: UDP

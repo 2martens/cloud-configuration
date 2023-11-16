@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: world
+spec:
+  nodeSelector:
+    # apply to all nodes
+    matchLabels: {}
+  egress:
+    # node -> world
+    - toEntities:
+        - world
