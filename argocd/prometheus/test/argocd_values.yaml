@@ -34,7 +34,7 @@ kube-prometheus-stack:
 
   prometheus:
     networkPolicy:
-      enabled: true
+      enabled: false
       egress:
         - {}
       ingress:
