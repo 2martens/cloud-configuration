@@ -12,24 +12,24 @@ specs:
       # kubelet -> probes
       - toEndpoints:
           - matchLabels:
-              k8s:app.kubernetes.io/name: argocd-server
-              k8s:io.kubernetes.pod.namespace: argocd
+              app.kubernetes.io/name: argocd-server
+              io.kubernetes.pod.namespace: argocd
         toPorts:
           - ports:
               - port: '8080'
                 protocol: TCP
       - toEndpoints:
           - matchLabels:
-              k8s:app.kubernetes.io/name: argocd-application-controller
-              k8s:io.kubernetes.pod.namespace: argocd
+              app.kubernetes.io/name: argocd-application-controller
+              io.kubernetes.pod.namespace: argocd
         toPorts:
           - ports:
               - port: '8082'
                 protocol: TCP
       - toEndpoints:
           - matchLabels:
-              k8s:app.kubernetes.io/name: argocd-repo-server
-              k8s:io.kubernetes.pod.namespace: argocd
+              app.kubernetes.io/name: argocd-repo-server
+              io.kubernetes.pod.namespace: argocd
         toPorts:
           - ports:
               - port: '8084'
@@ -37,7 +37,7 @@ specs:
   - endpointSelector:
       # apply to core dns pods
       matchLabels:
-        k8s:app.kubernetes.io/name: argocd-server
+        app.kubernetes.io/name: argocd-server
     ingress:
       # kubelet -> probes
       - fromEntities:
@@ -49,8 +49,8 @@ specs:
       # ingress -> server
       - fromEndpoints:
           - matchLabels:
-              k8s:io.cilium.k8s.policy.serviceaccount: nginx-ingress-microk8s-serviceaccount
-              k8s:io.kubernetes.pod.namespace: ingress
+              io.cilium.k8s.policy.serviceaccount: nginx-ingress-microk8s-serviceaccount
+              io.kubernetes.pod.namespace: ingress
         toPorts:
           - ports:
               - port: '8080'
@@ -58,8 +58,8 @@ specs:
       # prometheus -> server metrics
       - fromEndpoints:
           - matchLabels:
-              k8s:io.cilium.k8s.policy.serviceaccount: prometheus-kube-prometheus-prometheus
-              k8s:io.kubernetes.pod.namespace: observability
+              io.cilium.k8s.policy.serviceaccount: prometheus-kube-prometheus-prometheus
+              io.kubernetes.pod.namespace: observability
         toPorts:
           - ports:
               - port: '8083'
@@ -68,15 +68,21 @@ specs:
       - toEndpoints:
           - matchLabels:
               io.cilium.k8s.policy.serviceaccount: coredns
-              k8s:io.kubernetes.pod.namespace: kube-system
+              io.kubernetes.pod.namespace: kube-system
         toPorts:
           - ports:
               - port: '53'
                 protocol: UDP
+      - toEntities:
+          - host
+        toPorts:
+          - ports:
+              - port: '16443'
+                protocol: TCP
   - endpointSelector:
       # apply to core dns pods
       matchLabels:
-        k8s:app.kubernetes.io/name: argocd-application-controller
+        app.kubernetes.io/name: argocd-application-controller
     ingress:
       # kubelet -> probes
       - fromEntities:
@@ -88,7 +94,7 @@ specs:
   - endpointSelector:
       # apply to core dns pods
       matchLabels:
-        k8s:app.kubernetes.io/name: argocd-repo-server
+        app.kubernetes.io/name: argocd-repo-server
     ingress:
       # kubelet -> probes
       - fromEntities:
