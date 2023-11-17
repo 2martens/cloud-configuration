@@ -72,6 +72,8 @@ specs:
           - world
         toPorts:
           - ports:
+              - port: '8081'
+                protocol: TCP
               - port: '8084'
                 protocol: TCP
 {{- end }}
