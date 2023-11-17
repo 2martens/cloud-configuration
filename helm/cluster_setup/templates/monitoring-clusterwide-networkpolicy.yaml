@@ -1,0 +1,37 @@
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: monitoring
+spec:
+  nodeSelector:
+    # apply to all nodes
+    matchLabels: {}
+  ingress:
+    # prometheus -> monitoring ports
+    - fromEndpoints:
+        - matchLabels:
+            io.cilium.k8s.policy.serviceaccount: prometheus-kube-prometheus-prometheus
+            io.kubernetes.pod.namespace: observability
+      toPorts:
+        - ports:
+            - port: '9100'
+              protocol: TCP
+            - port: '9962'
+              protocol: TCP
+            - port: '9963'
+              protocol: TCP
+            - port: '9965'
+              protocol: TCP
+            - port: '10257'
+              protocol: TCP
+            - port: '10259'
+              protocol: TCP
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            io.cilium.k8s.policy.serviceaccount: prometheus-kube-prometheus-prometheus
+            io.kubernetes.pod.namespace: observability
+      toPorts:
+        - ports:
+            - port: '9090'
+              protocol: TCP
