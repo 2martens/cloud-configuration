@@ -36,18 +36,12 @@ specs:
               - port: '8083'
                 protocol: TCP
     egress:
-      - toEndpoints:
-          - matchLabels:
-              io.cilium.k8s.policy.serviceaccount: coredns
-              io.kubernetes.pod.namespace: kube-system
-        toPorts:
-          - ports:
-              - port: '53'
-                protocol: UDP
       - toEntities:
           - world
         toPorts:
           - ports:
+              - port: '53'
+                protocol: UDP
               - port: '443'
                 protocol: TCP
   - endpointSelector:
