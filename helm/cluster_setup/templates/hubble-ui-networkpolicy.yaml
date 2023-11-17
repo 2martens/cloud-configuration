@@ -1,35 +1,10 @@
+{{- if .Values.cilium.enabled }}
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: hubble-ui
   namespace: kube-system
 specs:
-  - nodeSelector:
-      # apply to master nodes
-      matchLabels:
-        node.kubernetes.io/microk8s-controlplane: microk8s-controlplane
-    ingress:
-      # hubble ui -> api server
-      - fromEndpoints:
-          - matchLabels:
-              io.cilium.k8s.policy.serviceaccount: hubble-ui
-        toPorts:
-          - ports:
-              - port: '16443'
-                protocol: TCP
-  - endpointSelector:
-      # apply to core dns endpoints
-      matchLabels:
-        io.cilium.k8s.policy.serviceaccount: coredns
-    ingress:
-      # hubble ui -> core dns
-      - fromEndpoints:
-          - matchLabels:
-              io.cilium.k8s.policy.serviceaccount: hubble-ui
-        toPorts:
-          - ports:
-              - port: '53'
-                protocol: UDP
   - endpointSelector:
       # apply to hubble relay endpoints
       matchLabels:
@@ -71,3 +46,4 @@ specs:
           - ports:
               - port: '53'
                 protocol: UDP
+{{- end }}
