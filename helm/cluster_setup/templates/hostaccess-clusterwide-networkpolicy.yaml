@@ -1,0 +1,31 @@
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: host-access
+spec:
+  nodeSelector:
+    matchLabels: { }
+  ingress:
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: '22'
+              protocol: TCP
+    - fromEntities:
+      - world
+      icmps:
+        - fields:
+            - type: 8
+              family: IPv4
+            - type: 8
+              family: IPv6
+  egress:
+    - toEntities:
+        - world
+      icmps:
+        - fields:
+            - type: 8
+              family: IPv4
+            - type: 8
+              family: IPv6
