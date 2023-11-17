@@ -17,3 +17,5 @@ thanos:
   awsRegion: "eu-central-1"
   accessKey: ""
   secretKey: ""
+cilium:
+  enabled: false
