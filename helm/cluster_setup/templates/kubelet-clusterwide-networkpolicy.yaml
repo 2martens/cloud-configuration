@@ -10,7 +10,8 @@ spec:
     # prometheus -> kubelet
     - fromEndpoints:
         - matchLabels:
-            app: kube-prometheus-stack-prometheus
+            io.cilium.k8s.policy.serviceaccount: prometheus-kube-prometheus-prometheus
+            io.kubernetes.pod.namespace: observability
       toPorts:
         - ports:
             - port: '10250'
