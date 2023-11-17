@@ -1,0 +1,88 @@
+{{- if .Values.cilium.enabled }}
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: argocd
+  namespace: {{ .Release.Namespace }}
+specs:
+  - nodeSelector:
+      # apply to all nodes
+      matchLabels: {}
+    egress:
+      # kubelet -> probes
+      - toEndpoints:
+          - matchLabels:
+              k8s:app.kubernetes.io/name: argocd-server
+        toPorts:
+          - ports:
+              - port: '8080'
+                protocol: TCP
+      - toEndpoints:
+          - matchLabels:
+              k8s:app.kubernetes.io/name: argocd-application-controller
+        toPorts:
+          - ports:
+              - port: '8082'
+                protocol: TCP
+      - toEndpoints:
+          - matchLabels:
+              k8s:app.kubernetes.io/name: argocd-repo-server
+        toPorts:
+          - ports:
+              - port: '8084'
+                protocol: TCP
+  - endpointSelector:
+      # apply to core dns pods
+      matchLabels:
+        k8s:app.kubernetes.io/name: argocd-server
+    ingress:
+      # kubelet -> probes
+      - fromEntities:
+          - host
+        toPorts:
+          - ports:
+              - port: '8080'
+                protocol: TCP
+      # ingress -> server
+      - fromEndpoints:
+          - matchLabels:
+              k8s:io.cilium.k8s.policy.serviceaccount: nginx-ingress-microk8s-serviceaccount
+              k8s:io.kubernetes.pod.namespace: ingress
+        toPorts:
+          - ports:
+              - port: '8080'
+                protocol: TCP
+      # prometheus -> server metrics
+      - fromEndpoints:
+          - matchLabels:
+              k8s:io.cilium.k8s.policy.serviceaccount: prometheus-kube-prometheus-prometheus
+              k8s:io.kubernetes.pod.namespace: observability
+        toPorts:
+          - ports:
+              - port: '8083'
+                protocol: TCP
+  - endpointSelector:
+      # apply to core dns pods
+      matchLabels:
+        k8s:app.kubernetes.io/name: argocd-application-controller
+    ingress:
+      # kubelet -> probes
+      - fromEntities:
+          - host
+        toPorts:
+          - ports:
+              - port: '8082'
+                protocol: TCP
+  - endpointSelector:
+      # apply to core dns pods
+      matchLabels:
+        k8s:app.kubernetes.io/name: argocd-repo-server
+    ingress:
+      # kubelet -> probes
+      - fromEntities:
+          - host
+        toPorts:
+          - ports:
+              - port: '8084'
+                protocol: TCP
+{{- end }}
