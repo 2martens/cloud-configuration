@@ -9,7 +9,7 @@ prometheus-adapter:
       memory: 512Mi
     limits:
       cpu: 1500m
-      memory: 512Mi
+      memory: 2Gi
   rules:
     resource:
       cpu:
