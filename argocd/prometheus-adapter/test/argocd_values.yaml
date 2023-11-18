@@ -3,6 +3,13 @@ prometheus-adapter:
     url: http://prometheus-kube-prometheus-prometheus.observability.svc
     port: 9090
 
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 512Mi
+    limits:
+      cpu: 1500m
+      memory: 512Mi
   rules:
     resource:
       cpu:
