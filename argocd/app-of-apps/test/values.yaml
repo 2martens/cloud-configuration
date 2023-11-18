@@ -57,8 +57,7 @@ applications:
     serverSideApply: true
     syncWave: 2
     ignoreDifferences:
-      - group: "*"
-        kind: PersistentVolume
+      - kind: PersistentVolume
         name: prometheus-prometheus-pv-0
         jsonPointers:
           - /spec/claimRef/resourceVersion
