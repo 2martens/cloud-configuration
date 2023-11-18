@@ -18,7 +18,9 @@ spec:
       group: {{ .group }}
       {{- end }}
       name: {{ .name }}
+      {{- if .namespace }}
       namespace: {{ .namespace }}
+      {{- end }}
       jsonPointers:
         {{- toYaml .jsonPointers | nindent 10 }}
     {{- end }}
