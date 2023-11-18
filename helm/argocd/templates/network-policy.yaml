@@ -36,6 +36,13 @@ specs:
               - port: '8083'
                 protocol: TCP
     egress:
+      - toEndpoints:
+          - matchLabels:
+              app.kubernetes.io/name: argocd-redis
+        toPorts:
+          - ports:
+              - port: '6379'
+                protocol: TCP
       - toEntities:
           - world
         toPorts:
