@@ -16,8 +16,6 @@ specs:
               io.cilium.k8s.policy.serviceaccount: hubble-ui
         toPorts:
           - ports:
-              - port: '80'
-                protocol: TCP
               - port: '4245'
                 protocol: TCP
   - endpointSelector:
@@ -37,40 +35,10 @@ specs:
           - world
         toPorts:
           - ports:
+              - port: '53'
+                protocol: UDP
+              - port: '80'
+                protocol: TCP
               - port: '443'
                 protocol: TCP
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: hubble-ui
-  namespace: kube-system
-spec:
-  podSelector:
-    matchLabels:
-      k8s-app: hubble-ui
-  policyTypes:
-  - Egress
-  egress:
-    - to:
-        - podSelector:
-            matchLabels:
-              k8s-app: hubble-relay
-      ports:
-        - port: '80'
-          protocol: TCP
-        - port: '4245'
-          protocol: TCP
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-        - podSelector:
-            matchLabels:
-              k8s-app: kube-dns
-      ports:
-        - port: '53'
-          protocol: UDP
----
-
 {{- end }}
