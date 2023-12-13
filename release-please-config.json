@@ -1,0 +1,62 @@
+{
+  "release-type": "simple",
+  "draft": "true",
+  "bump-minor-pre-major": "true",
+  "bump-patch-for-minor-pre-major": "true",
+  "changelog-sections": [
+    {
+      "type": "feat",
+      "section": "Added",
+      "hidden": false
+    },
+    {
+      "type": "change",
+      "section": "Changed",
+      "hidden": false
+    },
+    {
+      "type": "deprecate",
+      "section": "Deprecated",
+      "hidden": false
+    },
+    {
+      "type": "fix",
+      "section": "Fixed",
+      "hidden": false
+    },
+    {
+      "type": "remove",
+      "section": "Removed",
+      "hidden": false
+    },
+    {
+      "type": "security",
+      "section": "Security",
+      "hidden": false
+    }
+  ],
+  "packages": {
+    ".": {},
+    "helm/argocd": {
+      "releaseType": "helm"
+    },
+    "helm/cluster_setup": {
+      "releaseType": "helm"
+    },
+    "helm/configserver": {
+      "releaseType": "helm"
+    },
+    "helm/kafka": {
+      "releaseType": "helm"
+    },
+    "helm/template": {
+      "releaseType": "helm"
+    },
+    "helm/wahlrecht": {
+      "releaseType": "helm"
+    },
+    "helm/zookeeper": {
+      "releaseType": "helm"
+    }
+  }
+}
