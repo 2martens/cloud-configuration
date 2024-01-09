@@ -34,7 +34,6 @@ jobs:
         run: |
           mkdir $HOME/bin
           wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O $HOME/bin/yq && chmod +x $HOME/bin/yq
-          pwd && ls
           sed -i -r "s/(tag:).*/\1\ \"${{ inputs.image_version }}\"/" argocd/${{ inputs.application }}/${{ inputs.target }}/overwrite_values.yaml
           cd argocd/${{ inputs.application }}/${{ inputs.target }} && $HOME/bin/yq '. *= load("overwrite_values.yaml")' default_values.yaml > values.yaml
       - name: setup git config
