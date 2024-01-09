@@ -73,7 +73,7 @@ applications:
     project: default
     targetRevision: main
     namespace: timetable
-    createNamespace: false
+    createNamespace: true
     repoURL: https://git.2martens.de/2martens/cloud-configuration.git
     syncWave: 5
 
