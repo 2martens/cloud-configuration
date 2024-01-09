@@ -12,11 +12,11 @@ rules:
       - configmaps
     apiGroups:
       - ""
-{{- end }}
-{{- end }}
+{{ end }}
+{{ end }}
 ---
 {{- define "template.leaderRoleBinding" -}}
-{{- if .Values.leaderElection.enabled -}}
+{{- if .Values.leaderElection.enabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
