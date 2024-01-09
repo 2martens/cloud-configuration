@@ -3,3 +3,4 @@ projectId: "21153839-1630-4f55-9803-0220e3af458d"
 allowedNamespaces:
   - name: wahlrecht
   - name: hcloud
+  - name: timetable
