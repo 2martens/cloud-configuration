@@ -22,6 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: 2martens/cloud-configuration
+          ref: main
+          token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
       - name: Update image version
         run: |
           mkdir $HOME/bin
@@ -29,6 +33,10 @@ jobs:
           pwd && ls
           sed -i -r "s/(tag:).*/\1\ \"${{ inputs.image_version }}\"/" argocd/${{ inputs.application }}/${{ inputs.target }}/overwrite_values.yaml
           cd argocd/${{ inputs.application }}/${{ inputs.target }} && $HOME/bin/yq '. *= load("overwrite_values.yaml")' default_values.yaml > values.yaml
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
       - name: Save modified variable file
         run: |
           git add argocd/${{ inputs.application}}/${{ inputs.target }}/*
