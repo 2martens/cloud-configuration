@@ -48,7 +48,7 @@ application:
   profile: prod
   isSpring: true
   prefix: /config
-  repositoryPath: "https://git.2martens.de/2martens/{application}"
+  repositoryPath: "https://github.com/2martens/{application}"
   searchPath: module-server/src/main/resources/config
   kafka:
     host: kafka.kafka

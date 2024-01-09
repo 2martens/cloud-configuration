@@ -1,6 +1,7 @@
 image:
   tag: "0.1.21"
 application:
+  repositoryPath: "https://github.com/2martens/{application}"
   kafka:
     host: kafka.kafka
     port: 9092
