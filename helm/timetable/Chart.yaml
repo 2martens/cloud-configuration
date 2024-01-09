@@ -7,10 +7,10 @@ maintainers:
   - name: Jim Martens
     url: https://2martens.de
 sources:
-  - https://git.2martens.de/2martens/wahlrecht
+  - https://github.com/2martens/tsw-timetable
 dependencies:
   - name: template
-    version: 0.2.4
+    version: 0.3.3
     repository: file://../template
 annotations:
   artifacthub.io/images: |
