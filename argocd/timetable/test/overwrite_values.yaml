@@ -1,0 +1,54 @@
+image:
+  tag: "0.1.0"
+revisionHistoryLimit: 3
+ingress:
+  enabled: true
+  className: public
+  hosts:
+    - host: api.2martens.de
+      paths:
+        - path: /v1/formations/
+          pathType: Prefix
+        - path: /v1/routes/
+          pathType: Prefix
+        - path: /v1/timetables/
+          pathType: Prefix
+        - path: /v1/users/
+          pathType: Prefix
+        - path: /doc/v1/timetable/
+          pathType: Prefix
+        - path: /api-docs/v1/timetable/
+          pathType: Prefix
+  tls:
+    - secretName: timetable-tls
+      hosts:
+        - api.2martens.de
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+application:
+  configserver:
+    scheme: http
+    host: configserver.spring-support
+    port: 8888
+    prefix: /config
+  kafka:
+    host: kafka.kafka
+    port: 9092
+
+vault:
+  enabled: true
+  applicationName: timetable
+
+readinessProbe:
+  initialDelaySeconds: 70
+
+livenessProbe:
+  initialDelaySeconds: 70
+
+prometheus:
+  useCRDs: true

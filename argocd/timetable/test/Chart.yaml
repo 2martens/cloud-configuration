@@ -1,0 +1,8 @@
+apiVersion: v2
+name: timetable
+version: 0.1.0
+type: application
+dependencies:
+  - name: template
+    version: 0.2.4
+    repository: https://repo.2martens.de/charts

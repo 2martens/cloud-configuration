@@ -5,6 +5,7 @@
   "helm/configserver": "0.1.22",
   "helm/kafka": "0.1.7",
   "helm/template": "0.2.4",
+  "helm/timetable": "0.0.1",
   "helm/wahlrecht": "0.2.0",
   "helm/zookeeper": "0.1.5"
 }

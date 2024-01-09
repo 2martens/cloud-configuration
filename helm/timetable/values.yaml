@@ -1,0 +1,179 @@
+# Copy these values to your application chart completely and then modify those bits where
+# the default for your application differs. The image.repository is a prime candidate for that.
+
+replicaCount: 1
+# revisionHistoryLimit: can be configured to reduce/increase amount of stored replica sets for rollback
+revisionHistoryLimit: 10
+image:
+  repository: 2martens/timetable
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is latest
+  tag: ""
+# If image is not accessible for Kubernetes without authentication, configure required secrets here
+# will be added verbatim to imagePullSecrets in deployment pod template
+imagePullSecrets: []
+# Overrides the name being used in, for example, annotations
+# by default it is the chart name
+nameOverride: ""
+# Overrides the name being used for the name of Kubernetes resources
+# by default release name if it contains the chart name, otherwise releaseName-chartName
+fullnameOverride: ""
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+# Configure annotations for the pod, will be added verbatim to key annotations in pod metadata
+podAnnotations: {}
+# Configure the security context of the application pod
+podSecurityContext: {}
+# fsGroup: 2000
+
+# Configure security context of the application container
+securityContext: {}
+#   capabilities:
+#     drop:
+#     - ALL
+#   readOnlyRootFilesystem: true
+#   runAsNonRoot: true
+#   runAsUser: 1000
+
+application:
+  port: 12100
+  actuatorPort: 12101
+  namespace: template # update to match the desired namespace
+  profile: prod
+  isSpring: true
+  keycloak:
+    url: https://id.2martens.de
+    realm: 2martens
+  configserver:
+    scheme: http
+    host: configserver
+    port: 8888
+    prefix: /config
+  kafka:
+    host: kafka
+    port: 9092
+prometheus:
+  enabled: true
+  # only enable if you have the Prometheus operator installed, otherwise it will fail due to missing CRDs
+  useCRDs: false
+  # namespace: the namespace of the Prometheus installation
+  # the value is templated
+  namespace:
+  # name of helm release or argo cd application
+  releaseName:
+# Overwrite with application specific environment variables
+# Each item has key and value, where the value is parsed as a template
+environment:
+  - name: PORT
+    value: "{{ .Values.application.port }}"
+  - name: ACTUATOR_PORT
+    value: "{{ .Values.application.actuatorPort }}"
+  - name: KEYCLOAK_URL
+    value: "{{ .Values.application.keycloak.url }}"
+  - name: KEYCLOAK_REALM
+    value: "{{ .Values.application.keycloak.realm }}"
+  - name: CONFIGSERVER_SCHEME
+    value: "{{ .Values.application.configserver.scheme }}"
+  - name: CONFIGSERVER_HOST
+    value: "{{ .Values.application.configserver.host }}"
+  - name: CONFIGSERVER_PORT
+    value: "{{ .Values.application.configserver.port }}"
+  - name: CONFIGSERVER_PREFIX
+    value: "{{ .Values.application.configserver.prefix }}"
+  - name: KAFKA_HOST
+    value: "{{ .Values.application.kafka.host }}"
+  - name: KAFKA_PORT
+    value: "{{ .Values.application.kafka.port }}"
+enableServiceLinks: false
+# Contents of this object will be added to a Kubernetes secret data section and Base64 encoded
+# External secrets are not supported by this template
+secrets:
+  # Needs to be overwritten. Will be ignored if vault is enabled.
+  MONGODB_CONNECTION_STRING: ""
+  # Needs to be overwritten. Will be ignored if vault is enabled.
+  CLIENT_SECRET: ""
+# Configure the service
+service:
+  type: ClusterIP
+  # port is targeting the containerPort http, described by application.port
+  port: 12100
+  # actuatorPort is targeting the containerPort http-actuator, described by application.actuatorPort
+  # only used if application.isSpring=true
+  actuatorPort: 12101
+# Configure the liveness probe
+# Defaults fitting for Spring Boot application that has livenessProbe enabled
+livenessProbe:
+  enabled: true
+  path: /actuator/health/liveness
+  port: http-actuator
+  initialDelaySeconds: 30
+  periodSeconds: 120
+# Configure the readiness probe
+# Defaults fitting for Spring Boot application that has readinessProbe enabled
+readinessProbe:
+  enabled: true
+  path: /actuator/health/readiness
+  port: http-actuator
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  # Allows you to specify the number of seconds the application can take to answer readinessProbe
+  # before failure is assumed by Kubernetes
+  timeoutSeconds: 1
+# Configure ingress if desired (exposing app beyond the boundaries of the cluster)
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: chart-example-tls
+      hosts:
+        - chart-example.local
+resources: {}
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
+
+# Configure autoscaling
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+vault:
+  # If enabled, no ordinary secret resource will be created, even if secrets value is populated.
+  enabled: false
+  # name of the Vault secrets applications
+  applicationName: ""
+  # id of the organization in Vault secrets
+  organizationId: ""
+  # id of the project in Vault secrets
+  projectId: ""
+  # if not provided, vault-secrets-operator-system will be used
+  operatorNamespace: ""
+# Configure nodeSelector, contents will be added verbatim to key nodeSelector in deployment pod template
+nodeSelector: {}
+# Configure tolerations, contents will be added verbatim to key tolerations in deployment pod template
+tolerations: []
+# Configure affinity, contents will be added verbatim to key affinity in deployment pod template
+affinity: {}
+# podSpec: will be added at the bottom of the pod template in the deployment
+podSpec: {}
+# containerSpec: will be added at the bottom of the container specification in the pod template
+containerSpec: {}

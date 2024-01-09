@@ -52,6 +52,9 @@
     "helm/template": {
       "releaseType": "helm"
     },
+    "helm/timetable": {
+      "releaseType": "helm"
+    },
     "helm/wahlrecht": {
       "releaseType": "helm"
     },
