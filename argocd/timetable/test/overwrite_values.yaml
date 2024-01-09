@@ -11,6 +11,8 @@ ingress:
           pathType: Prefix
         - path: /v1/routes/
           pathType: Prefix
+        - path: /v1/stations/
+          pathType: Prefix
         - path: /v1/timetables/
           pathType: Prefix
         - path: /v1/users/
