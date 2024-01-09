@@ -1,0 +1,33 @@
+{{- define "template.leaderRole" -}}
+{{- if .Values.leaderElection.enabled -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: leader-role
+  namespace: {{ .Release.Namespace }}
+rules:
+  - verbs:
+      - watch
+    resources:
+      - configmaps
+    apiGroups:
+      - ""
+{{- end }}
+{{- end }}
+---
+{{- define "template.leaderRoleBinding" -}}
+{{- if .Values.leaderElection.enabled -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: leader-role-binding
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  name: {{ include "template.fullname" . }}
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "template.serviceAccountName" . }}
+{{- end }}
+{{- end }}
