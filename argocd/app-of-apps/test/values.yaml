@@ -4,56 +4,56 @@ applications:
     targetRevision: main
     namespace: hcloud
     createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 1
   - name: vso-crds
     project: default
     targetRevision: main
     namespace: hcloud
     createNamespace: true
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: -1
   - name: configserver
     project: default
     targetRevision: main
     namespace: spring-support
     createNamespace: true
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 4
   - name: kafka
     project: default
     targetRevision: main
     namespace: kafka
     createNamespace: true
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 3
   - name: zookeeper
     project: default
     targetRevision: main
     namespace: kafka
     createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 3
   - name: wahlrecht
     project: default
     targetRevision: main
     namespace: wahlrecht
     createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 5
   - name: vault-secrets-operator
     project: default
     targetRevision: main
     namespace: vault-secrets-operator-system
     createNamespace: true
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 0
   - name: prometheus
     project: default
     targetRevision: main
     namespace: observability
     createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     serverSideApply: true
     syncWave: 2
     ignoreDifferences:
@@ -67,14 +67,14 @@ applications:
     targetRevision: main
     namespace: observability
     createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 2
   - name: timetable
     project: default
     targetRevision: main
     namespace: timetable
     createNamespace: true
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 5
 
 overall:
