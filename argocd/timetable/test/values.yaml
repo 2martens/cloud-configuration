@@ -145,7 +145,7 @@ ingress:
           pathType: Prefix
         - path: /doc/v1/timetable/
           pathType: Prefix
-        - path: /api-docs/v1/timetable/
+        - path: /api-docs/v1/timetable
           pathType: Prefix
   tls:
     - secretName: timetable-tls
