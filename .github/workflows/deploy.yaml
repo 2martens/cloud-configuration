@@ -1,0 +1,35 @@
+name: Deploy
+on:
+  workflow_call:
+    inputs:
+      application:
+        description: Name of the path/application to deploy
+        type: string
+        required: true
+      image_version:
+        description: Docker image tag of the application to deploy
+        type: string
+        required: true
+      target:
+        description: Target overlay of deployment
+        type: string
+        required: true
+permissions:
+  contents: write
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update image version
+        run: |
+          mkdir $HOME/bin
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O $HOME/bin/yq && chmod +x $HOME/bin/yq
+          sed -i -r "s/(tag:).*/\1\ \"${{ inputs.image_version }}\"/" argocd/${{ inputs.application}}/${{ inputs.target }}/overwrite_values.yaml
+          cd argocd/${{ inputs.application}}/${{ inputs.target }} && $HOME/bin/yq '. *= load("overwrite_values.yaml")' default_values.yaml > values.yaml
+      - name: Save modified variable file
+        run: |
+          git add argocd/${{ inputs.application}}/${{ inputs.target }}/*
+          git diff-index --quiet HEAD || git commit -m "chore: Change ${{ inputs.application}}_image_version to ${{ inputs.image_version }}"
+          git push
