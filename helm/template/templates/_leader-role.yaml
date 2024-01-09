@@ -7,9 +7,23 @@ metadata:
   namespace: {{ .Release.Namespace }}
 rules:
   - verbs:
+      - get
       - watch
+      - list
+      - create
+      - update
+      - patch
+      - delete
     resources:
       - configmaps
+    apiGroups:
+      - ""
+  - verbs:
+      - get
+      - watch
+      - list
+    resources:
+      - pods
     apiGroups:
       - ""
 {{ end }}
@@ -23,7 +37,7 @@ metadata:
   name: leader-role-binding
   namespace: {{ .Release.Namespace }}
 roleRef:
-  name: {{ include "template.fullname" . }}
+  name: leader-role
   apiGroup: rbac.authorization.k8s.io
   kind: Role
 subjects:
