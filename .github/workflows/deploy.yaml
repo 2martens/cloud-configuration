@@ -31,5 +31,5 @@ jobs:
       - name: Save modified variable file
         run: |
           git add argocd/${{ inputs.application}}/${{ inputs.target }}/*
-          git diff-index --quiet HEAD || git commit -m "chore: Change ${{ inputs.application}}_image_version to ${{ inputs.image_version }}"
+          git diff-index --quiet HEAD || git commit -m "chore: Change ${{ inputs.application }}_image_version to ${{ inputs.image_version }}"
           git push
