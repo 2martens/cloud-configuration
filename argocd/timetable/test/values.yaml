@@ -173,7 +173,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 leaderElection:
-  enabled: false
+  enabled: true
 vault:
   # If enabled, no ordinary secret resource will be created, even if secrets value is populated.
   enabled: true
