@@ -6,7 +6,7 @@ replicaCount: 1
 revisionHistoryLimit: 3
 image:
   repository: 2martens/timetable
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is latest
   tag: "0.1.0-SNAPSHOT"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here

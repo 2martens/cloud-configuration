@@ -1,5 +1,6 @@
 image:
   tag: "0.1.0-SNAPSHOT"
+  pullPolicy: Always
 revisionHistoryLimit: 3
 ingress:
   enabled: true
