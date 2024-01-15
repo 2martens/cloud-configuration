@@ -76,6 +76,8 @@ environment:
     value: PLAINTEXT
   - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
     value: "1"
+  - name: KAFKA_LOG_RETENTION_MINUTES
+    value: "10"
 enableServiceLinks: false
 # Contents of this object will be added to a Kubernetes secret data section and Base64 encoded
 # External secrets are not supported by this template
