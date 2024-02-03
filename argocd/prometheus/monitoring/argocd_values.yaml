@@ -31,7 +31,7 @@ kube-prometheus-stack:
       enabled: false
   kubeControllerManager:
     endpoints:
-      - 10.0.0.4
+      - 10.0.0.7
   kubeScheduler:
     endpoints:
-      - 10.0.0.4
+      - 10.0.0.7
