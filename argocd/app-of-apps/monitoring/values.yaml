@@ -1,5 +1,5 @@
 applications:
-  - name: hcloud-csi
+  - name: hcloud-csi-ccm
     project: default
     targetRevision: main
     namespace: hcloud
