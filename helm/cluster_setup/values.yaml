@@ -17,5 +17,6 @@ thanos:
   awsRegion: "eu-central-1"
   accessKey: ""
   secretKey: ""
+  secretNamespaces: []
 cilium:
   enabled: false
