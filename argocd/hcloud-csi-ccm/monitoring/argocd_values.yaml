@@ -1,0 +1,23 @@
+hcloud-cloud-controller-manager:
+  monitoring:
+    podMonitor:
+      enabled: true
+  networking:
+    enabled: false
+    clusterCIDR: 10.1.0.0/16
+
+hcloud-csi:
+  storageClasses:
+  - name: hcloud-volumes
+    defaultStorageClass: true
+    reclaimPolicy: Retain
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: observability
+  node:
+    kubeletDir: /var/snap/microk8s/common/var/lib/kubelet
+vault:
+  enabled: true
+  applicationName: hcloud

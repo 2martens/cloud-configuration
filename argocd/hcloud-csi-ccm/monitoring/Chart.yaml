@@ -1,0 +1,12 @@
+apiVersion: v2
+name: hcloud-csi-ccm
+description: Installs the HCloud CSI driver
+type: application
+version: 0.1.0
+dependencies:
+  - name: hcloud-csi
+    version: 2.6.0
+    repository: https://charts.hetzner.cloud
+  - name: hcloud-cloud-controller-manager
+    version: v1.18.0
+    repository: https://charts.hetzner.cloud
