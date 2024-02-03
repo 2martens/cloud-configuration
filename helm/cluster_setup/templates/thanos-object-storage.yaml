@@ -15,11 +15,11 @@ metadata:
   namespace: {{ .name | default "observability" }}
   name: thanos-object-storage-config
   labels:
-    {{- include "template.labels" . | nindent 4 }}
+    {{- include "template.labels" $ | nindent 4 }}
   annotations:
-    {{- include "template.annotations" . | nindent 4 }}
+    {{- include "template.annotations" $ | nindent 4 }}
 data:
   thanos.yaml: |-
-    {{ tpl ($.Files.Get "thanos.yaml") . | b64enc }}
+    {{ tpl ($.Files.Get "thanos.yaml") $ | b64enc }}
 {{- end }}
 {{- end }}
