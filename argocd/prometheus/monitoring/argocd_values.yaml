@@ -35,3 +35,6 @@ kube-prometheus-stack:
   kubeScheduler:
     endpoints:
       - 10.0.0.7
+storage:
+  handles:
+    - "100341703"
