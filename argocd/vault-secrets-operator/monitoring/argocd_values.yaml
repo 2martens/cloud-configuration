@@ -1,0 +1,4 @@
+organizationId: "2015ed6d-3c84-48d5-9aca-99b0034b8b5a"
+projectId: "21153839-1630-4f55-9803-0220e3af458d"
+allowedNamespaces:
+  - name: hcloud

@@ -1,0 +1,17 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: HCPAuth
+metadata:
+  name: hcp-auth
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "template.labels" . | nindent 4 }}
+spec:
+  organizationID: {{ .Values.organizationId }}
+  projectID: {{ .Values.projectId }}
+  allowedNamespaces:
+    - {{ .Release.Namespace }}
+    {{- range .Values.allowedNamespaces }}
+    - {{ .name }}
+    {{- end }}
+  servicePrincipal:
+    secretRef: vault-service-principal
