@@ -14,6 +14,18 @@ kube-prometheus-stack:
     enabled: true
   grafana:
     enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: default
+      annotations:
+        cert-manager.io/cluster-issuer: lets-encrypt
+        ingress.kubernetes.io/rewrite-target: /
+      hosts:
+        - grafana.k8s.monitoring.2martens.de
+      tls:
+        - secretName: grafana-general-tls
+          hosts:
+            - grafana.k8s.monitoring.2martens.de
 
   prometheus:
     prometheusSpec:
