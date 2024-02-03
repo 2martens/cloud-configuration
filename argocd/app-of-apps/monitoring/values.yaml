@@ -4,28 +4,28 @@ applications:
     targetRevision: main
     namespace: hcloud
     createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 1
   - name: vso-crds
     project: default
     targetRevision: main
     namespace: hcloud
     createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: -1
   - name: vault-secrets-operator
     project: default
     targetRevision: main
     namespace: vault-secrets-operator-system
     createNamespace: true
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 0
   - name: prometheus
     project: default
     targetRevision: main
     namespace: observability
     createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     serverSideApply: true
     syncWave: 2
   - name: prometheus-adapter
@@ -33,14 +33,14 @@ applications:
     targetRevision: main
     namespace: observability
     createNamespace: false
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 2
   - name: thanos
     project: default
     targetRevision: main
     namespace: thanos
     createNamespace: true
-    repoURL: https://git.2martens.de/2martens/cloud-configuration.git
+    repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 2
 
 overall:
