@@ -57,7 +57,7 @@ spec:
           valueFrom:
             secretKeyRef:
               key: thanos.yaml
-              name: thanos-objectstorage
+              name: thanos-object-storage-config
         - name: HOST_IP_ADDRESS
           valueFrom:
             fieldRef:
