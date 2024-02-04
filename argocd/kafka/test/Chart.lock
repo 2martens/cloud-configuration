@@ -1,9 +1,9 @@
 dependencies:
 - name: template
   repository: https://repo.2martens.de/charts
-  version: 0.4.1
+  version: 0.5.0
 - name: prometheus-kafka-exporter
   repository: https://prometheus-community.github.io/helm-charts
   version: 2.8.0
-digest: sha256:3586c02de766ac74dc5faabf55d4ecb4523155f775c5e330837c943725283ddf
-generated: "2024-02-04T22:57:32.440725+01:00"
+digest: sha256:a1faec58c7a73a8a5585ec2547475590726da568a13de767a0f3d7fc9c2f0aae
+generated: "2024-02-04T23:11:27.592952+01:00"

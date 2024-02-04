@@ -170,6 +170,15 @@ nodeSelector: {}
 tolerations: []
 # Configure affinity, contents will be added verbatim to key affinity in deployment pod template
 affinity: {}
+# volumes: configure volumes
+volumes:
+  - name: kafka
+    emptyDir:
+      medium: Memory
+# volumeMounts: will be mounted in container
+volumeMounts:
+  - mountPath: /etc/kafka
+    name: kafka
 # podSpec: will be added at the bottom of the pod template in the deployment
 podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template

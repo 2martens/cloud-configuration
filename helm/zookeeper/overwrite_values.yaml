@@ -18,3 +18,10 @@ environment:
     value: "{{ .Values.application.port }}"
   - name: ZOOKEEPER_TICK_TIME
     value: "{{ .Values.application.tickTime }}"
+volumes:
+  - name: kafka
+    emptyDir:
+      medium: Memory
+volumeMounts:
+  - mountPath: /etc/kafka
+    name: kafka

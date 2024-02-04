@@ -30,3 +30,10 @@ environment:
     value: "1"
 prometheus:
   enabled: false
+volumes:
+  - name: kafka
+    emptyDir:
+      medium: Memory
+volumeMounts:
+  - mountPath: /etc/kafka
+    name: kafka
