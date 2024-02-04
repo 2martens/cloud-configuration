@@ -33,7 +33,13 @@ podSecurityContext: {}
 # fsGroup: 2000
 
 # Configure security context of the application container
-securityContext: {}
+securityContext:
+  seccompProfile:
+    type: RuntimeDefault
+  capabilities:
+    drop: ['ALL']
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
 #   capabilities:
 #     drop:
 #     - ALL

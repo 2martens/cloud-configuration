@@ -2,7 +2,7 @@ apiVersion: v2
 name: timetable
 description: Installs the Timetable backend into the Kubernetes cluster
 type: application
-version: 0.1.0
+version: 0.2.0
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
@@ -10,7 +10,7 @@ sources:
   - https://github.com/2martens/tsw-timetable
 dependencies:
   - name: template
-    version: 0.3.3
+    version: 0.4.0
     repository: file://../template
 annotations:
   artifacthub.io/images: |
@@ -20,8 +20,8 @@ annotations:
         - linux/amd64
         - linux/arm64
   artifacthub.io/changes: |
-    - kind: added
-      description: Added timetable chart
+    - kind: changed
+      description: Use restrictive security context by default
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
