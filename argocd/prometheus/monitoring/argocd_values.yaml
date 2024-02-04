@@ -39,8 +39,17 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: 10Gi
+      thanos:
+        objectStorageConfig:
+          existingSecret:
+            key: thanos.yaml
+            name: thanos-object-storage-config
     ingress:
       enabled: false
+    thanosServiceMonitor:
+      enabled: true
+    thanosService:
+      enabled: true
   kubeControllerManager:
     endpoints:
       - 10.0.0.7
