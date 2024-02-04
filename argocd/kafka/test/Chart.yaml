@@ -4,7 +4,7 @@ version: 0.1.0
 type: application
 dependencies:
   - name: template
-    version: 0.4.0
+    version: 0.4.1
     repository: https://repo.2martens.de/charts
   - name: prometheus-kafka-exporter
     version: 2.8.0
