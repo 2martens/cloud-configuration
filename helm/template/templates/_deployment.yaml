@@ -58,6 +58,11 @@ spec:
             - name: {{ .name }}
               value: {{ tpl (quote .value) $ }}
           {{- end }}
+          {{- if .Values.application.isSpring }}
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.application.port }}
@@ -110,6 +115,12 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.application.isSpring }}
+      volumes:
+        - name: tmp
+          emptyDir:
+            medium: Memory
       {{- end }}
       {{- with .Values.podSpec }}
       {{- toYaml . | nindent 6 }}
