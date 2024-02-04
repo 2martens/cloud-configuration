@@ -49,7 +49,7 @@ spec:
         - --endpoint=dnssrv+_grpc._tcp.thanos-store.thanos.svc.cluster.local:10901
         - --endpoint=dnssrv+_grpc._tcp.thanos-receive-ingestor-default.thanos.svc.cluster.local:10901
         {{- range .Values.clusters }}
-        - "--endpoint=_grpc._tcp.{{ .thanosEndpoint }}:{{ .thanosPort }}"
+        - "--endpoint={{ .thanosEndpoint }}:{{ .thanosPort }}"
         {{- end }}
         - --query.auto-downsampling
         env:
