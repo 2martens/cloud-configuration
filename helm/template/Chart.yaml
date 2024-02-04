@@ -2,7 +2,7 @@ apiVersion: v2
 name: template
 description: A Helm library chart containing common templates, keeping application templates short
 type: library
-version: 0.4.1
+version: 0.5.0
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
@@ -10,8 +10,8 @@ sources:
   - https://github.com/2martens/cloud-configuration
 annotations:
   artifacthub.io/changes: |
-    - kind: fixed
-      description: Provide volume for tmp directory
+    - kind: added
+      description: Add ability to configure volumes/volume mounts
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
