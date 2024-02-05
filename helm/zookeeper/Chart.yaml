@@ -2,7 +2,7 @@ apiVersion: v2
 name: zookeeper
 description: Simple Zookeeper chart to get started
 type: application
-version: 0.2.1
+version: 0.2.2
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
@@ -13,7 +13,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: fixed
-      description: Mount writable volume for /etc/kafka
+      description: Mount writable volume for /var/log/kafka
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc

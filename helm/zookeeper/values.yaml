@@ -155,10 +155,15 @@ volumes:
   - name: kafka
     emptyDir:
       medium: Memory
+  - name: log
+    emptyDir:
+      medium: Memory
 # volumeMounts: will be mounted in container
 volumeMounts:
   - mountPath: /etc/kafka
     name: kafka
+  - mountPath: /var/log/kafka
+    name: log
 # podSpec: will be added at the bottom of the pod template in the deployment
 podSpec: {}
 # containerSpec: will be added at the bottom of the container specification in the pod template
