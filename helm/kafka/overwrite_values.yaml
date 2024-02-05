@@ -34,6 +34,11 @@ volumes:
   - name: kafka
     emptyDir:
       medium: Memory
+  - name: log
+    emptyDir:
+      medium: Memory
 volumeMounts:
   - mountPath: /etc/kafka
     name: kafka
+  - mountPath: /var/log/kafka
+    name: log
