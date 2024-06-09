@@ -1,11 +1,11 @@
 {
-  ".": "0.0.1",
-  "helm/argocd": "0.2.3",
-  "helm/cluster_setup": "0.4.1",
-  "helm/configserver": "0.1.22",
-  "helm/kafka": "0.1.7",
-  "helm/template": "0.2.4",
-  "helm/timetable": "0.0.1",
-  "helm/wahlrecht": "0.2.0",
-  "helm/zookeeper": "0.1.5"
+  ".": "0.1.0",
+  "helm/argocd": "0.2.4",
+  "helm/cluster_setup": "0.5.0",
+  "helm/configserver": "0.1.23",
+  "helm/kafka": "0.1.8",
+  "helm/template": "0.3.0",
+  "helm/timetable": "0.1.0",
+  "helm/wahlrecht": "0.2.1",
+  "helm/zookeeper": "0.1.6"
 }
