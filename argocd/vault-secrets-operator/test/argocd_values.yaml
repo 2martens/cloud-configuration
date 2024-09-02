@@ -4,3 +4,4 @@ allowedNamespaces:
   - name: wahlrecht
   - name: hcloud
   - name: timetable
+  - name: routing

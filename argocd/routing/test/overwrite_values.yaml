@@ -1,0 +1,47 @@
+image:
+  tag: "0.1.0-SNAPSHOT"
+  pullPolicy: Always
+revisionHistoryLimit: 3
+ingress:
+  enabled: true
+  className: public
+  hosts:
+    - host: api.2martens.de
+      paths:
+        - path: /doc/v1/routing/
+          pathType: Prefix
+        - path: /api-docs/v1/routing
+          pathType: Prefix
+  tls:
+    - secretName: routing-tls
+      hosts:
+        - api.2martens.de
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+application:
+  configserver:
+    scheme: http
+    host: configserver.spring-support
+    port: 8888
+    prefix: /config
+
+vault:
+  enabled: true
+  applicationName: routing
+
+readinessProbe:
+  initialDelaySeconds: 70
+
+livenessProbe:
+  initialDelaySeconds: 70
+
+prometheus:
+  useCRDs: true
+
+leaderElection:
+  enabled: false
