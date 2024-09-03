@@ -8,7 +8,7 @@ image:
   repository: hbt/routing
   pullPolicy: Always
   # Overrides the image tag whose default is latest
-  tag: "0.1.0-SNAPSHOT"
+  tag: "latest"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here
 # will be added verbatim to imagePullSecrets in deployment pod template
 imagePullSecrets: []
