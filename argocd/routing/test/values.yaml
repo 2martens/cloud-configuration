@@ -5,7 +5,7 @@ replicaCount: 1
 # revisionHistoryLimit: can be configured to reduce/increase amount of stored replica sets for rollback
 revisionHistoryLimit: 3
 image:
-  repository: hbt/routing
+  repository: 313329311652.dkr.ecr.eu-central-1.amazonaws.com/hbt/routing
   pullPolicy: Always
   # Overrides the image tag whose default is latest
   tag: "latest"
