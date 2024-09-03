@@ -1,6 +1,8 @@
 image:
   tag: "latest"
   pullPolicy: Always
+imagePullSecrets:
+  - name: ecrcred
 revisionHistoryLimit: 3
 ingress:
   enabled: true

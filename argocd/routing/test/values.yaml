@@ -11,7 +11,8 @@ image:
   tag: "latest"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here
 # will be added verbatim to imagePullSecrets in deployment pod template
-imagePullSecrets: []
+imagePullSecrets:
+  - name: ecrcred
 # Overrides the name being used in, for example, annotations
 # by default it is the chart name
 nameOverride: ""
