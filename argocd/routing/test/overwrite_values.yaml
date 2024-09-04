@@ -33,7 +33,7 @@ application:
     prefix: /config
 
 vault:
-  enabled: true
+  enabled: false
   applicationName: routing
 
 readinessProbe:
