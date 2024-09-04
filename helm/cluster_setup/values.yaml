@@ -5,6 +5,14 @@ vault:
   clientSecret: ""
   # creates each of the namespaces
   applicationNamespaces: []
+ecr:
+  enabled: false
+  account: ""
+  accessKey:
+    id: ""
+    secret: ""
+  repository: ""
+  applicationNamespaces: []
 hcloud:
   enabled: false
   token: ""
