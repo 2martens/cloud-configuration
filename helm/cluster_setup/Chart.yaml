@@ -1,6 +1,6 @@
 apiVersion: v2
 name: cluster_setup
-version: 0.6.2
+version: 0.6.3
 type: application
 description: "Initial cluster setup"
 maintainers:
@@ -9,7 +9,7 @@ maintainers:
 annotations:
   artifacthub.io/changes: |
     - kind: fixed
-      description: Fixed missing namespace values
+      description: Use single-line command
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
