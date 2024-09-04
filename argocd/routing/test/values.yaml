@@ -167,7 +167,7 @@ leaderElection:
   enabled: false
 vault:
   # If enabled, no ordinary secret resource will be created, even if secrets value is populated.
-  enabled: false
+  enabled: true
   # name of the Vault secrets applications
   applicationName: "routing"
   # id of the organization in Vault secrets
