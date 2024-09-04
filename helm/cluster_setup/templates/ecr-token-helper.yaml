@@ -1,5 +1,5 @@
 {{- if .Values.ecr.enabled -}}
-{{- range .Values.ecr.applicationNamespaces }}
+{{- range .Values.ecr.applicationNamespaces -}}
 ---
 apiVersion: v1
 kind: Namespace
@@ -12,6 +12,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: ecr-token-helper
+  namespace: {{ .name }}
   labels:
     {{- include "template.labels" $ | nindent 4 }}
 rules:
@@ -30,6 +31,7 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: ecr-token-helper
+  namespace: {{ .name }}
   labels:
     {{- include "template.labels" $ | nindent 4 }}
 subjects:
@@ -44,13 +46,28 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: sa-ecr-token-helper
+  namespace: {{ .name }}
   labels:
     {{- include "template.labels" $ | nindent 4 }}
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: aws-credentials
+  namespace: {{ .name }}
+  labels:
+    {{- include "template.labels" $ | nindent 4 }}
+data:
+  AWS_ACCESS_KEY_ID: {{ $.Values.ecr.accessKey.id | b64enc }}
+  AWS_SECRET_ACCESS_KEY: {{ $.Values.ecr.accessKey.secret | b64enc }}
+  ACCOUNT: {{ $.Values.ecr.account | b64enc }}
 ---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: ecr-token-helper
+  namespace: {{ .name }}
   labels:
     {{- include "template.labels" $ | nindent 4 }}
 spec:
@@ -75,18 +92,15 @@ spec:
                   --namespace={{ .name }}
                   kubectl patch serviceaccount default -p '{"imagePullSecrets":[{"name":"'$SECRET_NAME'"}]}' -n {{ .name }}
               env:
-                - name: AWS_SECRET_ACCESS_KEY
-                  value: {{- $.Values.ecr.accessKey.secret }}
-                - name: AWS_ACCESS_KEY_ID
-                  value: {{- $.Values.ecr.accessKey.id }}
-                - name: ACCOUNT
-                  value: {{- $.Values.ecr.account }}
                 - name: SECRET_NAME
                   value: 'ecrcred'
                 - name: REGION
                   value: eu-central-1
                 - name: ECR_REPOSITORY
                   value: {{ $.Values.ecr.repository }}
+              envFrom:
+                - secretRef:
+                    name: aws-credentials
               image: gtsopour/awscli-kubectl:latest
               imagePullPolicy: IfNotPresent
               name: ecr-token-helper
