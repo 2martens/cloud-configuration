@@ -10,7 +10,7 @@ sources:
   - https://github.com/HBTGmbH/hackathon-2024-kotlin
 dependencies:
   - name: template
-    version: 0.5.0
+    version: 0.5.1
     repository: file://../template
 annotations:
   artifacthub.io/images: |
