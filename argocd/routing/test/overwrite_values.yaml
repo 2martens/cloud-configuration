@@ -1,8 +1,7 @@
 image:
+  repository: public.ecr.aws/g0w8i4q6/hbt/routing
   tag: "latest"
   pullPolicy: Always
-imagePullSecrets:
-  - name: ecrcred
 revisionHistoryLimit: 3
 ingress:
   enabled: true

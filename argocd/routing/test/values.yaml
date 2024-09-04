@@ -5,14 +5,13 @@ replicaCount: 1
 # revisionHistoryLimit: can be configured to reduce/increase amount of stored replica sets for rollback
 revisionHistoryLimit: 3
 image:
-  repository: 313329311652.dkr.ecr.eu-central-1.amazonaws.com/hbt/routing
+  repository: public.ecr.aws/g0w8i4q6/hbt/routing
   pullPolicy: Always
   # Overrides the image tag whose default is latest
   tag: "latest"
 # If image is not accessible for Kubernetes without authentication, configure required secrets here
 # will be added verbatim to imagePullSecrets in deployment pod template
-imagePullSecrets:
-  - name: ecrcred
+imagePullSecrets: []
 # Overrides the name being used in, for example, annotations
 # by default it is the chart name
 nameOverride: ""
