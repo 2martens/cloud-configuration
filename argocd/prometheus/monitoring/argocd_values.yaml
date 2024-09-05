@@ -17,6 +17,8 @@ kube-prometheus-stack:
     enabled: true
     envFromSecret:
     grafana.ini:
+      server:
+        root_url: https://grafana.k8s.monitoring.2martens.de
       auth.generic_oauth:
         enabled: true
         name: Keycloak-OAuth
