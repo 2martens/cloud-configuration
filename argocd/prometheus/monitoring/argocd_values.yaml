@@ -15,7 +15,7 @@ kube-prometheus-stack:
     enabled: true
   grafana:
     enabled: true
-    envFromSecret:
+    envFromSecret: prometheus
     grafana.ini:
       server:
         root_url: https://grafana.k8s.monitoring.2martens.de
