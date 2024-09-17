@@ -138,6 +138,8 @@ ingress:
           pathType: Prefix
         - path: /api-docs/v1/routing
           pathType: Prefix
+        - path: /gti/
+          pathType: Prefix
   tls:
     - secretName: routing-tls
       hosts:
