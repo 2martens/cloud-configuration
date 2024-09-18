@@ -15,7 +15,7 @@ ingress:
           pathType: Prefix
         - path: /gti/
           pathType: Prefix
-        - path: /v1/route/
+        - path: /v1/chat/
           pathType: Prefix
 
   tls:
