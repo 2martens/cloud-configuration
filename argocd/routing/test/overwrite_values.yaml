@@ -1,6 +1,6 @@
 image:
   repository: public.ecr.aws/g0w8i4q6/hbt/routing
-  tag: "0.0.51-SNAPSHOT"
+  tag: "0.0.53-SNAPSHOT"
   pullPolicy: Always
 revisionHistoryLimit: 3
 ingress:
