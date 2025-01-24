@@ -32,7 +32,7 @@ kube-prometheus-stack:
         auth_url: https://id.2martens.de/realms/2martens/protocol/openid-connect/auth
         token_url: https://id.2martens.de/realms/2martens/protocol/openid-connect/token
         api_url: https://id.2martens.de/realms/2martens/protocol/openid-connect/userinfo
-        role_attribute_path: contains(resource_access.grafana-oauth.roles[*], 'admin') && 'Admin' || contains(resource_access.grafana-oauth.roles[*], 'editor') && 'Editor' || 'Viewer'
+        role_attribute_path: contains(resource_access."grafana-oauth".roles, 'admin') && 'Admin' || contains(resource_access."grafana-oauth".roles, 'editor') && 'Editor' || 'Viewer'
     ingress:
       enabled: true
       ingressClassName: public
