@@ -1,0 +1,7 @@
+---
+keycloak_version: 26.1.0
+
+# Database Configuration Defaults
+keycloak_db_host: localhost
+keycloak_db_port: 3306
+keycloak_db_type: mariadb

@@ -14,3 +14,6 @@ repo ansible_host=shaula.uberspace.de ansible_python_interpreter=/usr/bin/python
 
 [applications]
 api-server ansible_host=49.13.77.70 ansible_python_interpreter=/usr/bin/python3
+
+[keycloak]
+keycloak-server ansible_host=monoceres.uberspace.de ansible_python_interpreter=/usr/bin/python

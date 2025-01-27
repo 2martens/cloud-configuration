@@ -1,0 +1,6 @@
+---
+- name: Print next steps
+  ansible.builtin.debug:
+    msg: "Login with the temp admin ({{ keycloak_temp_admin_user }}:{{ keycloak_temp_admin_password }}) and
+          create a proper admin user: https://{{ domain }}/admin/master/console"
+  when: bootstrap.changed

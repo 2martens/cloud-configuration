@@ -6,13 +6,13 @@ vault:
   # creates each of the namespaces
   applicationNamespaces: []
 ecr:
-  enabled: false
-  account: ""
   accessKey:
     id: ""
     secret: ""
-  repository: ""
+  account: ""
   applicationNamespaces: []
+  enabled: false
+  repository: ""
 hcloud:
   enabled: false
   token: ""

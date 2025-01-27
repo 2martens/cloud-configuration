@@ -1,0 +1,8 @@
+[program:keycloak]
+command=%(ENV_HOME)s/keycloak-current/bin/kc.sh start --optimized
+autostart=yes
+autorestart=yes
+
+[program:keycloak]
+# `startsecs` is set by Uberspace monitoring team, to prevent a broken service from looping
+startsecs=30

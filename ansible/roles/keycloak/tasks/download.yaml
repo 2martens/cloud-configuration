@@ -1,0 +1,20 @@
+---
+- name: Check if Keycloak is already downloaded
+  ansible.builtin.stat:
+    path: ~/keycloak-{{ keycloak_version }}
+  register: keycloak_dir
+
+- name: Download Keycloak
+  ansible.builtin.unarchive:
+    src: https://github.com/keycloak/keycloak/releases/download/{{ keycloak_version }}/keycloak-{{ keycloak_version }}.tar.gz
+    dest: ~
+    remote_src: true
+    creates: ~/keycloak-{{ keycloak_version }}
+  when: not keycloak_dir.stat.exists
+
+- name: Create symlink to current Keycloak version
+  ansible.builtin.file:
+    src: ~/keycloak-{{ keycloak_version }}
+    dest: ~/keycloak-current
+    state: link
+  when: not keycloak_dir.stat.exists

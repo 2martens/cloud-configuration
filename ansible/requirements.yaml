@@ -1,4 +1,8 @@
 ---
 collections:
-- community.docker
-- community.general
+  - community.docker
+  - community.general
+  - community.mysql
+  - ansible.posix
+  - hetzner.hcloud
+  - middleware_automation.keycloak

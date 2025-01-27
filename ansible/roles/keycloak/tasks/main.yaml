@@ -1,0 +1,11 @@
+---
+- name: Set up database
+  ansible.builtin.import_tasks: mysql.yaml
+- name: Download archive
+  ansible.builtin.import_tasks: download.yaml
+- name: Set up Keycloak
+  ansible.builtin.import_tasks: setup.yaml
+- name: Set up service
+  ansible.builtin.import_tasks: service.yaml
+- name: Print next steps
+  ansible.builtin.import_tasks: debug.yaml

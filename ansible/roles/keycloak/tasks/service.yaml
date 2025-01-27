@@ -1,0 +1,19 @@
+---
+- name: Create service directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/{{ ssh_user }}/etc/services.d
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "755"
+- name: Create Keycloak service
+  ansible.builtin.template:
+    src: etc/services.d/keycloak.ini.j2
+    dest: /home/{{ ssh_user }}/etc/services.d/keycloak.ini
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "644"
+- name: Start Keycloak
+  community.general.supervisorctl:
+    state: started
+    name: keycloak

@@ -1,0 +1,88 @@
+---
+- name: Check if service exists
+  ansible.builtin.stat:
+    path: /home/{{ ssh_user }}/etc/services.d/keycloak.ini.j2
+  register: service
+- name: Shutdown Keycloak
+  community.general.supervisorctl:
+    name: keycloak
+    state: stopped
+  when: service.stat.exists
+- name: Update configuration
+  block:
+    - name: Set db type
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?db='
+        line: "db={{ keycloak_db_type }}"
+    - name: Set db username
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?db-username='
+        line: "db-username={{ ssh_user }}"
+    - name: Set db password
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?db-password='
+        line: "db-password={{ keycloak_db_password }}"
+    - name: Set db host
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?db-url-host='
+        line: "db-url-host={{ keycloak_db_host }}"
+    - name: Set db port
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?db-url-port='
+        line: "db-url-port={{ keycloak_db_port }}"
+    - name: Set db name
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?db-url-database='
+        line: "db-url-database={{ ssh_user }}_keycloak"
+    - name: Enable http
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?http-enabled='
+        line: "http-enabled=true"
+    - name: Set ssl certificate
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?https-certificate-file='
+        line: "https-certificate-file=/home/{{ ssh_user }}/etc/certificates/{{ domain }}.crt"
+    - name: Set ssl certificate key
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?https-certificate-key-file='
+        line: "https-certificate-key-file=/home/{{ ssh_user }}/etc/certificates/{{ domain }}.key"
+    - name: Set proxy mode to edge
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?proxy='
+        line: "proxy=edge"
+    - name: Set proxy headers to xforwarded
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?proxy-headers='
+        line: "proxy-headers=xforwarded"
+    - name: Set hostname
+      ansible.builtin.lineinfile:
+        path: ~/keycloak-current/conf/keycloak.conf
+        regex: '#?hostname='
+        line: "hostname={{ domain }}"
+- name: Build application
+  ansible.builtin.command:
+    chdir: ~/keycloak-current/bin
+    cmd: ./kc.sh build
+  register: build
+  changed_when: true
+- name: Create temp admin
+  ansible.builtin.command:
+    chdir: ~/keycloak-current/bin
+    cmd: ./kc.sh bootstrap-admin user --username:env KEYCLOAK_ADMIN_USER --password:env KEYCLOAK_ADMIN_USER_PASSWORD --optimized
+  environment:
+    KEYCLOAK_ADMIN_USER: keycloakbootstrap
+    KEYCLOAK_ADMIN_USER_PASSWORD: "{{ keycloak_temp_admin_password }}"
+  when: database.changed
+  register: bootstrap
+  changed_when: true

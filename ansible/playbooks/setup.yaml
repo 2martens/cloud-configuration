@@ -52,3 +52,10 @@
   tags: springBoot
   roles:
     - spring_boot
+- name: Set up Keycloak
+  hosts: keycloak
+  gather_facts: false
+  remote_user: "{{ ssh_user }}"
+  tags: keycloak
+  roles:
+    - keycloak

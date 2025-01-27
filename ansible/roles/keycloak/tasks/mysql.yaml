@@ -1,0 +1,6 @@
+---
+- name: Create MySQL database
+  community.mysql.mysql_db:
+    name: "{{ ssh_user }}_keycloak"
+    state: present
+  register: database

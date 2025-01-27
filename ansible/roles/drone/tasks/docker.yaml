@@ -19,5 +19,5 @@
     group: root
     mode: "644"
 - name: Start drone docker container
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /etc/drone

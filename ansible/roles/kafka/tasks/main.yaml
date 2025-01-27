@@ -20,5 +20,5 @@
     state: present
     appends: true
 - name: Start kafka docker container
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /opt/kafka
