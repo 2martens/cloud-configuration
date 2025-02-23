@@ -1,0 +1,8 @@
+[program:payload]
+directory=%(ENV_HOME)s/payload
+command=npm run start
+autostart=true
+autorestart=true
+environment=NODE_ENV=production
+# `startsecs` is set by Uberspace monitoring team, to prevent a broken service from looping
+startsecs=30

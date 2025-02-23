@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ! -e ~/payload-new ]; then
+    echo "No-op: source does not exist."
+    exit 0
+fi
+
+DATE=$(date +"%Y-%m-%dT%H:%M:%S")
+supervisorctl stop payload
+[ -e ~/payload ] && mv ~/payload ~/payload-old-$DATE
+mv ~/payload-new ~/payload
+cd ~/payload
+npm install
+supervisorctl start payload

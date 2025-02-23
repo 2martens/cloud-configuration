@@ -33,25 +33,6 @@
   remote_user: "{{ ssh_user }}"
   roles:
     - gitea
-- name: Set up application server
-  hosts: applications
-  become: true
-  become_method: ansible.builtin.sudo
-  remote_user: "{{ ssh_user }}"
-  roles:
-    - drone_accessible
-    - docker
-    - nginx
-    - letsencrypt
-    - kafka
-- name: Set up Spring Boot applications
-  hosts: applications
-  become: true
-  become_method: ansible.builtin.sudo
-  remote_user: "{{ ssh_user }}"
-  tags: springBoot
-  roles:
-    - spring_boot
 - name: Set up Keycloak
   hosts: keycloak
   gather_facts: false
@@ -59,3 +40,10 @@
   tags: keycloak
   roles:
     - keycloak
+- name: Set up Payload
+  hosts: payload
+  gather_facts: false
+  remote_user: "{{ ssh_user }}"
+  tags: payload
+  roles:
+    - payload

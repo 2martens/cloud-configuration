@@ -11,6 +11,7 @@ gitea ansible_host=giteajim.uber.space ansible_python_interpreter=/usr/bin/pytho
 [frontend]
 wahlrecht-frontend ansible_host=gienah.uberspace.de ansible_python_interpreter=/usr/bin/python
 repo ansible_host=shaula.uberspace.de ansible_python_interpreter=/usr/bin/python
+payload ansible_host=caelum.uberspace.de ansible_python_interpreter=/usr/bin/python
 
 [applications]
 api-server ansible_host=49.13.77.70 ansible_python_interpreter=/usr/bin/python3

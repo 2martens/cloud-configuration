@@ -1,0 +1,26 @@
+---
+- name: Create service directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/{{ ssh_user }}/etc/services.d
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "755"
+- name: Create Payload service
+  ansible.builtin.template:
+    src: etc/services.d/payload.ini.j2
+    dest: /home/{{ ssh_user }}/etc/services.d/payload.ini
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "644"
+- name: Create update script
+  ansible.builtin.template:
+    src: bin/updatePayload.sh.j2
+    dest: /home/{{ ssh_user }}/bin/updatePayload.sh
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "744"
+- name: Set node version
+  ansible.builtin.command:
+    cmd: "uberspace tools use node {{ node_version }}"
+    cwd: /home/{{ ssh_user }}
