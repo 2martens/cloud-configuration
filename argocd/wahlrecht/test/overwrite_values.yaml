@@ -1,5 +1,5 @@
 image:
-  tag: "0.3.6"
+  tag: "0.3.7"
 revisionHistoryLimit: 3
 ingress:
   enabled: true
