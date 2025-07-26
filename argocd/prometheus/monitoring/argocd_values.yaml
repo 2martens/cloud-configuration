@@ -24,7 +24,6 @@ kube-prometheus-stack:
         name: Keycloak-OAuth
         allow_sign_up: true
         client_id: ${GF_AUTH_GENERIC_OAUTH_CLIENT_ID}
-        client_secret: ${GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}
         scopes: openid email profile offline_access roles
         email_attribute_path: email
         login_attribute_path: username
@@ -33,6 +32,8 @@ kube-prometheus-stack:
         token_url: https://id.2martens.de/realms/twomartens/protocol/openid-connect/token
         api_url: https://id.2martens.de/realms/twomartens/protocol/openid-connect/userinfo
         role_attribute_path: contains(resource_access."grafana-oauth".roles, 'admin') && 'Admin' || contains(resource_access."grafana-oauth".roles, 'editor') && 'Editor' || 'Viewer'
+        use_pkce: true
+        use_refresh_token: true
     ingress:
       enabled: true
       ingressClassName: public
