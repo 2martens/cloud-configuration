@@ -13,27 +13,27 @@ applications:
     createNamespace: true
     repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: -1
-  - name: configserver
-    project: default
-    targetRevision: main
-    namespace: spring-support
-    createNamespace: true
-    repoURL: https://github.com/2martens/cloud-configuration.git
-    syncWave: 4
-  - name: kafka
-    project: default
-    targetRevision: main
-    namespace: kafka
-    createNamespace: true
-    repoURL: https://github.com/2martens/cloud-configuration.git
-    syncWave: 3
-  - name: zookeeper
-    project: default
-    targetRevision: main
-    namespace: kafka
-    createNamespace: false
-    repoURL: https://github.com/2martens/cloud-configuration.git
-    syncWave: 3
+#  - name: configserver
+#    project: default
+#    targetRevision: main
+#    namespace: spring-support
+#    createNamespace: true
+#    repoURL: https://github.com/2martens/cloud-configuration.git
+#    syncWave: 4
+#  - name: kafka
+#    project: default
+#    targetRevision: main
+#    namespace: kafka
+#    createNamespace: true
+#    repoURL: https://github.com/2martens/cloud-configuration.git
+#    syncWave: 3
+#  - name: zookeeper
+#    project: default
+#    targetRevision: main
+#    namespace: kafka
+#    createNamespace: false
+#    repoURL: https://github.com/2martens/cloud-configuration.git
+#    syncWave: 3
   - name: wahlrecht
     project: default
     targetRevision: main
@@ -69,13 +69,13 @@ applications:
     createNamespace: false
     repoURL: https://github.com/2martens/cloud-configuration.git
     syncWave: 2
-  - name: routing
-    project: default
-    targetRevision: main
-    namespace: routing
-    createNamespace: false
-    repoURL: https://github.com/2martens/cloud-configuration.git
-    syncWave: 5
+#  - name: routing
+#    project: default
+#    targetRevision: main
+#    namespace: routing
+#    createNamespace: false
+#    repoURL: https://github.com/2martens/cloud-configuration.git
+#    syncWave: 5
 
 overall:
   destinationServer: https://kubernetes.default.svc
