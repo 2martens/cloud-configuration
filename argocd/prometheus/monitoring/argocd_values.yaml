@@ -29,9 +29,9 @@ kube-prometheus-stack:
         email_attribute_path: email
         login_attribute_path: username
         name_attribute_path: full_name
-        auth_url: https://id.2martens.de/realms/2martens/protocol/openid-connect/auth
-        token_url: https://id.2martens.de/realms/2martens/protocol/openid-connect/token
-        api_url: https://id.2martens.de/realms/2martens/protocol/openid-connect/userinfo
+        auth_url: https://id.2martens.de/realms/twomartens/protocol/openid-connect/auth
+        token_url: https://id.2martens.de/realms/twomartens/protocol/openid-connect/token
+        api_url: https://id.2martens.de/realms/twomartens/protocol/openid-connect/userinfo
         role_attribute_path: contains(resource_access."grafana-oauth".roles, 'admin') && 'Admin' || contains(resource_access."grafana-oauth".roles, 'editor') && 'Editor' || 'Viewer'
     ingress:
       enabled: true
