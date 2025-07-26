@@ -2,7 +2,7 @@ apiVersion: v2
 name: wahlrecht
 description: Installs the Wahlrecht API into the Kubernetes cluster
 type: application
-version: 0.3.0
+version: 0.3.1
 maintainers:
   - name: Jim Martens
     url: https://2martens.de
@@ -20,8 +20,8 @@ annotations:
         - linux/amd64
         - linux/arm64
   artifacthub.io/changes: |
-    - kind: changed
-      description: Use restrictive security context by default
+    - kind: fixed
+      description: Use working keycloak realm
   artifacthub.io/signKey: |
     fingerprint: F0F153B65BAD467201D7544E47393ABD1F96B7C8
     url: https://mafiasi.de/pks/key/47393ABD1F96B7C8.asc
