@@ -1,0 +1,44 @@
+name: Update image version
+on:
+  workflow_call:
+    inputs:
+      application:
+        description: Name of the path/application to deploy
+        type: string
+        required: true
+      image_version:
+        description: Docker image tag of the application to deploy
+        type: string
+        required: true
+      target:
+        description: Target overlay of deployment
+        type: string
+        required: true
+    secrets:
+      ACTIONS_GITHUB_TOKEN:
+        description: PAT with permission public_repo
+        required: true
+permissions:
+  contents: write
+jobs:
+  update-image-version:
+    name: Update image version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: 2martens/cloud-configuration
+          ref: main
+          token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
+      - name: Update image version
+        run: |
+          sed -i -r "s/(image:.*:).*/\1${{ inputs.image_version }}/" docker/stack-config/${{ inputs.target }}/${{ inputs.application }}.yaml
+      - name: setup git config
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+      - name: Save modified variable file
+        run: |
+          git add docker/stack-config/${{ inputs.target }}/${{ inputs.application}}.yaml
+          git diff-index --quiet HEAD || git commit -m "chore: Change ${{ inputs.application }}_image_version to ${{ inputs.image_version }}"
+          git push

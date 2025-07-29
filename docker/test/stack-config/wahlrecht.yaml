@@ -1,0 +1,11 @@
+services:
+  wahlrecht:
+    image: 2martens/wahlrecht:0.3.8
+    networks:
+      - internal_net
+    deploy:
+      replicas: 1
+
+networks:
+  internal_net:
+    external: true
