@@ -29,20 +29,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Exit if this environment wasn't changed
+        id: check
         run: |
           echo "Changed envs: '${{ needs.fact-finding.outputs.changed_envs }}'"
           if [[ ! " ${{ needs.fact-finding.outputs.changed_envs }} " =~ " ${{ matrix.env }} " ]]; then
-            echo "Environment '${{ matrix.env }}' was not modified. Skipping."
-            exit 0
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
           fi
+        shell: bash
       - name: Build & push Nginx image to GHCR
-        if: steps.detect.outputs.changed_envs != ''
+        if: steps.check.outputs.should_deploy == 'true'
         run: |
           docker build -t ghcr.io/2martens/docker-nginx:${{ matrix.env }} docker/${{ matrix.env }}/nginx
           echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u 2martens --password-stdin
           docker push ghcr.io/2martens/docker-nginx:${{ matrix.env }}
       - name: Copy files to remote
-        if: steps.detect.outputs.changed_envs != ''
+        if: steps.check.outputs.should_deploy == 'true'
         uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -az -r --del
@@ -53,6 +56,7 @@ jobs:
           remote_user: ${{ secrets.DEPLOY_USER }}
           remote_key: ${{ secrets.DEPLOY_KEY }}
       - name: Deploy applications
+        if: steps.check.outputs.should_deploy == 'true'
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DEPLOY_HOST }}
