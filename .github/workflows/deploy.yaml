@@ -32,7 +32,7 @@ jobs:
         id: check
         run: |
           echo "Changed envs: '${{ needs.fact-finding.outputs.changed_envs }}'"
-          if [[ ! " ${{ needs.fact-finding.outputs.changed_envs }} " =~ " ${{ matrix.env }} " ]]; then
+          if [[ "${{ needs.fact-finding.outputs.changed_envs }}" =~ "${{ matrix.env }}" ]]; then
             echo "should_deploy=true" >> $GITHUB_OUTPUT
           else
             echo "should_deploy=false" >> $GITHUB_OUTPUT
