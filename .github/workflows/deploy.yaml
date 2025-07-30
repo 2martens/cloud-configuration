@@ -24,10 +24,16 @@ jobs:
     strategy:
       matrix:
         env: [ test ]
-    if: contains(needs.fact-finding.outputs.changed_envs, matrix.env)
     environment: ${{ matrix.env }}
     steps:
       - uses: actions/checkout@v4
+      - name: Exit if this environment wasn't changed
+        run: |
+          echo "Changed envs: '${{ needs.fact-finding.outputs.changed_envs }}'"
+          if [[ ! " ${{ needs.fact-finding.outputs.changed_envs }} " =~ " ${{ matrix.env }} " ]]; then
+            echo "Environment '${{ matrix.env }}' was not modified. Skipping."
+            exit 0
+          fi
       - name: Build & push Nginx image to GHCR
         if: steps.detect.outputs.changed_envs != ''
         run: |
