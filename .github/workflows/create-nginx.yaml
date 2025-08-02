@@ -6,7 +6,10 @@ on:
     branches:
       - main
     paths:
-      - 'docker/**/nginx/**'
+      - 'docker/**/nginx/certificates-available/**'
+      - 'docker/**/nginx/Dockerfile'
+      - 'docker/**/nginx/entrypoint.sh'
+      - 'docker/**/nginx/nginx.conf'
 
 env:
   REGISTRY: ghcr.io

@@ -52,6 +52,8 @@ jobs:
             echo "should_deploy=false" >> $GITHUB_OUTPUT
           fi
         shell: bash
+      - name: Create nginx image
+        uses: 2martens/cloud-configuration/.github/workflows/create-nginx.yaml@main
       - name: Insert secrets
         if: steps.check.outputs.should_deploy == 'true'
         env:
