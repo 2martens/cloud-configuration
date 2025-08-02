@@ -81,7 +81,7 @@ jobs:
         with:
           switches: -az -r --del
           path: docker/${{ matrix.env }}/stack-config/.
-          remote_path: ~/tmp/stack-config
+          remote_path: ~/stack-config
           remote_host: ${{ secrets.DEPLOY_HOST }}
           remote_port: ${{ secrets.DEPLOY_PORT }}
           remote_user: ${{ secrets.DEPLOY_USER }}
