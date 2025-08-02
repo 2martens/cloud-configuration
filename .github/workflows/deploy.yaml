@@ -46,7 +46,7 @@ jobs:
         id: check
         run: |
           echo "Changed envs: '${{ needs.fact-finding.outputs.changed_envs }}'"
-          if [[ ${{ github.event_name }} == 'workflow_dispatch' && "${{ github.event.inputs.deploy }}" == 'true' || "${{ needs.fact-finding.outputs.changed_envs }}" =~ "${{ matrix.env }}" ]]; then
+          if [[ (${{ github.event_name }} == 'workflow_dispatch' && "${{ github.event.inputs.deploy }}" == 'true') || "${{ needs.fact-finding.outputs.changed_envs }}" =~ "${{ matrix.env }}" ]]; then
             echo "should_deploy=true" >> $GITHUB_OUTPUT
           else
             echo "should_deploy=false" >> $GITHUB_OUTPUT
@@ -103,7 +103,7 @@ jobs:
         id: check
         run: |
           echo "Changed envs: '${{ needs.fact-finding.outputs.changed_envs }}'"
-          if [[ ${{ github.event_name }} == 'workflow_dispatch' && "${{ github.event.inputs.deploy }}" == 'true' || "${{ needs.fact-finding.outputs.changed_envs }}" =~ "${{ matrix.env }}" ]]; then
+          if [[ (${{ github.event_name }} == 'workflow_dispatch' && "${{ github.event.inputs.deploy }}" == 'true') || "${{ needs.fact-finding.outputs.changed_envs }}" =~ "${{ matrix.env }}" ]]; then
             echo "should_deploy=true" >> $GITHUB_OUTPUT
           else
             echo "should_deploy=false" >> $GITHUB_OUTPUT
