@@ -68,6 +68,7 @@ jobs:
           tags: |
             type=raw,value=${{ matrix.env }}
       - name: Set up Docker Buildx
+        if: steps.check.outputs.should_deploy == 'true'
         uses: docker/setup-buildx-action@v3
       - name: Build & push Nginx image to GHCR
         id: push
@@ -80,6 +81,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       - name: Attest
+        if: steps.check.outputs.should_deploy == 'true'
         uses: actions/attest-build-provenance@v2
         id: attest
         with:
