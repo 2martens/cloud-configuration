@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 CERT_PATH="/etc/letsencrypt/live/api.2martens.de/fullchain.pem"
 KEY_PATH="/etc/letsencrypt/live/api.2martens.de/privkey.pem"
@@ -12,4 +12,4 @@ else
   ln -sf /etc/nginx/ssl/selfsigned.key /etc/letsencrypt/live/api.2martens.de/privkey.pem
 fi
 
-exec nginx -g 'daemon off;'
+exec /docker-entrypoint.sh "$@
