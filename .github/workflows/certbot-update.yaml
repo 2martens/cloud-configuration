@@ -19,4 +19,4 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
-            docker service update --force nginx-proxy
+            docker service update --force nginx_nginx-proxy
