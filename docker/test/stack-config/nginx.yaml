@@ -1,0 +1,29 @@
+services:
+  nginx-proxy:
+    image: ghcr.io/2martens/docker-nginx:test
+    deploy:
+      mode: global
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: /etc/letsencrypt
+        target: /etc/letsencrypt
+        read_only: true
+      - type: bind
+        source: /var/www/certbot
+        target: /var/www/certbot
+        read_only: true
+    networks:
+      - internal_net
+
+networks:
+  internal_net:
+    external: true
