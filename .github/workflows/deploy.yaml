@@ -8,6 +8,8 @@ on:
         required: true
         type: boolean
   push:
+    branches:
+      - main
     paths:
       - 'docker/**'
 
