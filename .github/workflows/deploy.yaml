@@ -101,8 +101,8 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
-            docker pull ghcr.io/2martens/docker-nginx:${{ matrix.env }}
-            docker service update --image ghcr.io/2martens/docker-nginx:${{ matrix.env }} nginx-proxy
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.env }}
+            docker service update --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.env }} nginx-proxy
             for f in ~/stack-config/*.yaml; do
               NAME=$(basename "$f" .yaml)
               docker stack deploy -c "$f" "$NAME"
