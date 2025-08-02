@@ -1,0 +1,22 @@
+name: certbot-update.yaml
+on:
+  schedule:
+    - cron: "0 3 * * 1"
+
+jobs:
+  renew-certs:
+    name: Update nginx
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: [ test ]
+    environment: ${{ matrix.env }}
+    steps:
+      - name: Update Nginx
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            docker service update --force nginx-proxy
