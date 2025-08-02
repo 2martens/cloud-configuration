@@ -96,6 +96,16 @@ jobs:
     environment: ${{ matrix.env }}
     steps:
       - uses: actions/checkout@v4
+      - name: Exit if this environment wasn't changed
+        id: check
+        run: |
+          echo "Changed envs: '${{ needs.fact-finding.outputs.changed_envs }}'"
+          if [[ ${{ github.event_name }} == 'workflow_dispatch' && "${{ github.event.inputs.deploy }}" == 'true' || "${{ needs.fact-finding.outputs.changed_envs }}" =~ "${{ matrix.env }}" ]]; then
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
       - name: Copy files to remote
         if: steps.check.outputs.should_deploy == 'true'
         uses: burnett01/rsync-deployments@7.0.2
