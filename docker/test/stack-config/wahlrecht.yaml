@@ -5,6 +5,8 @@ services:
       - internal_net
     deploy:
       replicas: 1
+    environment:
+      MONGODB_CONNECTION_STRING: <wahlrecht_mongodb_connection_string>
 
 networks:
   internal_net:
