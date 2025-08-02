@@ -14,6 +14,7 @@ FROM nginx:mainline-alpine
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY paths-enabled /etc/nginx/paths-enabled.d
+COPY certificates-available /etc/nginx/certificates-available.d
 
 COPY --from=cert-builder /tmp/ssl/selfsigned.crt /etc/nginx/ssl/selfsigned.crt
 COPY --from=cert-builder /tmp/ssl/selfsigned.key /etc/nginx/ssl/selfsigned.key
