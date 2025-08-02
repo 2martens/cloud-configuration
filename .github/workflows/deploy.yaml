@@ -25,6 +25,8 @@ jobs:
       changed_envs: ${{ steps.detect.outputs.changed_envs }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Determine which environments changed
         id: detect
         run: |
