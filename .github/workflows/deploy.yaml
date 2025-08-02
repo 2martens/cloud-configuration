@@ -11,6 +11,10 @@ on:
     paths:
       - 'docker/**'
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: 2martens/docker-nginx
+
 jobs:
   fact-finding:
     name: Detect changed environments
@@ -31,6 +35,11 @@ jobs:
       matrix:
         env: [ test ]
     environment: ${{ matrix.env }}
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - name: Exit if this environment wasn't changed
@@ -43,12 +52,29 @@ jobs:
             echo "should_deploy=false" >> $GITHUB_OUTPUT
           fi
         shell: bash
+      - name: Perform docker login
+        if: steps.check.outputs.should_deploy == 'true'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        if: steps.check.outputs.should_deploy == 'true'
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ matrix.env }}
       - name: Build & push Nginx image to GHCR
         if: steps.check.outputs.should_deploy == 'true'
-        run: |
-          docker build -t ghcr.io/2martens/docker-nginx:${{ matrix.env }} docker/${{ matrix.env }}/nginx
-          echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u 2martens --password-stdin
-          docker push ghcr.io/2martens/docker-nginx:${{ matrix.env }}
+        uses: docker/build-push-action@v6
+        with:
+          context: docker/${{ matrix.env }}/nginx
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
       - name: Copy files to remote
         if: steps.check.outputs.should_deploy == 'true'
         uses: burnett01/rsync-deployments@7.0.2
