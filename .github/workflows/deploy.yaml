@@ -68,6 +68,7 @@ jobs:
           tags: |
             type=raw,value=${{ matrix.env }}
       - name: Build & push Nginx image to GHCR
+        id: push
         if: steps.check.outputs.should_deploy == 'true'
         uses: docker/build-push-action@v6
         with:
@@ -75,6 +76,12 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - name: Attest
+        uses: actions/attest-build-provenance@v2
+        id: attest
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          subject-digest: ${{ steps.push.outputs.digest }}
       - name: Copy files to remote
         if: steps.check.outputs.should_deploy == 'true'
         uses: burnett01/rsync-deployments@7.0.2
