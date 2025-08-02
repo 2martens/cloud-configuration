@@ -103,7 +103,7 @@ jobs:
           script: |
             docker pull ghcr.io/2martens/docker-nginx:${{ matrix.env }}
             docker service update --image ghcr.io/2martens/docker-nginx:${{ matrix.env }} nginx-proxy
-            for f in ~/tmp/stack-config/*.yaml; do
+            for f in ~/stack-config/*.yaml; do
               NAME=$(basename "$f" .yaml)
               docker stack deploy -c "$f" "$NAME"
             done
