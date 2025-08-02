@@ -74,6 +74,7 @@ jobs:
         if: steps.check.outputs.should_deploy == 'true'
         uses: docker/build-push-action@v6
         with:
+          platforms: linux/amd64,linux/arm64
           context: docker/${{ matrix.env }}/nginx
           push: true
           tags: ${{ steps.meta.outputs.tags }}
