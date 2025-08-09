@@ -1,0 +1,13 @@
+services:
+  timetable:
+    image: 2martens/timetable:0.1.0-SNAPSHOT
+    networks:
+      - internal_net
+    deploy:
+      replicas: 1
+    environment:
+      MONGODB_CONNECTION_STRING: <timetable_mongodb_connection_string>
+
+networks:
+  internal_net:
+    external: true
