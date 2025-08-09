@@ -7,7 +7,8 @@ services:
       replicas: 1
     environment:
       MONGODB_CONNECTION_STRING: <timetable_mongodb_connection_string>
-
+      DB_CLIENT_ID: <timetable_db_client_id>
+      DB_CLIENT_SECRET: <timetable_db_client_secret>
 networks:
   internal_net:
     external: true

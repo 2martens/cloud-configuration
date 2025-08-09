@@ -66,11 +66,17 @@ jobs:
         env:
           WAHLRECHT_MONGODB_CONNECTION_STRING: ${{ secrets.WAHLRECHT_MONGODB_CONNECTION_STRING }}
           TIMETABLE_MONGODB_CONNECTION_STRING: ${{ secrets.TIMETABLE_MONGODB_CONNECTION_STRING }}
+          TIMETABLE_DB_CLIENT_ID: ${{ secrets.TIMETABLE_DB_CLIENT_ID }}
+          TIMETABLE_DB_CLIENT_SECRET: ${{ secrets.TIMETABLE_DB_CLIENT_SECRET }}
         run: |
           ESCAPED=$(printf '%s' "$WAHLRECHT_MONGODB_CONNECTION_STRING" | sed 's/&/\\&/g')
           sed -i "s|<wahlrecht_mongodb_connection_string>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/wahlrecht.yaml
           ESCAPED=$(printf '%s' "$TIMETABLE_MONGODB_CONNECTION_STRING" | sed 's/&/\\&/g')
           sed -i "s|<timetable_mongodb_connection_string>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
+          ESCAPED=$(printf '%s' "$TIMETABLE_DB_CLIENT_ID" | sed 's/&/\\&/g')
+          sed -i "s|<timetable_db_client_id>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
+          ESCAPED=$(printf '%s' "$TIMETABLE_DB_CLIENT_SECRET" | sed 's/&/\\&/g')
+          sed -i "s|<timetable_db_client_secret>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
       - name: Copy files to remote
         if: steps.check.outputs.should_deploy == 'true'
         uses: burnett01/rsync-deployments@7.0.2
