@@ -32,13 +32,13 @@ jobs:
           token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
       - name: Update image version
         run: |
-          sed -i -r "s/(image:.*:).*/\1${{ inputs.image_version }}/" docker/stack-config/${{ inputs.target }}/${{ inputs.application }}.yaml
+          sed -i -r "s/(image:.*:).*/\1${{ inputs.image_version }}/" docker/${{ inputs.target }}/stack-config/${{ inputs.application }}.yaml
       - name: setup git config
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
       - name: Save modified variable file
         run: |
-          git add docker/stack-config/${{ inputs.target }}/${{ inputs.application}}.yaml
+          git add docker/${{ inputs.target }}/stack-config/${{ inputs.application}}.yaml
           git diff-index --quiet HEAD || git commit -m "chore: Change ${{ inputs.application }}_image_version to ${{ inputs.image_version }}"
           git push
