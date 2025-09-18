@@ -1,6 +1,7 @@
 services:
   timetable:
     image: 2martens/timetable:0.1.0-SNAPSHOT
+    pull_policy: always
     networks:
       - internal_net
     deploy:

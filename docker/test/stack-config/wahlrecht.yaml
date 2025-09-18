@@ -1,6 +1,7 @@
 services:
   wahlrecht:
     image: 2martens/wahlrecht:0.3.8
+    pull_policy: always
     networks:
       - internal_net
     deploy:
