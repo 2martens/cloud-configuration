@@ -68,6 +68,9 @@ jobs:
           TIMETABLE_MONGODB_CONNECTION_STRING: ${{ secrets.TIMETABLE_MONGODB_CONNECTION_STRING }}
           TIMETABLE_DB_CLIENT_ID: ${{ secrets.TIMETABLE_DB_CLIENT_ID }}
           TIMETABLE_DB_CLIENT_SECRET: ${{ secrets.TIMETABLE_DB_CLIENT_SECRET }}
+          TIMETABLE_JDBC_DATABASE_URL: ${{ secrets.TIMETABLE_JDBC_DATABASE_URL }}
+          TIMETABLE_JDBC_DATABASE_USERNAME: ${{ secrets.TIMETABLE_JDBC_DATABASE_USERNAME }}
+          TIMETABLE_JDBC_DATABASE_PASSWORD: ${{ secrets.TIMETABLE_JDBC_DATABASE_PASSWORD }}
         run: |
           ESCAPED=$(printf '%s' "$WAHLRECHT_MONGODB_CONNECTION_STRING" | sed 's/&/\\&/g')
           sed -i "s|<wahlrecht_mongodb_connection_string>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/wahlrecht.yaml
@@ -77,6 +80,12 @@ jobs:
           sed -i "s|<timetable_db_client_id>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
           ESCAPED=$(printf '%s' "$TIMETABLE_DB_CLIENT_SECRET" | sed 's/&/\\&/g')
           sed -i "s|<timetable_db_client_secret>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
+          ESCAPED=$(printf '%s' "$TIMETABLE_JDBC_DATABASE_URL" | sed 's/&/\\&/g')
+          sed -i "s|<timetable_jdbc_database_url>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
+          ESCAPED=$(printf '%s' "$TIMETABLE_JDBC_DATABASE_USERNAME" | sed 's/&/\\&/g')
+          sed -i "s|<timetable_jdbc_database_username>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
+          ESCAPED=$(printf '%s' "$TIMETABLE_JDBC_DATABASE_PASSWORD" | sed 's/&/\\&/g')
+          sed -i "s|<timetable_jdbc_database_password>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
       - name: Copy files to remote
         if: steps.check.outputs.should_deploy == 'true'
         uses: burnett01/rsync-deployments@7.0.2

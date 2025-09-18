@@ -9,6 +9,9 @@ services:
       MONGODB_CONNECTION_STRING: <timetable_mongodb_connection_string>
       DB_CLIENT_ID: <timetable_db_client_id>
       DB_CLIENT_SECRET: <timetable_db_client_secret>
+      JDBC_DATABASE_URL: <timetable_jdbc_database_url>
+      JDBC_DATABASE_USERNAME: <timetable_jdbc_database_username>
+      JDBC_DATABASE_PASSWORD: <timetable_jdbc_database_password>
 networks:
   internal_net:
     external: true
