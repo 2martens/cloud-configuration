@@ -1,0 +1,12 @@
+---
+- name: Copy postgresql service
+  ansible.builtin.template:
+    src: etc/services.d/postgresql.ini.j2
+    dest: /home/{{ ssh_user }}/etc/services.d/postgresql.ini
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "644"
+- name: Start postgresql
+  community.general.supervisorctl:
+    state: started
+    name: postgresql

@@ -1,0 +1,33 @@
+---
+- name: Copy profile file to home dir
+  ansible.builtin.template:
+    src: postgres_profile.j2
+    dest: ~/.postgres_profile
+    mode: 0644
+  register: postgres_profile
+- name: Include postgres profile in bash_profile
+  ansible.builtin.lineinfile:
+    path: ~/.bash_profile
+    line: source ~/.postgres_profile
+    insertafter: EOF
+  when: postgres_profile.changed
+- name: Source bash_profile
+  ansible.builtin.command:
+    cmd: source ~/.bash_profile
+  when: postgres_profile.changed
+- name: Copy environment var file to home dir
+  ansible.builtin.template:
+    src: postgres_env.j2
+    dest: ~/.postgres_vars
+    mode: 0644
+  register: postgres_env
+- name: include postgres vars in bashrc
+  ansible.builtin.lineinfile:
+    path: ~/.bashrc
+    line: source ~/.postgres_vars
+    insertafter: EOF
+  when: postgres_env.changed
+- name: Source bashrc
+  ansible.builtin.command:
+    cmd: source ~/.bashrc
+  when: postgres_env.changed

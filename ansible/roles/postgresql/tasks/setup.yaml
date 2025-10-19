@@ -1,0 +1,58 @@
+---
+- name: Create shared secret
+  ansible.builtin.command:
+    cmd: openssl rand -hex 32
+  register: postgresql_secret
+  changed_when: false
+- name: Create pgpass file
+  ansible.builtin.template:
+    src: .pgpass.j2
+    dest: ~/.pgpass
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "600"
+- name: Create pgpass.temp file
+  ansible.builtin.template:
+    src: .pgpass.temp.j2
+    dest: ~/.pgpass.temp
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "600"
+- name: Create database
+  ansible.builtin.command:
+    cmd: initdb --pwfile ~/pgpass.temp --auth=scram-sha-256 -E UTF8 -D ~/opt/postgresql/data/
+    creates: ~/opt/postgresql/data
+- name: Delete temporary password file
+  ansible.builtin.file:
+    path: ~/.pgpass.temp
+    state: absent
+- name: Update unix socket directories
+  ansible.builtin.lineinfile:
+    path: ~/opt/postgresql/data/postgresql.conf
+    regexp: '^#unix_socket_directories'
+    line: unix_socket_directories = '/home/{{ ssh_user }}/tmp'      # comma-separated list of directories
+- name: Configure max files per process
+  ansible.builtin.lineinfile:
+    path: ~/opt/postgresql/data/postgresql.conf
+    regexp: '^#?max_files_per_process'
+    line: max_files_per_process = {{ max_files_per_process }}
+- name: Configure max worker processes
+  ansible.builtin.lineinfile:
+    path: ~/opt/postgresql/data/postgresql.conf
+    regexp: '^#?max_worker_processes'
+    line: max_worker_processes = {{ max_worker_processes }}
+- name: Configure max parallel workers
+  ansible.builtin.lineinfile:
+    path: ~/opt/postgresql/data/postgresql.conf
+    regexp: '^#?max_parallel_workers'
+    line: max_parallel_workers = {{ max_parallel_workers }}
+- name: Configure max connections
+  ansible.builtin.lineinfile:
+    path: ~/opt/postgresql/data/postgresql.conf
+    regexp: '^#?max_connections'
+    line: max_connections = {{ max_connections }}
+- name: Configure log directory
+  ansible.builtin.lineinfile:
+    path: ~/opt/postgresql/data/postgresql.conf
+    regexp: '^#?log_directory'
+    line: log_directory = /home/{{ ssh_user }}/logs

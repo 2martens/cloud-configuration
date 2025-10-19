@@ -1,0 +1,11 @@
+---
+- name: Set used postgresql version
+  ansible.builtin.command:
+    cmd: uberspace tools version use postgresql {{ postgresql_version }}
+  changed_when: false
+- name: Extend bash profile
+  ansible.builtin.import_tasks: profile.yaml
+- name: Set up postgresql
+  ansible.builtin.import_tasks: setup.yaml
+- name: Set up service
+  ansible.builtin.import_tasks: service.yaml

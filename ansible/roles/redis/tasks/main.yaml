@@ -1,0 +1,26 @@
+---
+- name: Create redis folder
+  ansible.builtin.file:
+    state: directory
+    path: /home/{{ ssh_user }}/.redis
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "755"
+- name: Copy redis config
+  ansible.builtin.template:
+    src: .redis/conf.j2
+    dest: /home/{{ ssh_user }}/.redis/conf
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "644"
+- name: Copy redis service
+  ansible.builtin.template:
+    src: etc/services.d/redis.ini.j2
+    dest: /home/{{ ssh_user }}/etc/services.d/redis.ini
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "644"
+- name: Start redis
+  community.general.supervisorctl:
+    state: started
+    name: redis
