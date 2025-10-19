@@ -1,0 +1,20 @@
+---
+- name: Create DB user password
+  ansible.builtin.command:
+    cmd: openssl rand -hex 32
+  register: pretix_db_password
+  changed_when: false
+- name: Create DB user
+  community.postgresql.postgresql_user:
+    name: "{{ ssh_user }}_pretix"
+    password: "{{ pretix_db_password.stdout }}"
+    state: present
+- name: Create database
+  community.postgresql.postgresql_db:
+    name: "{{ ssh_user }}_pretix"
+    owner: "{{ ssh_user }}_pretix"
+    encoding: UTF-8
+    template: template0
+    comment: Database for pretix
+    state: present
+  register: pretix_db

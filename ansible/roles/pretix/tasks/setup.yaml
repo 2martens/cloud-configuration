@@ -1,0 +1,48 @@
+---
+- name: Create data folder
+  ansible.builtin.file:
+    state: directory
+    path: /home/{{ ssh_user }}/pretix_data
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "755"
+- name: Install pretix
+  ansible.builtin.pip:
+    executable: "{{ pip_executable }}"
+    name:
+      - pretix
+      - gunicorn
+    extra_args: --user
+- name: Create config file
+  ansible.builtin.template:
+    src: pretix.cfg.j2
+    dest: /home/{{ ssh_user }}/.pretix.cfg
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "600"
+- name: Populate database
+  ansible.builtin.command:
+    cmd: "{{ python_executable }} -m pretix migrate"
+  when: pretix_db.changed
+- name: Prepare static files
+  ansible.builtin.command:
+    cmd: "{{ python_executable }} -m pretix rebuild"
+- name: Move static files to Apache
+  ansible.builtin.copy:
+    remote_src: true
+    src: /home/{{ ssh_user }}/.local/lib/{{ python_executable }}/site-packages/pretix/static.dist/
+    dest: /var/www/virtual/{{ ssh_user }}/html/static
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user}}"
+    mode: "755"
+- name: Create service
+  ansible.builtin.template:
+    src: etc/services.d/pretix.ini.j2
+    dest: /home/{{ ssh_user }}/etc/services.d/pretix.ini
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "644"
+- name: Start pretix
+  community.general.supervisorctl:
+    state: started
+    name: pretix

@@ -1,0 +1,22 @@
+---
+- name: Create database
+  ansible.builtin.import_tasks: database.yaml
+- name: Set up domain
+  ansible.builtin.import_tasks: domain.yaml
+- name: Set up pretix
+  ansible.builtin.import_tasks: setup.yaml
+- name: Configure pretix web backend
+  ansible.builtin.command:
+    cmd: uberspace web backend set / --http --port 9000
+- name: Configure static files
+  ansible.builtin.command:
+    cmd: uberspace web backend set /static --apache
+- name: Configure media files
+  ansible.builtin.command:
+    cmd: uberspace web backend set /media --apache
+- name: Set up cronjob
+  ansible.builtin.cron:
+    name: pretix periodic
+    minute: "18,48"
+    job: "cd ~/pretix_data && {{ python_executable }} -m pretix runperiodic"
+    state: present

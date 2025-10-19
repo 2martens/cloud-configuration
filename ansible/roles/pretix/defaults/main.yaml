@@ -1,0 +1,4 @@
+---
+pip_executable: pip3.13
+pretix_currency: EUR
+python_executable: python3.13

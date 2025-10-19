@@ -1,0 +1,26 @@
+[pretix]
+instance_name={{ pretix_instance_name }}
+url=https://{{ domain }}
+currency={{ pretix_currency }}
+datadir=/home/{{ ssh_user }}/pretix_data
+trust_x_forwarded_proto=on
+
+[database]
+backend=postgresql
+name={{ ssh_user }}_pretix
+user={{ ssh_user }}_pretix
+password={{ pretix_db_password.stdout }}
+host=localhost
+port=5432
+
+[celery]
+broker=redis+socket:///home/{{ ssh_user }}/.redis/sock
+backend=redis+socket:///home/{{ ssh_user }}/.redis/sock
+
+[mail]
+from={{ mail_user }}
+host={{ mail_server }}
+user={{ mail_user }}
+password={{ mail_password }}
+port=587
+tls=on
