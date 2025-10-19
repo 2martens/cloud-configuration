@@ -47,3 +47,10 @@
   tags: payload
   roles:
     - payload
+- name: Set up Pretix
+  hosts: pretix
+  gather_facts: false
+  remote_user: "{{ ssh_user }}"
+  tags: pretix
+  roles:
+    - pretix

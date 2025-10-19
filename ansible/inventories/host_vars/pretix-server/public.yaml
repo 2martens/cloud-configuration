@@ -1,0 +1,7 @@
+---
+ssh_user: jimevent
+domain: events.2martens.de
+pretix_instance_name: 2martens Events
+pretix_from_address: pretix@events.2martens.de
+mail_user: jimevent@uber.space
+mail_server: aquila.uberspace.de
