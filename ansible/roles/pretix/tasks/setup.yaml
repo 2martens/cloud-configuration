@@ -35,6 +35,11 @@
     owner: "{{ ssh_user }}"
     group: "{{ ssh_user}}"
     mode: "755"
+  register: static_files
+- name: Restore SELinux context
+  ansible.builtin.command:
+    cmd: restorecon -R -v /var/www/virtual/{{ ssh_user }}/html
+  when: static_files.changed
 - name: Create service
   ansible.builtin.template:
     src: etc/services.d/pretix.ini.j2
