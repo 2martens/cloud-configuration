@@ -6,15 +6,20 @@
 - name: Read in postgres password
   ansible.builtin.command:
     cmd: cat ~/.pretix_db_password
-  register: pretix_db_password
+  register: pretix_db_password_existing
   when: pretix_db_password_file.stat.exists
   changed_when: false
 - name: Create DB user password
   ansible.builtin.command:
     cmd: openssl rand -hex 32
-  register: pretix_db_password
+  register: pretix_db_password_new
   changed_when: false
   when: not pretix_db_password_file.stat.exists
+- name: Determine DB user password
+  ansible.builtin.shell:
+    cmd: echo "{{ pretix_db_password_existing.stdout if pretix_db_password_file.stat.exists else pretix_db_password_new.stdout }}"
+  register: pretix_db_password
+  changed_when: false
 - name: Create DB user
   community.postgresql.postgresql_user:
     login_user: "{{ ssh_user }}"
