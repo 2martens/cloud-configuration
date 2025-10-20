@@ -12,6 +12,7 @@
     name:
       - pretix
       - gunicorn
+      - legacy_cgi
     extra_args: --user
 - name: Create config file
   ansible.builtin.template:
