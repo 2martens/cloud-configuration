@@ -9,5 +9,9 @@
   register: postgresql_service
 - name: Reread service config
   ansible.builtin.command:
-    cmd: supervisorctl reread && supervisorctl update
+    cmd: supervisorctl reread
+  when: postgresql_service.changed
+- name: Update service config
+  ansible.builtin.command:
+    cmd: supervisorctl update
   when: postgresql_service.changed
