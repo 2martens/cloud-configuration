@@ -11,10 +11,6 @@
     line: source ~/.postgres_profile
     insertafter: EOF
   when: postgres_profile.changed
-- name: Source bash_profile
-  ansible.builtin.command:
-    cmd: source ~/.bash_profile
-  when: postgres_profile.changed
 - name: Copy environment var file to home dir
   ansible.builtin.template:
     src: postgres_env.j2
@@ -26,8 +22,4 @@
     path: ~/.bashrc
     line: source ~/.postgres_vars
     insertafter: EOF
-  when: postgres_env.changed
-- name: Source bashrc
-  ansible.builtin.command:
-    cmd: source ~/.bashrc
   when: postgres_env.changed
