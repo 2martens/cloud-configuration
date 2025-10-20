@@ -20,7 +20,7 @@
     mode: "600"
 - name: Create database
   ansible.builtin.command:
-    cmd: initdb --pwfile ~/pgpass.temp --auth=scram-sha-256 -E UTF8 -D ~/opt/postgresql/data/
+    cmd: initdb --pwfile ~/.pgpass.temp --auth=scram-sha-256 -E UTF8 -D ~/opt/postgresql/data/
     creates: ~/opt/postgresql/data
 - name: Delete temporary password file
   ansible.builtin.file:
