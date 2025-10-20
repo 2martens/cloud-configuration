@@ -6,14 +6,14 @@
   changed_when: false
 - name: Create pgpass file
   ansible.builtin.template:
-    src: .pgpass.j2
+    src: pgpass.j2
     dest: ~/.pgpass
     owner: "{{ ssh_user }}"
     group: "{{ ssh_user }}"
     mode: "600"
 - name: Create pgpass.temp file
   ansible.builtin.template:
-    src: .pgpass.temp.j2
+    src: pgpass_temp.j2
     dest: ~/.pgpass.temp
     owner: "{{ ssh_user }}"
     group: "{{ ssh_user }}"
