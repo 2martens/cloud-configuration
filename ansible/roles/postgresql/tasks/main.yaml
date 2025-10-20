@@ -1,8 +1,14 @@
 ---
+- name: Determine postgresql version
+  ansible.builtin.command:
+    cmd: uberspace tools version show postgresql
+  register: active_postgresql_version
+  changed_when: false
 - name: Set used postgresql version
   ansible.builtin.command:
     cmd: uberspace tools version use postgresql {{ postgresql_version }}
-  changed_when: false
+  changed_when: true
+  when: active_postgresql_version.stdout.find(postgresql_version) == -1
 - name: Extend bash profile
   ansible.builtin.import_tasks: profile.yaml
 - name: Set up postgresql
