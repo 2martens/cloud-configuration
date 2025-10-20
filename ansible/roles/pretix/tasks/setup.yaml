@@ -42,6 +42,11 @@
     owner: "{{ ssh_user }}"
     group: "{{ ssh_user }}"
     mode: "644"
+  register: pretix_service
+- name: Reread service config
+  ansible.builtin.command:
+    cmd: supervisorctl reread
+  when: pretix_service.changed
 - name: Start pretix
   community.general.supervisorctl:
     state: started
