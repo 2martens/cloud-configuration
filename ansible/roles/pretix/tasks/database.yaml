@@ -8,6 +8,7 @@
     cmd: cat ~/.pretix_db_password
   register: pretix_db_password
   when: pretix_db_password_file.stat.exists
+  changed_when: false
 - name: Create DB user password
   ansible.builtin.command:
     cmd: openssl rand -hex 32
