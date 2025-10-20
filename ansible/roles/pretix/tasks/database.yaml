@@ -1,16 +1,41 @@
 ---
+- name: Check if postgres password exists
+  ansible.builtin.stat:
+    path: ~/.pretix_db_password
+  register: pretix_db_password_file
+- name: Read in postgres password
+  ansible.builtin.command:
+    cmd: cat ~/.pretix_db_password
+  register: pretix_db_password
+  when: pretix_db_password_file.stat.exists
 - name: Create DB user password
   ansible.builtin.command:
     cmd: openssl rand -hex 32
   register: pretix_db_password
   changed_when: false
+  when: not pretix_db_password_file.stat.exists
 - name: Create DB user
   community.postgresql.postgresql_user:
+    login_user: "{{ ssh_user }}"
+    login_unix_socket: "/home/{{ ssh_user }}/tmp"
+    login_db: "postgres"
     name: "{{ ssh_user }}_pretix"
     password: "{{ pretix_db_password.stdout }}"
     state: present
+  environment:
+    PGOPTIONS: "-c password_encryption=scram-sha-256"
+- name: Write out DB user password
+  ansible.builtin.copy:
+    content: "{{ pretix_db_password.stdout }}"
+    dest: ~/.pretix_db_password
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "600"
 - name: Create database
   community.postgresql.postgresql_db:
+    login_user: "{{ ssh_user }}"
+    login_unix_socket: "/home/{{ ssh_user }}/tmp"
+    maintenance_db: "postgres"
     name: "{{ ssh_user }}_pretix"
     owner: "{{ ssh_user }}_pretix"
     encoding: UTF-8
