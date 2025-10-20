@@ -6,6 +6,11 @@
     owner: "{{ ssh_user }}"
     group: "{{ ssh_user }}"
     mode: "644"
+  register: postgresql_service
+- name: Reread service config
+  ansible.builtin.command:
+    cmd: supervisorctl reread
+  when: postgresql_service.changed
 - name: Start postgresql
   community.general.supervisorctl:
     state: started
