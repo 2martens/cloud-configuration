@@ -45,9 +45,5 @@
   register: pretix_service
 - name: Reread service config
   ansible.builtin.command:
-    cmd: supervisorctl reread
+    cmd: supervisorctl reread && supervisorctl update
   when: pretix_service.changed
-- name: Start pretix
-  community.general.supervisorctl:
-    state: started
-    name: pretix

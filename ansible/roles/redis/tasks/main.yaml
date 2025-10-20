@@ -23,9 +23,6 @@
   register: redis_service
 - name: Reread service config
   ansible.builtin.command:
-    cmd: supervisorctl reread
+    cmd: supervisorctl reread  && supervisorctl update
   when: redis_service.changed
-- name: Start redis
-  community.general.supervisorctl:
-    state: started
-    name: redis
+
