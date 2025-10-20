@@ -55,4 +55,4 @@
   ansible.builtin.lineinfile:
     path: ~/opt/postgresql/data/postgresql.conf
     regexp: '^#?log_directory'
-    line: log_directory = /home/{{ ssh_user }}/logs
+    line: log_directory = '/home/{{ ssh_user }}/logs'
