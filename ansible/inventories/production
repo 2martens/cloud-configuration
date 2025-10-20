@@ -18,4 +18,4 @@ payload ansible_host=caelum.uberspace.de ansible_python_interpreter=/usr/bin/pyt
 keycloak-server ansible_host=monoceres.uberspace.de ansible_python_interpreter=/usr/bin/python
 
 [pretix]
-pretix-server ansible_host=aquila.uberspace.de ansible_python_interpreter=/usr/bin/python
+pretix-server ansible_host=aquila.uberspace.de ansible_python_interpreter=/usr/bin/python3.13
