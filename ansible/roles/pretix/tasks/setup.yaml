@@ -24,7 +24,6 @@
 - name: Populate database
   ansible.builtin.command:
     cmd: "{{ python_executable }} -m pretix migrate"
-  when: pretix_db.changed
 - name: Prepare static files
   ansible.builtin.command:
     cmd: "{{ python_executable }} -m pretix rebuild"
