@@ -1,0 +1,10 @@
+---
+- name: Install setuptools
+  ansible.builtin.command:
+    cmd: "{{ pip_executable }} install setuptools --user"
+- name: Install psycopg2-binary
+  ansible.builtin.pip:
+    executable: "{{ pip_executable }}"
+    name:
+      - psycopg2-binary
+    extra_args: --user

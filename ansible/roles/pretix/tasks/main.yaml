@@ -1,4 +1,6 @@
 ---
+- name: Install requirements
+  ansible.builtin.import_tasks: pip.yaml
 - name: Create database
   ansible.builtin.import_tasks: database.yaml
 - name: Set up domain
