@@ -1,5 +1,5 @@
 ---
-postgresql_version: 15
+postgresql_version: "15"
 max_files_per_process: 64
 max_worker_processes: 4
 max_parallel_workers: 2
