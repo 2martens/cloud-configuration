@@ -11,7 +11,12 @@
   when: active_postgresql_version.stdout.find(postgresql_version) == -1
 - name: Extend bash profile
   ansible.builtin.import_tasks: profile.yaml
+- name: Check if postgresql database is created
+  ansible.builtin.stat:
+    path: ~/opt/postgresql/data
+  register: postgresql_dir
 - name: Set up postgresql
+  when: not postgresql_dir.stat.exists
   ansible.builtin.import_tasks: setup.yaml
 - name: Set up service
   ansible.builtin.import_tasks: service.yaml
