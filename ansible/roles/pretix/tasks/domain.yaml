@@ -1,16 +1,31 @@
 ---
-- name: List domains
+- name: List web domains
   ansible.builtin.command: uberspace web domain list
   changed_when: false
-  register: domains
-- name: Set up domain
-  when: domains.stdout.find(pretix_domain) == -1
+  register: web_domains
+- name: Set up web domain
+  when: web_domains.stdout.find(pretix_domain) == -1
   block:
     - name: Add domain
       ansible.builtin.command: uberspace web domain add {{ pretix_domain }}
-      register: new_domain
+      register: new_web_domain
       changed_when: true
     - name: Print out important information
       changed_when: false
       ansible.builtin.debug:
-        msg: "{{ new_domain.stdout }}"
+        msg: "{{ new_web_domain.stdout }}"
+- name: List mail domains
+  ansible.builtin.command: uberspace mail domain list
+  changed_when: false
+  register: mail_domains
+- name: Set up mail domain
+  when: mail_domains.stdout.find(pretix_domain) == -1
+  block:
+    - name: Add domain
+      ansible.builtin.command: uberspace mail domain add {{ pretix_domain }}
+      register: new_mail_domain
+      changed_when: true
+    - name: Print out important information
+      changed_when: false
+      ansible.builtin.debug:
+        msg: "{{ new_mail_domain.stdout }}"
