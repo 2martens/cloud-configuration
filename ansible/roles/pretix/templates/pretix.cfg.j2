@@ -17,6 +17,9 @@ port=5432
 broker=redis+socket:///home/{{ ssh_user }}/.redis/sock
 backend=redis+socket:///home/{{ ssh_user }}/.redis/sock
 
+[redis]
+location=unix:///home/{{ ssh_user }}/.redis/sock?db=0
+
 [mail]
 from={{ mail_user }}
 host={{ mail_server }}
