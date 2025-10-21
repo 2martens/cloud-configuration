@@ -27,6 +27,8 @@
 - name: Prepare static files
   ansible.builtin.command:
     cmd: "{{ python_executable }} -m pretix rebuild"
+    creates: /home/{{ ssh_user }}/.local/lib/{{ python_executable }}/site-packages/pretix/static.dist
+  register: static_files
 - name: Move static files to Apache
   ansible.builtin.copy:
     remote_src: true
@@ -35,7 +37,7 @@
     owner: "{{ ssh_user }}"
     group: "{{ ssh_user}}"
     mode: "755"
-  register: static_files
+  when: static_files.changed
 - name: Restore SELinux context
   ansible.builtin.command:
     cmd: restorecon -R -v /var/www/virtual/{{ ssh_user }}/html
