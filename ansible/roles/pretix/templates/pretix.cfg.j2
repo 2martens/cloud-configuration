@@ -19,6 +19,7 @@ backend=redis+socket:///home/{{ ssh_user }}/.redis/sock
 
 [redis]
 location=unix:///home/{{ ssh_user }}/.redis/sock?db=0
+sessions=true
 
 [mail]
 from={{ mail_user }}
