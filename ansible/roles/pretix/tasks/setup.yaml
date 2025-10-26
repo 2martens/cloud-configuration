@@ -15,6 +15,7 @@
       - legacy_cgi
       - pretix-passbook
     extra_args: --user
+  register: dependencies
 - name: Create config file
   ansible.builtin.template:
     src: pretix.cfg.j2
@@ -59,3 +60,7 @@
   ansible.builtin.command:
     cmd: supervisorctl update
   when: pretix_service.changed
+- name: Restart services
+  ansible.builtin.command:
+    cmd: supervisorctl restart pretix pretix_worker
+  when: dependencies.changed && !pretix_service.changed
