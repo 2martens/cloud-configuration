@@ -39,7 +39,8 @@
     mode: "755"
   when: static_files.changed
 - name: Restore SELinux context
-  ansible.builtin.command:
+  #language=Shell
+  ansible.builtin.shell:
     cmd: restorecon -R -v /var/www/virtual/{{ ssh_user }}/html
   when: static_files.changed
 - name: Create service
