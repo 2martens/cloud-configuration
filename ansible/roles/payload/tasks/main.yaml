@@ -22,5 +22,16 @@
     mode: "744"
 - name: Set node version
   ansible.builtin.command:
-    cmd: "uberspace tools use node {{ node_version }}"
-    cwd: /home/{{ ssh_user }}
+    cmd: "uberspace tools version use node {{ node_version }}"
+    chdir: /home/{{ ssh_user }}
+- name: Create payload directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/{{ ssh_user }}/payload
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: "755"
+- name: Load Payload service
+  community.general.supervisorctl:
+    state: present
+    name: payload
