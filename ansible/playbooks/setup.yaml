@@ -10,6 +10,7 @@
   gather_facts: false
   remote_user: "{{ ssh_user }}"
   serial: 1
+  tags: frontend
   roles:
     - frontend
 - name: Set up devops server
@@ -41,7 +42,7 @@
   roles:
     - keycloak
 - name: Set up Payload
-  hosts: payload
+  hosts: payloadcms
   gather_facts: false
   remote_user: "{{ ssh_user }}"
   tags: payload
