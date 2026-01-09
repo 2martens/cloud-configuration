@@ -12,6 +12,7 @@ wahlrecht-frontend ansible_host=gienah.uberspace.de ansible_python_interpreter=/
 repo ansible_host=shaula.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
 payload ansible_host=caelum.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
 payload2026 ansible_host=octans.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
+prj2026 ansible_host=centaurus.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
 
 [payloadcms]
 payload ansible_host=caelum.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
