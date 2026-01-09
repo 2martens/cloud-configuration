@@ -5,17 +5,22 @@ application_server ansible_host=localhost ansible_connection=local
 [ci]
 
 [git]
-gitea ansible_host=giteajim.uber.space ansible_python_interpreter=/usr/bin/python
+gitea ansible_host=giteajim.uber.space ansible_python_interpreter=/usr/bin/python3.9
 
 [frontend]
-wahlrecht-frontend ansible_host=gienah.uberspace.de ansible_python_interpreter=/usr/bin/python
-repo ansible_host=shaula.uberspace.de ansible_python_interpreter=/usr/bin/python
-payload ansible_host=caelum.uberspace.de ansible_python_interpreter=/usr/bin/python
+wahlrecht-frontend ansible_host=gienah.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
+repo ansible_host=shaula.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
+payload ansible_host=caelum.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
+payload2026 ansible_host=octans.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
+
+[payloadcms]
+payload ansible_host=caelum.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
+payload2026 ansible_host=octans.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
 
 [applications]
 
 [keycloak]
-keycloak-server ansible_host=monoceres.uberspace.de ansible_python_interpreter=/usr/bin/python
+keycloak-server ansible_host=monoceres.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
 
 [pretix]
-pretix-server ansible_host=aquila.uberspace.de ansible_python_interpreter=/usr/bin/python3.13
+pretix-server ansible_host=aquila.uberspace.de ansible_python_interpreter=/usr/bin/python3.9
