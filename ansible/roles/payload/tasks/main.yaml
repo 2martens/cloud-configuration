@@ -27,7 +27,7 @@
 - name: Create payload directory
   ansible.builtin.file:
     state: directory
-    path: /home/{{ ssh_user }}/payload
+    path: /home/{{ ssh_user }}/payload/media
     owner: "{{ ssh_user }}"
     group: "{{ ssh_user }}"
     mode: "755"
