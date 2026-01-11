@@ -7,7 +7,7 @@ fi
 
 DATE=$(date +"%Y-%m-%dT%H:%M:%S")
 supervisorctl stop payload
-[ -e ~/payload ] && mv ~/payload/media ~/media
+[ -e ~/payload/media ] && mv ~/payload/media ~/media
 [ -e ~/payload ] && mv ~/payload ~/payload-old-$DATE
 mv ~/payload-new ~/payload
 mv ~/media ~/payload/
