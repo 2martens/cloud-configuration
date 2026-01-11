@@ -35,3 +35,6 @@
   community.general.supervisorctl:
     state: present
     name: payload
+- name: Register web backend
+  ansible.builtin.command:
+    cmd: "uberspace web backend set --http --port 3000 /"
