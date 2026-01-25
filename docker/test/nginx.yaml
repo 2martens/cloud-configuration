@@ -6,6 +6,8 @@ services:
       placement:
         constraints:
           - node.role == manager
+    networks:
+      - internal_net
     ports:
       - target: 80
         published: 80
@@ -24,3 +26,6 @@ services:
         source: /var/www/certbot
         target: /var/www/certbot
         read_only: true
+networks:
+  internal_net:
+    external: true

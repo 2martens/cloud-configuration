@@ -5,3 +5,9 @@ services:
       replicas: 1
     environment:
       MONGODB_CONNECTION_STRING: <wahlrecht_mongodb_connection_string>
+    networks:
+      - internal_net
+
+networks:
+  internal_net:
+    external: true

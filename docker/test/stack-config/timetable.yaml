@@ -10,3 +10,9 @@ services:
       JDBC_DATABASE_URL: <timetable_jdbc_database_url>
       JDBC_DATABASE_USERNAME: <timetable_jdbc_database_username>
       JDBC_DATABASE_PASSWORD: <timetable_jdbc_database_password>
+    networks:
+      - internal_net
+
+networks:
+  internal_net:
+    external: true
