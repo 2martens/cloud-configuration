@@ -1,13 +1,7 @@
 services:
   wahlrecht:
     image: 2martens/wahlrecht:0.3.8
-    networks:
-      - ingress
     deploy:
       replicas: 1
     environment:
       MONGODB_CONNECTION_STRING: <wahlrecht_mongodb_connection_string>
-
-networks:
-  ingress:
-    external: true

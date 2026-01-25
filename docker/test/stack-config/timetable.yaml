@@ -1,8 +1,6 @@
 services:
   timetable:
     image: 2martens/timetable:0.1.0-SNAPSHOT
-    networks:
-      - ingress
     deploy:
       replicas: 1
     environment:
@@ -12,6 +10,3 @@ services:
       JDBC_DATABASE_URL: <timetable_jdbc_database_url>
       JDBC_DATABASE_USERNAME: <timetable_jdbc_database_username>
       JDBC_DATABASE_PASSWORD: <timetable_jdbc_database_password>
-networks:
-  ingress:
-    external: true
