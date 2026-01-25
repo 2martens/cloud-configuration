@@ -86,13 +86,24 @@ jobs:
           sed -i "s|<timetable_jdbc_database_username>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
           ESCAPED=$(printf '%s' "$TIMETABLE_JDBC_DATABASE_PASSWORD" | sed 's/&/\\&/g')
           sed -i "s|<timetable_jdbc_database_password>|$ESCAPED|g" docker/${{ matrix.env }}/stack-config/timetable.yaml
-      - name: Copy files to remote
+      - name: Copy stack config to remote
         if: steps.check.outputs.should_deploy == 'true'
         uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: -az -r --del
           path: docker/${{ matrix.env }}/stack-config/.
           remote_path: ~/stack-config
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
+      - name: Copy nginx stack config to remote
+        if: steps.check.outputs.should_deploy == 'true'
+        uses: burnett01/rsync-deployments@7.0.2
+        with:
+          switches: -az -r --del
+          path: docker/${{ matrix.env }}/nginx.yaml
+          remote_path: ~/
           remote_host: ${{ secrets.DEPLOY_HOST }}
           remote_port: ${{ secrets.DEPLOY_PORT }}
           remote_user: ${{ secrets.DEPLOY_USER }}
@@ -112,3 +123,6 @@ jobs:
               docker pull "$IMAGE"
               docker stack deploy -c "$f" "$NAME" --detach=false
             done
+            IMAGE=$(grep -oE 'image: *[^ ]+' ~/nginx.yaml | sed 's/^image: *//')
+            docker pull "$IMAGE"
+            docker stack deploy -c ~/nginx.yaml nginx --detach=false
