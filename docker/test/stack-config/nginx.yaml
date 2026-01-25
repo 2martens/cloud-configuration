@@ -25,11 +25,8 @@ services:
         target: /var/www/certbot
         read_only: true
     networks:
-      - internal_net
-    depends_on:
-      - timetable_timetable
-      - wahlrecht_wahlrecht
+      - ingress
 
 networks:
-  internal_net:
+  ingress:
     external: true
