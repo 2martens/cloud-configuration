@@ -1,7 +1,6 @@
 name: certbot-update.yaml
 on:
-  schedule:
-    - cron: "0 3 * * 1"
+  workflow_dispatch:
 
 jobs:
   renew-certs:
